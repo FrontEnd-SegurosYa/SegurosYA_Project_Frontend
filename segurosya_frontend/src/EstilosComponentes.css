@@ -1,0 +1,64 @@
+.EstiloPresentacion {
+    position: absolute;
+    width: 1024px;
+    height: 172px;
+    left: 123px;
+    top: 496px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.EstiloImagenPrincipal {
+    position: absolute;
+    width: 1289px;
+    height: 330px;
+    left: 0px;
+    top: 96px;
+}
+
+.EstiloRectangulos{
+    position: absolute;
+    width: 353px;
+    height: 116px;
+    left: 864px;
+    top: 41px;
+    border-radius: 30px;
+    box-shadow: 5px 8px 12px black;
+}
+
+
+.Todo{
+    background-color: #2B3467;
+}
+
+.EstiloBotonProductos{
+    position: absolute;
+    width: 262px;
+    height: 46.58px;
+    left: 524px;
+    top: 713px;
+    border-radius: 30px;
+}
+
+.EstiloBotonCotiza{
+    position: absolute;
+    width: 214.58px;
+    height: 38.38px;
+    left: 939px;
+    top: 238px;
+}
+
+.EstiloBotonCompra{
+    position: absolute;
+    width: 262px;
+    height: 46.58px;
+    left: 915px;
+    top: 92px;
+}
