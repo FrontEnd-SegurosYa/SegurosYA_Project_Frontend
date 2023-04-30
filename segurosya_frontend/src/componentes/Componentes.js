@@ -1,21 +1,8 @@
 import './EstilosComponentes.css';
-import { useRef } from "react";
-import './NavbarElements'
 import React from 'react';
 
-import imagenPrincipal from './img/brand.png';
-import NavbarElements from './NavbarElements';
+import imagenPrincipal from '../img/brand.png';
 
-function Navbar() {
-	return (
-		<React.Fragment>
-			<NavbarElements/>
-		</React.Fragment>
-	);
-}
-
-export default Navbar;
-   
 
 export function ContenedorPrincipal (){
     return <div class = 'back-imag'>
