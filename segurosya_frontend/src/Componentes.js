@@ -1,28 +1,31 @@
 import './EstilosComponentes.css';
+import { useRef } from "react";
+import './NavbarElements'
 import React from 'react';
 
 import imagenPrincipal from './img/brand.png';
+import NavbarElements from './NavbarElements';
 
-const Navbar = () => {
-    return(
-        <div>
-            <Nav>
-                <NavLink to="/">
-                   <h1>logo</h1>
-                </NavLink>
-            </Nav>
-        </div>
-    );
-};
+function Navbar() {
+	return (
+		<React.Fragment>
+			<NavbarElements/>
+		</React.Fragment>
+	);
+}
+
 export default Navbar;
    
 
 export function ContenedorPrincipal (){
-    return <section>
-        <button name="button" className='EstiloBotonCompra'>Compra AQUI</button>
-        <button name="button" className='EstiloBotonCotiza'>Cotiza AQUI</button>
-        <img src={imagenPrincipal} width= {"1289px"} height= {"330px"} className='EstiloImagenPrincipal'/>
-    </section>
+    return <div class = 'back-imag'>
+        <p class='EstiloTextoSOAT'>Inicia tu trámite de SOAT con nosotros HOY</p>
+        <button name="button" class='EstiloBotonCompra'>Compra AQUI</button>
+    
+        <p class='EstiloTextoSeguro'>Cotiza tu seguro vehicular aquí HOY</p>
+        <button name="button" class='EstiloBotonCotiza'>Cotiza AQUI</button>
+
+    </div>
 }
 
 export function Presentacion (){
