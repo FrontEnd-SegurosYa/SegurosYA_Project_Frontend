@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import './EstilosComponentes.css';
+import './Navbar.css'
 
 function NavbarElements() {
 	const navRef = useRef();
@@ -13,7 +13,7 @@ function NavbarElements() {
 	return (
     <header>
     <h2> </h2>
-    <img src={require('./img/logo_nombre.png')} className = 'EstiloLogoNavegacion'/>
+    <img src={require('../../img/logo_nombre.png')} className = 'EstiloLogoNavegacion'/>
     <nav ref={navRef}>
       <a href="/#">Sobre seguros</a>
       <a href="/#">Atención al cliente</a>
