@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import './EstilosComponentes.css';
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container'
 
 function NavbarElements() {
 	const navRef = useRef();
