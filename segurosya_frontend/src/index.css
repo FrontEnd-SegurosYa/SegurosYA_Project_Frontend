@@ -34,3 +34,47 @@
     border-color: red;
     border-width: 1px;
   }
+
+  .btnGeneral{
+    background: #EEEEEE;
+    color: #F37B0C;
+    border: 2px solid #F37B0C;
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+  }
+  
+  .btnGeneral:hover{
+    background-color: #F37B0C;
+    color: #EEEEEE;
+    border: none;
+  }
+  
+  .btnGeneral:active{
+    background-color: #F37B0C;
+    border: none;
+    color: #EEEEEE;
+  }
+
+  .btnGeneral2{
+    background: #F37B0C;
+    color: #EEEEEE;
+    border: 2px solid #EEEEEE;
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+  }
+
+  .btnGeneral2:hover{
+    background-color: #EEEEEE;
+    color: #F37B0C;
+    border: 2px solid #F37B0C;
+  }
+  
+  .btnGeneral2:active{
+    background-color: #EEEEEE;
+    border: 2px solid #F37B0C;
+    color: #F37B0C;
+  }
