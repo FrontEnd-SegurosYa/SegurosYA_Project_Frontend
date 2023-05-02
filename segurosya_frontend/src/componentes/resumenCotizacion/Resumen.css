@@ -1,0 +1,49 @@
+.cardResumen {
+    width: 50%;
+    height: auto;
+    box-sizing: border-box;
+    float: left;
+    margin: 20px 10px;
+    padding: 50px;
+    font-family: 'Montserrat';
+    text-align: left;
+    background-color: white;
+    border-radius: 38px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #2B3467;
+  }
+    
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .container .cardResumen {
+    flex: 1;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {    
+    .container .cardResumen {
+        width: 100%;
+        flex-basis: unset;
+    }
+  }
+  
+
+.btnVolverCentrado{
+    font-size: 18px;
+    padding: 5px 70px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.Textos{
+    font-family: 'Montserrat';
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
