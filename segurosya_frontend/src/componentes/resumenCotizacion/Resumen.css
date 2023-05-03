@@ -7,12 +7,19 @@
     padding: 50px;
     font-family: 'Montserrat';
     text-align: left;
-    background-color: white;
+    background-color: #FFFFFF;
     border-radius: 38px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
     color: #2B3467;
   }
-    
+  
+  .imagen{
+    background-image: url('../../img/resumen.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -36,7 +43,8 @@
 .btnVolverCentrado{
     font-size: 18px;
     padding: 5px 70px;
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-bottom: 18px;
     text-align: center;
 }
 
@@ -47,3 +55,20 @@
     align-items: center;
     justify-content: center;
 }
+
+.check{
+    height: 70px ;
+    width: 70px;
+    margin-top: 15px;
+}
+
+.modalA{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  border-color: #2B3467;
+  border-radius: 20px;
+  border-width: 3px;
+}
+

@@ -36,7 +36,7 @@
   }
 
   .btnGeneral{
-    background: #EEEEEE;
+    background: #FFFFFF;
     color: #F37B0C;
     border: 2px solid #F37B0C;
     font-weight: 600;
@@ -47,20 +47,20 @@
   
   .btnGeneral:hover{
     background-color: #F37B0C;
-    color: #EEEEEE;
+    color: #FFFFFF;
     border: none;
   }
   
   .btnGeneral:active{
     background-color: #F37B0C;
     border: none;
-    color: #EEEEEE;
+    color: #FFFFFF;
   }
 
   .btnGeneral2{
     background: #F37B0C;
-    color: #EEEEEE;
-    border: 2px solid #EEEEEE;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
     font-weight: 600;
     border-radius: 20px;
     font-family: 'Montserrat';
@@ -68,13 +68,13 @@
   }
 
   .btnGeneral2:hover{
-    background-color: #EEEEEE;
+    background-color: #FFFFFF;
     color: #F37B0C;
     border: 2px solid #F37B0C;
   }
   
   .btnGeneral2:active{
-    background-color: #EEEEEE;
+    background-color: #FFFFFF;
     border: 2px solid #F37B0C;
     color: #F37B0C;
   }
