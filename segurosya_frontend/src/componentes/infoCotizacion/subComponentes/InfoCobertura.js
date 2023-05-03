@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Componente5 = (props) => {
+const infoCobertura = (props) => {
   const {titulo, costo}=props
   return (
     <div>
@@ -13,4 +13,4 @@ const Componente5 = (props) => {
   )
 }
 
-export default Componente5
+export default infoCobertura

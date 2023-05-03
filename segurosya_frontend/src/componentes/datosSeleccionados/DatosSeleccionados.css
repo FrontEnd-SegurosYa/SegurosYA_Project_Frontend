@@ -1,0 +1,17 @@
+.contenedor {
+    display: flex;
+    width: 70%;
+    margin-left: 15%;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.infoPersonaCoche {
+    margin-left: 5%;
+    width: 40%;
+}
+
+.Imagen {
+    width: 100%;
+}
+

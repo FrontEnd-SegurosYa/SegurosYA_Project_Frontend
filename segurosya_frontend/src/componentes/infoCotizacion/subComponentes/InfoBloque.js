@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Componente4 = (props) => {
+const infoBloque = (props) => {
   const {titulo, descripcion}=props
   return (
     <div>
@@ -10,4 +10,4 @@ const Componente4 = (props) => {
   )
 }
 
-export default Componente4
+export default infoBloque
