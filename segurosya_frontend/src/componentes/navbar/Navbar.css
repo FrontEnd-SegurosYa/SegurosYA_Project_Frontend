@@ -4,5 +4,9 @@
 
 .tituloNavbar{
 	font-family: 'Montserrat';
-	font-size: 18px
+	font-size: 20px
+}
+
+.navbar-nav .nav-link:hover {
+	color: #BFDCE5
 }
