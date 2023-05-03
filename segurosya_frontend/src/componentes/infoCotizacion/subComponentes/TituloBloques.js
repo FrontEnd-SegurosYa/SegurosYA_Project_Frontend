@@ -1,10 +1,12 @@
 import React from 'react'
 
-const Componente3 = (props) => {
+const tituloBloques = (props) => {
   const {titulo}=props
   return (
+    <React.Fragment>
     <p className='Subtitulo-datos'>{titulo}</p>
+    </React.Fragment>
   )
 }
 
-export default Componente3
+export default tituloBloques
