@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
+import { departamentos } from './infoDirecciones';
+
 //Contenedor principal
 export function FormularioClienteSinCuenta () {
 
@@ -18,13 +20,39 @@ export function FormularioClienteSinCuenta () {
 }
 
 function ContenedorPrincipal ( ) {
+    
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit} = useForm();
     const onSubmit = (data) => {
         console.log(data);
+        console.log(departamentos[0].nombre);
+        console.log(departamentos[0].provincias[0].distritos[0].nombre);
         navigate("/cotizacion1");
+        
     }
+
+    //Controlador de opciones de direccion:
+    var depaSeleccionado = "",
+        provSeleccionado = "",
+        distSeleccionado = "";
+    
+    // const [selectValue, setSelectValue] = React.useState("");
+
+    const seleccionDepartamento = (depSel) => {
+        // depaSeleccionado = depSel;
+        console.log(depaSeleccionado);
+    }
+
+    // const seleccionProvincia = (depPro) => {
+    //     depaSeleccionado = depPro;
+    // }
+
+    // const seleccionDistrito = (depDis) => {
+    //     depaSeleccionado = depDis;
+
+    // }
+    
    
     return (
         <form className='ContenedorPrincipal' onSubmit={handleSubmit(onSubmit)}>
@@ -73,22 +101,50 @@ function ContenedorPrincipal ( ) {
                     <div className='ContenedorCampoFormulario'>
                         Direccion: <br/>
                         Departamento:
-                        <select {...register('departamento')}>
-                            <option value="Lima">Lima</option>
+                        <select {...register('departamento')} >
+                            {/* Renderizar primero opciones de departamentos */}
+                            {departamentos.map(
+                                (departamento) =>
+                                {
+                                    return(
+                                        <option value={departamento.nombre} > {departamento.nombre} </option>
+                                    );
+                                }
+                            )}
+                            {/* <option value="Lima">Lima</option>
                             <option value="Ancash">Ancash</option>
-                            <option value="Ica">Ica</option>
+                            <option value="Ica">Ica</option> */}
                         </select>
                         Provincia:
-                        <select {...register('provincia')}>
-                            <option value="LimaMetropolitana">Lima Metropolitana</option>
+                            <select {...register('provincia')} >
+                            	{
+                                    departamentos[0].provincias.map(
+                                    (provincia) =>
+                                    {
+                                        return(
+                                            <option value={provincia.nombre} key={provincia.nombre}>  {provincia.nombre} </option>
+                                        );
+                                    }
+                                )}
+                            {/* <option value="LimaMetropolitana">Lima Metropolitana</option>
                             <option value="Callao">Callao</option>
-                            <option value="Huarochiri">Huarochiri</option>
-                        </select>
+                            <option value="Huarochiri">Huarochiri</option> */}
+                            </select>
                         Distrito:
                         <select {...register('distrito')}>
-                            <option value="SanMiguel">San Miguel</option>
+                            {
+                                departamentos[0].provincias[0].distritos.map(
+                                (distrito) =>
+                                    {
+                                        return(
+                                            <option value={distrito.nombre} key={distrito.nombre}>  {distrito.nombre} </option>
+                                        );
+                                    }
+                                )
+                            }
+                            {/* <option value="SanMiguel">San Miguel</option>
                             <option value="Lince">Lince</option>
-                            <option value="JesusMaria">Jesus María</option>
+                            <option value="JesusMaria">Jesus María</option> */}
                         </select>
                     </div>
                 </div>
