@@ -9,6 +9,7 @@ const InfoCotizaciones = () => {
   return (
     <div className='blanco'>
         <div className='bloque-datos'>
+            <br/>
             <TituloBloques titulo='¿Qué te ofrecemos?'/>
             <div className='lista-horizontal'>
                 <InfoBloque titulo='Protegemos tu vehiculo' 

@@ -1,4 +1,5 @@
 import './FormularioClienteSinCuenta.css';
+import { Link } from 'react-router-dom';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
@@ -17,8 +18,15 @@ function ContenedorPrincipal () {
             <div>
                 <ContenedorImagenFormulario/>
             </div>
-            <div>
-                barra botones
+            <div class ="botones text-center">
+                <div class="btn-group" role="group" aria-label="Botones con separación">
+                <Link to={"/"}>
+                    <button type="button" class="btnGeneral2 mx-3">Volver</button>
+                </Link>
+                <Link to={"/cotizacion1"}>
+                    <button type="button" class="btnGeneral mx-3">Continuar</button>
+                </Link>
+                </div>
             </div>
                 
             
@@ -41,6 +49,7 @@ function Formulario () {
         console.log(data);
     }
     return (
+        <>
         <form className='ContenedorFormulario' onSubmit={handleSubmit(onSubmit)}>
                 <div className='Texto1'>
                     ¡Protege tu auto, protege tu inversión!
@@ -110,7 +119,9 @@ function Formulario () {
                     <input type="submit" value="enviar"/>
                 </div>
 
-            </form>
+        </form>
+
+       </>
     );
 
 }

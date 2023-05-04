@@ -1,6 +1,7 @@
 import './Navbar.css'
 import logo from '../../img/logoNombre.png';
 import telefono from '../../img/telefonoGris.png';
+import { Link } from 'react-router-dom';
 
 
 const NavbarElements = () => {
@@ -20,10 +21,8 @@ const NavbarElements = () => {
                 Sobre Seguros
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></hr></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">SOAT</a></li>
+                <li><a class="dropdown-item" href="#">Seguros Vehiculares</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -35,7 +34,9 @@ const NavbarElements = () => {
             <span class="navbar-brand mb-0 tituloNavbar mx-2"> (01) 654 3636</span>
           </div>
           <form class="d-flex mx-3 ">
-            <button type="button" class="btnGeneral">Ingresa a tu Cuenta</button>
+            <Link to={"/FormularioClienteSinCuenta"}>
+              <button type="button" class="btnGeneral">Ingresa a tu Cuenta</button>
+            </Link>
           </form>
         </div>
       </div>

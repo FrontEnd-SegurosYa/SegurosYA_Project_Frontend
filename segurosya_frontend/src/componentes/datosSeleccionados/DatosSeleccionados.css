@@ -1,9 +1,10 @@
-.contenedor {
+.contenedorD {
     display: flex;
     width: 70%;
     margin-left: 15%;
     background: #FFFFFF;
     border-radius: 10px;
+    font-family: "Montserrat";
 }
 
 .infoPersonaCoche {
@@ -12,6 +13,14 @@
 }
 
 .Imagen {
-    width: 100%;
+    position: absolute;
+    top: 225px;
+    left: 660px;
+    width: 40%
+    
 }
 
+.borde {
+    border: 2px solid #2B3467;
+    border-left-width: 5px
+}

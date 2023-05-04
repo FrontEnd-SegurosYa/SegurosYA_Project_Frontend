@@ -1,7 +1,7 @@
 import './FormularioPlacaCotizacion.css';
 
 import {useForm} from 'react-hook-form';
-
+import { Link } from 'react-router-dom';
 // IMAGENES
 import imagenCotizacion1 from '../img/imagenAutoCotizacionInicio.png';
 import imagenLapicero1 from '../img/imagenBoligrafo.png';
@@ -72,7 +72,9 @@ function TextInputPlaca () {
 function BotonInputPlaca () {
     return (
         <>
-        <button type="button" className="BotonesGenericos" >Cotizar</button> 
+        <Link to={"/cotizacion2"}>
+            <button type="button" className="btnGeneral2" >Cotizar</button> 
+        </Link>
         </>
     );
 }

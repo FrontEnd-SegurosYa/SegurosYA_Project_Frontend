@@ -2,12 +2,13 @@ import React, { Fragment } from 'react'
 import "./DatosCarro.css";
 import '../../index.css'
 import carro from '../datosCotizacion/Carro.png'
+import { Link } from 'react-router-dom';
 
 export const DatosCarro = () => {
   return (
     <>
       <div className='DatosCarro'>
-        <div className='container'>
+        <div className='containerD'>
           <p className='Subtitulo'>Ingresa los datos de tu auto para cotizar</p>
           <div className='Form'>
             <div className='Opciones'>
@@ -35,9 +36,19 @@ export const DatosCarro = () => {
             </div>
           </div>
         </div>
-        <div className='Imagen'>
+        <div className='ImagenCarro'>
           <img className='CarroCotiza' src={carro}/>
         </div>
+      </div>
+      <div className = "botones text-center">
+        <div class="btn-group" role="group" aria-label="Botones con separación">
+          <Link to={"/cotizacion1"}>
+            <button type="button" class="btnGeneral2 mx-3">Volver</button>
+          </Link>
+          <Link to={"/cotizacion3"}>
+            <button type="button" class="btnGeneral mx-3">Continuar</button>
+          </Link>
+          </div>
       </div>
     </>
   )

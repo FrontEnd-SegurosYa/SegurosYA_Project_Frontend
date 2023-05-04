@@ -47,6 +47,7 @@
     font-size: 26px;
     font-weight: bold;
     color: var(--colorAzul1);
+    font-family: "Montserrat";
   }
   
   .Texto2Formulario {
@@ -57,6 +58,7 @@
     font-size: 15px;
     font-weight: bold;
     color: var(--colorAzul1);
+    font-family: "Montserrat"
   }
   
   .Texto3Formulario {
@@ -64,12 +66,14 @@
     font-size: 15px;
     font-weight: bold;
     color: var(--colorCeleste1);
+    font-family: "Montserrat"
   }
 
   .Texto4Formulario {
     font-size: 15px;
     color: var(--colorAzul1);
     font-weight: bold;
+    font-family: "Montserrat"
   }
   
     
@@ -84,6 +88,7 @@
     background-color: var(--colorGris1);
     border-radius: 1px;
     border: 1px var(--colorAzul1) solid;
+    font-family: "Montserrat"
   
   }
 

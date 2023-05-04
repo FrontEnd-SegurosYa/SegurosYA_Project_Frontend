@@ -48,6 +48,7 @@
     border-radius: 20px;
     font-family: 'Montserrat';
     padding: 8px 25px;
+    width: 190px;
   }
   
   .btnGeneral:hover{
@@ -70,6 +71,7 @@
     border-radius: 20px;
     font-family: 'Montserrat';
     padding: 8px 25px;
+    width: 190px;
   }
 
   .btnGeneral2:hover{
@@ -82,4 +84,11 @@
     background-color: #FFFFFF;
     border: 2px solid #F37B0C;
     color: #F37B0C;
+  }
+
+  .botones{
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    justify-content: space-evenly;
   }

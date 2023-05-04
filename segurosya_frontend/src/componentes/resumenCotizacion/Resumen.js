@@ -3,6 +3,7 @@ import "./Resumen.css"; // archivo CSS donde escribiremos nuestros estilos
 import '../../index.css'
 import imagen from '../../img/check.png'
 import './fecha'
+import { Link } from "react-router-dom";
 
 function Resumen() {
   return (
@@ -28,8 +29,9 @@ function Resumen() {
           <h5> <b>Esta cotización tiene vigencia hasta el día:</b></h5>
         </div>
       </div>
+      <br/>
       <div class="text-center">
-            <button class="btnGeneral2 btnVolverCentrado" data-bs-toggle="modal" data-bs-target="#volverModal">Volver</button>
+            <button class="btnGeneral2" data-bs-toggle="modal" data-bs-target="#volverModal">Continuar</button>
       </div>
       <div class="modal fade " id="volverModal" tabindex="-1" aria-labelledby="volverModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -42,12 +44,14 @@ function Resumen() {
                 <h4>Se le enviará la cotización a su correo electrónico</h4> 
               </div>
               <div class="modal-footer">
+                <Link to={"/"}>
                   <button class="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Volver</button>
+                  </Link>
               </div>
             </div>
         </div>
       </div>
-      
+      <br/>
     </>
   );
 }
