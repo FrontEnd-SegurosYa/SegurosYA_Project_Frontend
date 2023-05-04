@@ -1,0 +1,80 @@
+:root {
+    --colorAzul1: #2B3467;
+    --colorAzul2: #EEEEEE;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Montserrat',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    font-style: normal;
+    font-weight: 400px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #2B3467;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+  
+  .table {
+    border-collapse: collapse;
+    border-color: red;
+    border-width: 1px;
+  }
+  
+  .tr {
+    border-color: red;
+    border-width: 1px;
+  }
+  
+  .td {
+    border-color: red;
+    border-width: 1px;
+  }
+
+  .btnGeneral{
+    background: #FFFFFF;
+    color: #F37B0C;
+    border: 2px solid #F37B0C;
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+  }
+  
+  .btnGeneral:hover{
+    background-color: #F37B0C;
+    color: #FFFFFF;
+    border: none;
+  }
+  
+  .btnGeneral:active{
+    background-color: #F37B0C;
+    border: none;
+    color: #FFFFFF;
+  }
+
+  .btnGeneral2{
+    background: #F37B0C;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+  }
+
+  .btnGeneral2:hover{
+    background-color: #FFFFFF;
+    color: #F37B0C;
+    border: 2px solid #F37B0C;
+  }
+  
+  .btnGeneral2:active{
+    background-color: #FFFFFF;
+    border: 2px solid #F37B0C;
+    color: #F37B0C;
+  }

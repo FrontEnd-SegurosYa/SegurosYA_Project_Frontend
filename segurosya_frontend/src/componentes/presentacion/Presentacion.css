@@ -1,0 +1,22 @@
+.EstiloPresentacion {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 45px;
+}
+
+.EstiloTextoP{
+    font-style: 'Montserrat';   
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    padding: 0 30px;
+    margin: 45px 0;
+
+    color: #FFFFFF;
+}
+
+.btnPresentacion{
+    font-size: 18px;
+    padding: 10px 40px;
+}

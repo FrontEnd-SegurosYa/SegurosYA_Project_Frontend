@@ -1,0 +1,49 @@
+
+.back-imag{
+    position: relative;
+    height: 500px;
+    background-image: url('../../img/brand.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+
+.card{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    width: 400px;
+    border-radius: 40px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-right: 100px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .card-container {
+      width: 100%;
+      left: 0;
+      right: auto;
+      transform: none;
+      padding: 0 20px;
+    }
+}
+
+.btnContenedor{
+    font-size: 18px;
+    padding: 10px 20px;
+}
