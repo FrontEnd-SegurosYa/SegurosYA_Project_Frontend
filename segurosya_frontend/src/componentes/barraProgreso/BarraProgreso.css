@@ -38,6 +38,7 @@
     border: 3px solid var(--colorBlanco1);    
     border-radius: 50%;    
     display: inline-block;
+    margin: 4px;
     
     /* PROPIEDADES TEXTO */
     display: flex; /* or inline-flex */
@@ -55,6 +56,7 @@
     background-color: var(--colorAzul2);
     border-radius: 50%;
     border: 3px solid var(--colorBlanco1);    
+    margin: 4px;
     
     /* PROPIEDADES TEXTO */
     display: flex; /* or inline-flex */
@@ -68,6 +70,7 @@
 .RectanguloParteBarraProgreso { 
     width: 35px;
     height: 4px;
+    margin: 4px;
     background-color: var(--colorBlanco1);
     color: var(--colorBlanco1);
     display: inline-block;

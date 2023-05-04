@@ -19,14 +19,15 @@
 
 .ContenedorFormulario {
     /* padding: (top and bottom) (left and right)*/
-    margin-top: 2%;
+    /* margin-top: 2%;
     margin-bottom: 6.5%;
     margin-left: 1%;
-    margin-right: 40%;
+    margin-right: 40%; */
     text-align: center;
     background-color: var(--colorBlanco2);
     border-radius: 38px;
     z-index: 2;
+    padding-right: 10%;
 
   }
 
@@ -35,7 +36,14 @@
 .TamannhosAreasFormularios {
     display: grid;
     grid-template-rows: 1.5fr 1fr 1fr 0.5fr 1.5fr;
-    
+    background-color: var(--colorBlanco2);
+    border-radius: 38px;
+    max-width: 100%;
+    margin-left: 5%;
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 4%;
+    text-align: center;
   }
   
   .Texto1Formulario {
@@ -83,7 +91,20 @@
     justify-content: center;
     align-items: center;
     height: 90%;  
-    width: 100%;    
+    width: 100%;
+    /* PROPIEDADES GRAFICAS */
+    background-color: var(--colorBlanco2);
+    font-family: "Montserrat"
+  
+  }
+
+  .ContenedorBarraInputPlaca {
+    /* UBICACION DE INPUT */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;  
+    width: 28%;
     /* PROPIEDADES GRAFICAS */
     background-color: var(--colorGris1);
     border-radius: 1px;

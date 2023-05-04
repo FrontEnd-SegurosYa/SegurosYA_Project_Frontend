@@ -33,7 +33,7 @@ function FormularioPlaca () {
             <div className="Texto1Formulario">
                 Asegúrate desde S/.30
             </div>
-            <div className="ContenedorInputImagen">
+            <div className="ContenedorInputPlaca">
                 <TextInputPlaca/>                                
             </div>            
             <div className="ContenedorBotonInput">
@@ -60,9 +60,12 @@ function FormularioPlaca () {
 // Text Input de la placa
 function TextInputPlaca () {
     return (
-        <div className="ContenedorInputPlaca" >
+        <div className='ContenedorBarraInputPlaca'>
+        
             <input className="InputPlaca" type="text" id="placa" name="inputPlaca" placeholder="Ingresa tu placa"></input>
             <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
+        
+            
         </div>
     );
 }
