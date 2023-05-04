@@ -1,9 +1,13 @@
 import React from 'react';
 import DatosSeleccionados from '../componentes/datosSeleccionados/DatosSeleccionados.js';
+import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import Navbar from '../componentes/navbar/Navbar'
 
 function CotizacionPagina3() {
   return (
     <>
+      <Navbar/>
+      <BarraProgreso paso = {3}/>
       <DatosSeleccionados/>
     </>   
   );

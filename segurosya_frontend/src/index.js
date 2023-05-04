@@ -9,7 +9,7 @@ import PaginaInicio from './paginas/PaginaInicio';
 import CotizacionPagina1 from './paginas/CotizacionPagina1';
 import CotizacionPagina2 from './paginas/CotizacionPagina2';
 import CotizacionPagina3 from './paginas/CotizacionPagina3';
-import CotizacionPagina5 from './paginas/CotizacionPagina5';
+import CotizacionPagina4 from './paginas/CotizacionPagina4';
 
 
 
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
       element: <CotizacionPagina3/>,
     },
     {
-      path: "/cotizacion5",
-      element: <CotizacionPagina5/>,
+      path: "/cotizacion4",
+      element: <CotizacionPagina4/>,
     },
   ]);
   

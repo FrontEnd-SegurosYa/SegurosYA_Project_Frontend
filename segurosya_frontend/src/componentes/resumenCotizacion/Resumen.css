@@ -20,20 +20,20 @@
     background-repeat: no-repeat;
   }
 
-  .container {
+  .containerR {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
   
-  .container .cardResumen {
+  .containerR .cardResumen {
     flex: 1;
     margin-bottom: 10px;
     width: 100%;
   }
   
   @media (max-width: 768px) {    
-    .container .cardResumen {
+    .containerR .cardResumen {
         width: 100%;
         flex-basis: unset;
     }

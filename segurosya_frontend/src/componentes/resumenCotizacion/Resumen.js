@@ -7,7 +7,7 @@ import './fecha'
 function Resumen() {
   return (
     <>
-      <div class="container">
+      <div class="containerR">
         <div class="cardResumen">
           <h2><b>Información del auto</b></h2>
           <ol>
@@ -21,11 +21,11 @@ function Resumen() {
           <></>
         </div>
       </div>
-      <div class="container">
+      <div class="containerR">
         <div class="cardResumen">
           <h2> <b> Resumen de la cotización </b></h2>
           <h3>Monto Total: </h3>
-          <h5> <b>Esta cotización tiene vigencia hasta el día: <span id="fecha"></span></b></h5>
+          <h5> <b>Esta cotización tiene vigencia hasta el día:</b></h5>
         </div>
       </div>
       <div class="text-center">

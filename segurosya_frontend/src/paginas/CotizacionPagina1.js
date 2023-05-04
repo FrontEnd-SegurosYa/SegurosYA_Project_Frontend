@@ -1,12 +1,18 @@
-// CotizacionPagina1.js
+// CotizacionPagina2.js
 import React from 'react';
-import DatosCarro from '../componentes/datosCotizacion/DatosCarro.js'
+import InfoCotizaciones from '../componentes/infoCotizacion/InfoCotizaciones.js';
+import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import Navbar from '../componentes/navbar/Navbar.js'
+import {FormularioPlacaCotizacion} from "../FormularioPlacaCotizacion/FormularioPlacaCotizacion.js"
 
-function CotizacionPagina1() {
+function CotizacionPagina2() {
   return (
     <>
-      <DatosCarro/>
+      <Navbar/>
+      <BarraProgreso paso = {1}/>
+      <FormularioPlacaCotizacion/>
+      <InfoCotizaciones/>
     </>   
   );
 }
-export default CotizacionPagina1;
+export default CotizacionPagina2;
