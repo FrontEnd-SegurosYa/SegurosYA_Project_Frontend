@@ -1,6 +1,7 @@
 import './FormularioPlacaCotizacion.css';
 
 import {useForm} from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 // IMAGENES
 import imagenCotizacion1 from '../../img/imagenAutoCotizacionInicio.png';
@@ -24,36 +25,48 @@ export function FormularioPlacaCotizacion () {
 
 // Formulario
 function FormularioPlaca () {
+    const navigate = useNavigate();
+    // Declaraciones para botones
     const {register, handleSubmit} = useForm();
     const onSubmit = (data) => {
         console.log(data);
+        navigate("/cotizacion2");
     }
     return (
-        <div className="TamannhosAreasFormularios">
-            <div className="Texto1Formulario">
-                Asegúrate desde S/.30
-            </div>
-            <div className="ContenedorInputPlaca">
-                <TextInputPlaca/>                                
-            </div>            
-            <div className="ContenedorBotonInput">
-                <BotonInputPlaca/>
-            </div>
-            <div className="Texto2Formulario">
-                <p>
-                    Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
-                </p>                
-            </div>
-            <div>
-                <p>
-                    <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" id="cbox1" value="first_checkbox"/> No tengo inspección vehicular.</label>
-                </p>
-                <p>
-                    <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" id="cbox1" value="first_checkbox"/> No tengo placa.</label>
-                </p> 
-                
-            </div>
-        </div>        
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="TamannhosAreasFormularios">
+                <div className="Texto1Formulario">
+                    Asegúrate desde S/.30
+                </div>
+                <div className="ContenedorInputPlaca">
+                    {/* <TextInputPlaca/>                                 */}
+                    <div className='ContenedorBarraInputPlaca'>        
+                        <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
+                            required: true,
+                            })}/>
+                        <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
+                    </div>            
+                </div>
+           
+                <div className="ContenedorBotonInput">
+                    {/* <BotonInputPlaca/> */}
+                    <button type="submit" className="btnGeneral2" >Cotizar</button> 
+                </div>
+                <div className="Texto2Formulario">
+                    <p>
+                        Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
+                    </p>                
+                </div>
+                <div>
+                    <p>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" value="first_checkbox" {...register('poseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
+                    </p>
+                    <p>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" value="first_checkbox" {...register('poseePlaca')}/> No tengo placa.</label>
+                    </p>                     
+                </div>
+            </div> 
+        </form>               
     );
 }
 
@@ -62,7 +75,7 @@ function TextInputPlaca () {
     return (
         <div className='ContenedorBarraInputPlaca'>
         
-            <input className="InputPlaca" type="text" id="placa" name="inputPlaca" placeholder="Ingresa tu placa"></input>
+            <input className="InputPlaca" type="text" id="placa" name="inputPlaca" placeholder="Ingresa tu placa" ></input>
             <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
         
             
