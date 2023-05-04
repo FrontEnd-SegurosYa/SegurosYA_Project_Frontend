@@ -1,0 +1,100 @@
+/* Importacion de colores */
+@import "../index.css";
+
+.ContenedorPrincipal{
+    background-color: var(--colorAzul1);
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.ContenedorImagenFormulario {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 40px;
+    background-color: var(--colorBlanco2);
+    border-radius: 25px;
+    height: 700px;
+
+}
+
+.ContenedorFormulario {
+    display: grid;
+    background-color: transparent;
+    grid-template-rows:  
+        1fr, /*Fila 1*/
+        1fr, /*Fila 2*/
+        1fr, /*Fila 3*/ 
+        1fr, /*Fila 4*/
+        1fr, /*Fila 5*/
+        1fr, /*Fila 6*/
+        1fr, /*Fila 7*/
+        1fr; /*Fila 8*/
+    width: 100%;
+    padding-left: 8%;
+}
+
+.ImagenConductor {
+    /* top-left | top-right | bottom-right | bottom-left */
+    border-radius: 0 25px 25px 0;
+    background-image: url('../img/imagenFormularioSinCuenta.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.Texto1 {
+    color: var(--colorAzul1);
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.Texto2 {
+    color: var(--colorAzul1);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.ContenedorCampoFormulario {
+    background-color: var(--colorBlanco1);
+    border-radius: 12px;
+    width: 72%;
+    height: 80%;
+    padding-left: 2%;
+    padding-top: 1%;
+    /* TEXTO */
+    color: var(--colorAzul1);
+    font-weight: 700;
+    text-align: left;
+}
+
+.ContenedorLink {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.Link1 {
+    font-size: 15px;
+    color: var(--colorAzul1);
+    font-weight: bold;
+    
+}
+
+.Link2 {
+    /* PROPIEDADES TEXTO */
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--colorCeleste1);
+}
+
+
+
