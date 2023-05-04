@@ -1,9 +1,9 @@
 // CotizacionPagina2.js
 import React from 'react';
 import InfoCotizaciones from '../componentes/infoCotizacion/InfoCotizaciones.js';
-import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js'
-import {FormularioPlacaCotizacion} from "../FormularioPlacaCotizacion/FormularioPlacaCotizacion.js"
+import {FormularioPlacaCotizacion} from "../componentes/formularioPlacaCotizacion/FormularioPlacaCotizacion.js"
 
 function CotizacionPagina2() {
   return (

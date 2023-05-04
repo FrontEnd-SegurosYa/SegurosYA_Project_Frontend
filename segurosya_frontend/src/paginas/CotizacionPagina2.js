@@ -1,7 +1,7 @@
 // CotizacionPagina1.js
 import React from 'react';
 import DatosCarro from '../componentes/datosCotizacion/DatosCarro.js'
-import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js' 
 
 function CotizacionPagina1() {

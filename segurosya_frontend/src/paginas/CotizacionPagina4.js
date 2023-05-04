@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '../componentes/navbar/Navbar' 
 import Resumen from '../componentes/resumenCotizacion/Resumen';
-import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 
 function CotizacionPagina5() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import DatosSeleccionados from '../componentes/datosSeleccionados/DatosSeleccionados.js';
-import {BarraProgreso} from "../BarraProgreso/BarraProgreso.js"
+import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar'
 
 function CotizacionPagina3() {
