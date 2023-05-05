@@ -1,5 +1,6 @@
 import React from 'react';
 import './ContenedorPrincipal.css';
+import { Link } from 'react-router-dom';
 
 export function ContenedorPrincipal (){
     return <div class="back-imag">
@@ -10,7 +11,10 @@ export function ContenedorPrincipal (){
       </div>
       <div class="card d-flex justify-content-center align-items-center">
         <p>Cotiza tu seguro vehicular aquí HOY</p>
-        <button type="button text-center" class="btnGeneral btnContenedor">Cotiza AQUÍ</button>
+        <Link to={"/FormularioClienteSinCuenta"}>
+          <button type="button text-center" class="btnGeneral btnContenedor">Cotiza AQUÍ</button>
+        </Link>
+       
       </div>
     </div>
   </div>

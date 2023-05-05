@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
+import {useState} from 'react';
 
 import { departamentos } from './infoDirecciones';
 
@@ -33,25 +34,21 @@ function ContenedorPrincipal ( ) {
     }
 
     //Controlador de opciones de direccion:
-    var depaSeleccionado = "",
-        provSeleccionado = "",
-        distSeleccionado = "";
+    var depaSeleccionado = "Lima",
+        provSeleccionado = "Lima Metropolitana",
+        distSeleccionado = "Lince";
     
     // const [selectValue, setSelectValue] = React.useState("");
 
-    const seleccionDepartamento = (depSel) => {
-        // depaSeleccionado = depSel;
+    const [selected, setSelected] = useState('');
+
+    const handleChange = event => {
+        // console.log('Label 👉️', event.target.selectedOptions[0].label);
+        console.log("Departamento seleccionado: ",event.target.value);
+        setSelected(event.target.value);
+        depaSeleccionado = event.target.value;
         console.log(depaSeleccionado);
-    }
-
-    // const seleccionProvincia = (depPro) => {
-    //     depaSeleccionado = depPro;
-    // }
-
-    // const seleccionDistrito = (depDis) => {
-    //     depaSeleccionado = depDis;
-
-    // }
+      };
     
    
     return (
@@ -101,7 +98,7 @@ function ContenedorPrincipal ( ) {
                     <div className='ContenedorCampoFormulario'>
                         Direccion: <br/>
                         Departamento:
-                        <select {...register('departamento')} >
+                        <select {...register('departamento')} onChange={handleChange}>
                             {/* Renderizar primero opciones de departamentos */}
                             {departamentos.map(
                                 (departamento) =>
