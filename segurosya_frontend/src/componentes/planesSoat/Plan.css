@@ -1,0 +1,77 @@
+@import "../../index.css"; 
+.plan {
+    width: 30%;
+    padding: 0;
+    border: 1px solid #ccc;
+    background-color: var(--colorBlanco1);
+    border-radius: 4px;
+    margin-right: 60px;
+    display: inline-block;
+    position: relative; /* Agrega esta propiedad para establecer el contexto de posicionamiento */
+    border-radius: 38px;
+    box-sizing: border-box
+  }
+
+  .plan:hover{
+    background-color: var(--colorCeleste2);  ; /* Color de fondo del card al hacer hover */
+  }
+  
+  
+  .plan img {
+    width: 100%;
+    height: 33.33%; /* Establece la altura al 33.33% del contenedor */
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el espacio */
+    border-top-left-radius: 38px; /* Agrega esquinas redondeadas solo en la esquina superior izquierda */
+    border-top-right-radius: 38px; /* Agrega esquinas redondeadas solo en la esquina superior derecha */
+  }
+
+  .plan-content {
+    padding: 20px;
+  }
+
+  .plan h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--colorAzul3);
+  }
+
+  .azulos{
+    color: var(--colorAzul1);
+    font-size: 22px;
+  }
+
+  .nombre{
+    color:var(--colorAzul3);
+  }
+
+  .plan h6 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--colorAzul1);
+  }
+  
+  .plan p {
+    font-size: 14px;
+    color: #888;
+    padding: 10px;
+    color: var(--colorAzul1);
+  }
+
+  .plan-content ul {
+    margin-top: 0; /* Elimina el margen superior predeterminado de la lista */
+    padding-left: 20px; /* Elimina el padding izquierdo predeterminado de la lista */
+    list-style: none; /* Elimina los estilos de viñetas de la lista */
+    color: var(--colorAzul1);
+  }
+
+
+  .plan li {
+    font-size: 14px;
+    color: #888;
+    padding: 10px;
+    margin-bottom: 2px;
+    line-height: 0.8;
+    color: var(--colorAzul1);
+  }
+  

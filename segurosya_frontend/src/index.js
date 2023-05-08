@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -11,6 +10,7 @@ import CotizacionPagina2 from './paginas/CotizacionPagina2';
 import CotizacionPagina3 from './paginas/CotizacionPagina3';
 import CotizacionPagina4 from './paginas/CotizacionPagina4';
 import FormularioClientesSinCuenta from './paginas/FormularioClienteSinCuenta'
+import SoatPagina3 from './paginas/SoatPagina3';
 
 
 
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
     {
       path: "/formularioClienteSinCuenta",
       element: <FormularioClientesSinCuenta/>,
+    },
+    {
+      path: "/soat3",
+      element: <SoatPagina3/>,
     },
   ]);
   

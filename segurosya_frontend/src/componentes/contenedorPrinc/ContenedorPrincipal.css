@@ -1,3 +1,4 @@
+@import "../../index.css"; 
 
 .back-imag{
     position: relative;
@@ -8,7 +9,7 @@
     background-position: center;
 }
 
-.back-image > card-container {
+.cardPrincipal {
     position: absolute;
     top: 50%;
     right: 0;
@@ -30,13 +31,13 @@
     font-size: 22px;
     font-weight: bold;
     font-family: "Roboto";
-    color: #2B3467;
+    color: var(--colorAzul1);
 }
 
 
 
 @media only screen and (max-width: 768px) {
-    .card-container {
+    .cardPrincipal{
       width: 100%;
       left: 0;
       right: auto;

@@ -1,11 +1,13 @@
 :root {
   --colorAzul1:     #2B3467;
   --colorAzul2:     #525A82;
+  --colorAzul3:     #3E54AC;
   --colorBlanco1:   #EEEEEE;
   --colorBlanco2:   #FFFFFF;
   --colorGris1:     #D9D9D9;
   --colorNaranja1:  #F37B0C;
   --colorCeleste1:  #2BBCC6;
+  --colorCeleste2:  #BFDCE5;
   }
 
   div{
@@ -21,7 +23,7 @@
     font-weight: 400px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #2B3467;
+    background-color: var(--colorAzul1);
   }
   
   code {
@@ -45,49 +47,49 @@
   }
 
   .btnGeneral{
-    background: #FFFFFF;
-    color: #F37B0C;
-    border: 2px solid #F37B0C;
+    background: var(--colorBlanco1);
+    color: var(--colorNaranja1);
+    border: 2px solid var(--colorNaranja1);
     font-weight: 600;
     border-radius: 20px;
     font-family: 'Montserrat';
     padding: 8px 25px;
-    width: 190px;
+    width: 220px;
   }
   
   .btnGeneral:hover{
-    background-color: #F37B0C;
-    color: #FFFFFF;
+    background-color: var(--colorNaranja1);
+    color: var(--colorBlanco1);
     border: none;
   }
   
   .btnGeneral:active{
-    background-color: #F37B0C;
+    background-color: var(--colorNaranja1);
     border: none;
-    color: #FFFFFF;
+    color: var(--colorBlanco1);
   }
 
   .btnGeneral2{
-    background: #F37B0C;
-    color: #FFFFFF;
-    border: 2px solid #FFFFFF;
+    background: var(--colorNaranja1);
+    color: var(--colorBlanco1);
+    border: 2px solid var(--colorBlanco1);
     font-weight: 600;
     border-radius: 20px;
     font-family: 'Montserrat';
     padding: 8px 25px;
-    width: 190px;
+    width: 220px;
   }
 
   .btnGeneral2:hover{
-    background-color: #FFFFFF;
-    color: #F37B0C;
-    border: 2px solid #F37B0C;
+    background-color: var(--colorBlanco1);
+    color: var(--colorNaranja1);
+    border: 2px solid var(--colorNaranja1);
   }
   
   .btnGeneral2:active{
-    background-color: #FFFFFF;
-    border: 2px solid #F37B0C;
-    color: #F37B0C;
+    background-color: var(--colorBlanco1);
+    border: 2px solid var(--colorNaranja1);
+    color: var(--colorNaranja1);
   }
 
   .botones{
@@ -96,3 +98,14 @@
     margin-bottom: 20px;
     justify-content: space-evenly;
   }
+
+  .modalMensajes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    border-color: var(--colorAzul1);
+    border-radius: 20px;
+    border-width: 3px;
+  }
+  
