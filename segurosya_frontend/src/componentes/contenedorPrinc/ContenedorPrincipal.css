@@ -8,7 +8,7 @@
     background-position: center;
 }
 
-.card-container {
+.back-image > card-container {
     position: absolute;
     top: 50%;
     right: 0;

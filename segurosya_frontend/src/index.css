@@ -7,9 +7,14 @@
   --colorNaranja1:  #F37B0C;
   --colorCeleste1:  #2BBCC6;
   }
+
+  div{
+    font-family: "Montserrat";
+  }
+
   body {
     margin: 0;
-    font-family: 'Montserrat',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: "Montserrat",-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     font-style: normal;
