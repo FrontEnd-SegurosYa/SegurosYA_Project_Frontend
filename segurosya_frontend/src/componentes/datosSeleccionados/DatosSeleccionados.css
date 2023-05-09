@@ -1,26 +1,30 @@
+@import "../../index.css";
+
 .contenedorD {
     display: flex;
     width: 70%;
     margin-left: 15%;
-    background: #FFFFFF;
+    background: var(--colorBlanco2);
     border-radius: 10px;
     font-family: "Montserrat";
 }
 
 .infoPersonaCoche {
     margin-left: 5%;
-    width: 40%;
+    width: 50%;
 }
 
-.Imagen {
-    position: absolute;
-    top: 225px;
-    left: 660px;
-    width: 40%
-    
+.carroCotiza3{
+    background-image: url('../../img/carroSeguro.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .borde {
-    border: 2px solid #2B3467;
+    border: 2px solid var(--colorAzul1);
     border-left-width: 5px
 }
+

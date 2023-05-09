@@ -6,16 +6,16 @@ const Plan = ({ title, pago, costo, coberturas, asistencias, image }) => {
         <div className="plan">
           <img src={image} alt={title} />
           <div className="plan-content">
-            <h2 class="nombre"><b>{title}</b></h2>
+            <h2 className="nombre"><b>{title}</b></h2>
             <h6><b>{pago}</b></h6>
-            <h2 class="azulos"><b>{costo}</b></h2>
-            <p class="azulos"><b>Coberturas</b></p>
+            <h2 className="azulos"><b>{costo}</b></h2>
+            <p className="azulos"><b>Coberturas</b></p>
             <ul>
                 {coberturas.map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>
-            <p class="azulos"><b>Asistencias</b></p>
+            <p className="azulos"><b>Asistencias</b></p>
             <ul>
                 {asistencias.map((item, index) => (
                     <li key={index}>{item}</li>

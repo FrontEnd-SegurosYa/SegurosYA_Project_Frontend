@@ -41,7 +41,7 @@ const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, image }) => {
       </div>
       <div className ="botones text-center">
           <div className="btn-group" role="group" aria-label="Botones con separación">
-              <Link to={"/"}>
+              <Link to={"/soat2"}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
               <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>     

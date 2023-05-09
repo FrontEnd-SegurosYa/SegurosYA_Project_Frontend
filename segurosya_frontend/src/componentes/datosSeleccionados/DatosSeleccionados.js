@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import "./DatosSeleccionados.css";
 import '../../index.css'
-import carro from '../datosSeleccionados/CarroSeguro.png'
 import { Link } from 'react-router-dom';
 
 export const DatosSeleccionados = () => {
@@ -33,8 +32,8 @@ export const DatosSeleccionados = () => {
                 <p><b>Seguro Base: S/. 40.00</b></p>
             </div>
         </div>
-        <div className='Imagen'>
-          <img className='CarroCotiza' src={carro}/>
+        <div className='carroCotiza3 infoPersonaCoche' alt ="imagenCotiza3">
+          <></>
         </div>
       </div>
       <div className = "botones text-center">

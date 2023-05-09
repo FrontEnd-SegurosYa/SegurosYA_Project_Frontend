@@ -47,7 +47,7 @@
   }
 
   .btnGeneral{
-    background: var(--colorBlanco1);
+    background: var(--colorBlanco2);
     color: var(--colorNaranja1);
     border: 2px solid var(--colorNaranja1);
     font-weight: 600;
@@ -71,8 +71,8 @@
 
   .btnGeneral2{
     background: var(--colorNaranja1);
-    color: var(--colorBlanco1);
-    border: 2px solid var(--colorBlanco1);
+    color: var(--colorBlanco2);
+    border: 2px solid var(--colorBlanco2);
     font-weight: 600;
     border-radius: 20px;
     font-family: 'Montserrat';
@@ -81,13 +81,13 @@
   }
 
   .btnGeneral2:hover{
-    background-color: var(--colorBlanco1);
+    background-color: var(--colorBlanco2);
     color: var(--colorNaranja1);
     border: 2px solid var(--colorNaranja1);
   }
   
   .btnGeneral2:active{
-    background-color: var(--colorBlanco1);
+    background-color: var(--colorBlanco2);
     border: 2px solid var(--colorNaranja1);
     color: var(--colorNaranja1);
   }

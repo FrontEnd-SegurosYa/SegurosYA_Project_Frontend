@@ -11,6 +11,7 @@ import CotizacionPagina3 from './paginas/CotizacionPagina3';
 import CotizacionPagina4 from './paginas/CotizacionPagina4';
 import FormularioClientesSinCuenta from './paginas/FormularioClienteSinCuenta'
 import SoatPagina3 from './paginas/SoatPagina3';
+import SoatPagina2 from './paginas/SoatPagina2';
 
 
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     {
       path: "/soat3",
       element: <SoatPagina3/>,
+    },
+    {
+      path: "/soat2",
+      element: <SoatPagina2/>,
     },
   ]);
   

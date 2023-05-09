@@ -50,7 +50,7 @@ function FormularioPlaca () {
            
                 <div className="ContenedorBotonInput">
                     {/* <BotonInputPlaca/> */}
-                    <button type="submit" className="btnGeneral2" >Cotizar</button> 
+                    <button type="submit" className="btnGeneral" >Cotizar</button> 
                 </div>
                 <div className="Texto2Formulario">
                     <p>
