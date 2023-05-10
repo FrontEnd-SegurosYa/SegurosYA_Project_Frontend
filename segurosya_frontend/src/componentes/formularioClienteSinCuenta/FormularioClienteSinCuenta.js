@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
-import {useForm} from 'react-hook-form';
+import { useForm, Controller} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 
-import { departamentos } from './infoDirecciones';
+
+import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
 export function FormularioClienteSinCuenta () {
@@ -21,35 +22,61 @@ export function FormularioClienteSinCuenta () {
 }
 
 function ContenedorPrincipal ( ) {
-    
+
     const navigate = useNavigate();
-    // Declaraciones para botones
-    const {register, handleSubmit} = useForm();
+
+    const { control, register,handleSubmit } = useForm();
+    
+    const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
+    const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
+    const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
+    const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
+    const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
+    const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
+
+    const ubicacion = {
+        departamento: departamento,
+        provincia: provincia,
+        distrito: distrito
+    };
+
+    const cambioDepartamento = (depSelec) => {
+        const depObtenido = ubicacionesJSON.find( (departamento)  => departamento.nombre === depSelec);
+        setdepartamento(depObtenido.nombre);
+        setProvincia(depObtenido.provincias[0].nombre);
+        setListaProvincias( depObtenido.provincias );
+        setDistrito(depObtenido.provincias[0].distritos[0]);
+        setListaDistritos( depObtenido.provincias[0].distritos);
+    };
+
+    const cambioProvincia = (provSelec) => {
+        const provObtenida = listaProvincias.find( (provincia)  => provincia.nombre === provSelec);
+        setProvincia(provObtenida.nombre);
+        setListaDistritos( provObtenida.distritos );
+        setDistrito(provObtenida.distritos[0]);
+    };
+
+    const cambioDistrito = (distSelec) => {
+        setDistrito(distSelec);
+    };
+
+    useEffect(() => {
+        setListaDepartamentos( ubicacionesJSON );
+    }, []);
+
     const onSubmit = (data) => {
-        console.log(data);
-        console.log(departamentos[0].nombre);
-        console.log(departamentos[0].provincias[0].distritos[0].nombre);
+        const informacionClienteSinCuenta = {
+            nombreCompleto: data.nombreCompleto,
+            DNI: data.DNI,
+            correoElectronico: data.correoElectronico,
+            telefonoCelular: data.telefonoCelular,
+            ubicacion: ubicacion
+        };
+        console.log(informacionClienteSinCuenta);
+        alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
         navigate("/cotizacion1");
         
     }
-
-    //Controlador de opciones de direccion:
-    var depaSeleccionado = "Lima",
-        provSeleccionado = "Lima Metropolitana",
-        distSeleccionado = "Lince";
-    
-    // const [selectValue, setSelectValue] = React.useState("");
-
-    const [selected, setSelected] = useState('');
-
-    const handleChange = event => {
-        // console.log('Label 👉️', event.target.selectedOptions[0].label);
-        console.log("Departamento seleccionado: ",event.target.value);
-        setSelected(event.target.value);
-        depaSeleccionado = event.target.value;
-        console.log(depaSeleccionado);
-      };
-    
    
     return (
         <form className='ContenedorPrincipal' onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +92,9 @@ function ContenedorPrincipal ( ) {
                 <div >
                     <div className='ContenedorCampoFormulario'>
                         Nombre Completo: <br/>                        
-                        <input type='text' {...register('nombreCompleto')}/>
+                        <input type='text' {...register('nombreCompleto',{
+                            required: true,
+                        })}/>
                     </div>
                     
                 </div>
@@ -81,7 +110,7 @@ function ContenedorPrincipal ( ) {
                 <div>
                     <div className='ContenedorCampoFormulario'>
                         Correo electrónico: <br/>                        
-                        <input type='text' {...register('correoElectonico',{
+                        <input type='email' {...register('correoElectonico',{
                             required: true,
                         })}/>
                     </div>
@@ -98,51 +127,57 @@ function ContenedorPrincipal ( ) {
                     <div className='ContenedorCampoFormulario'>
                         Direccion: <br/>
                         Departamento:
-                        <select {...register('departamento')} onChange={handleChange}>
-                            {/* Renderizar primero opciones de departamentos */}
-                            {departamentos.map(
-                                (departamento) =>
-                                {
-                                    return(
-                                        <option value={departamento.nombre} > {departamento.nombre} </option>
-                                    );
-                                }
+                        <Controller
+                            name="departamento"
+                            control={control}
+                            render={({ field: { onChange } }) => (
+                                <select onChange={(e) => {
+                                    onChange(e.target.value);
+                                    cambioDepartamento(e.target.value);
+                                }}>
+                                {listaDepartamentos.map((option) => (
+                                    <option key={option.nombre} value={option.nombre}>
+                                        {option.nombre}
+                                    </option>
+                                ))}
+                                </select>
                             )}
-                            {/* <option value="Lima">Lima</option>
-                            <option value="Ancash">Ancash</option>
-                            <option value="Ica">Ica</option> */}
-                        </select>
+                        />
                         Provincia:
-                            <select {...register('provincia')} >
-                            	{
-                                    departamentos[0].provincias.map(
-                                    (provincia) =>
-                                    {
-                                        return(
-                                            <option value={provincia.nombre} key={provincia.nombre}>  {provincia.nombre} </option>
-                                        );
-                                    }
-                                )}
-                            {/* <option value="LimaMetropolitana">Lima Metropolitana</option>
-                            <option value="Callao">Callao</option>
-                            <option value="Huarochiri">Huarochiri</option> */}
-                            </select>
+                        <Controller
+                            name="provincia"
+                            control={control}
+                            render={({ field: { onChange } }) => (
+                                <select onChange={(e) => {
+                                    onChange(e.target.value);
+                                    cambioProvincia(e.target.value);
+                                }}>
+                                {listaProvincias.map((option) => (
+                                    <option key={option.nombre} value={option.nombre}>
+                                        {option.nombre}
+                                    </option>
+                                ))}
+                                </select>     
+                            )}
+                        />
                         Distrito:
-                        <select {...register('distrito')}>
-                            {
-                                departamentos[0].provincias[0].distritos.map(
-                                (distrito) =>
-                                    {
-                                        return(
-                                            <option value={distrito.nombre} key={distrito.nombre}>  {distrito.nombre} </option>
-                                        );
-                                    }
-                                )
-                            }
-                            {/* <option value="SanMiguel">San Miguel</option>
-                            <option value="Lince">Lince</option>
-                            <option value="JesusMaria">Jesus María</option> */}
-                        </select>
+                        <Controller
+                            name="distrito"
+                            control={control}
+                            render={({ field: { onChange } }) => (
+                                <select 
+                                    onChange={(e) => { 
+                                        onChange(e.target.value); 
+                                        cambioDistrito(e.target.value);
+                                    }}>
+                                {listaDistritos.map((distrito) => (
+                                    <option key={distrito} value={distrito}>
+                                        {distrito}
+                                    </option>
+                                ))}
+                                </select>
+                            )}  
+                        />
                     </div>
                 </div>
                 <div className='ContenedorLink'>
