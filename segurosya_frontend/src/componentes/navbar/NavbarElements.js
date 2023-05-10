@@ -34,7 +34,7 @@ const NavbarElements = () => {
             <span className="navbar-brand mb-0 tituloNavbar mx-2"> (01) 654 3636</span>
           </div>
           <form className="d-flex mx-3 ">
-            <Link to={"/FormularioClienteSinCuenta"}>
+            <Link to={"/iniciarSesion"}>
               <button type="button" className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
             </Link>
           </form>

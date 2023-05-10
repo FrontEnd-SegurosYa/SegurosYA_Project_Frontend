@@ -2,9 +2,11 @@ import React, { Fragment } from 'react'
 import "./RegistrarCliente.css";
 import '../../index.css'
 import hombre from '../registrarCliente/HombresManos.png'
+import { Link } from 'react-router-dom';
 
 export const RegistrarCliente = () => {
   return (
+    <>
     <div className='RegistrarCliente'>
       <div className='DatosCliente'>
         <p className='Titulo'>¡Únase a nuestra comunidad!</p>
@@ -61,6 +63,17 @@ export const RegistrarCliente = () => {
         <img className='VentaCarro' src={hombre}/>
       </div>
     </div>
+    <div className = "botones text-center">
+        <div className="btn-group" role="group" aria-label="Botones con separación">
+        <Link to={"/"}>
+            <button type="button" className="btnGeneral2 mx-3">Volver</button>
+        </Link>
+        <Link to={"/"}>
+            <button type="button" className="btnGeneral mx-3">Continuar</button>
+        </Link>
+        </div>
+    </div>
+    </>
   )
 }
 
