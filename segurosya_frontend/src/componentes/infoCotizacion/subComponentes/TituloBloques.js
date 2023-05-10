@@ -4,7 +4,7 @@ const tituloBloques = (props) => {
   const {titulo}=props
   return (
     <React.Fragment>
-    <h5 className='Subtitulo-datos'>{titulo}</h5>
+    <p className='Subtitulo-datos'>{titulo}</p>
     </React.Fragment>
   )
 }

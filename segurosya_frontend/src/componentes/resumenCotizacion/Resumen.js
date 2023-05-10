@@ -4,18 +4,26 @@ import '../../index.css'
 import imagenCheck from '../../img/check.png'
 import './fecha'
 import { Link } from "react-router-dom";
+import DatosCarroSoat from "../datosCarroSoat/datosCarroSoat";
 
-function Resumen() {
+function Resumen({carroSeleccionado}) {
+  const fechaActual = new Date();
+  fechaActual.setFullYear(fechaActual.getFullYear() + 1);
+  const dia = fechaActual.getDate().toString().padStart(2, '0');
+  const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
+  const anio = fechaActual.getFullYear();
+  const fechaActualTexto= `${dia}/${mes}/${anio}`;
+
   return (
     <>
       <div className="containerR">
         <div className="cardResumen">
           <h2><b>Información del auto</b></h2>
           <ol>
-            <li> Marca: </li>
-            <li> Modelo:</li>
-            <li> Año de fabricación:</li>
-            <li> Número de asientos:</li>
+            <li> Marca: {carroSeleccionado.marca}</li>
+            <li> Modelo: {carroSeleccionado.modelo}</li>
+            <li> Año de fabricación: {carroSeleccionado.anhoFabricacion}</li>
+            <li> Número de asientos: {carroSeleccionado.numeroAsientos}</li>
           </ol>
         </div>
         <div className="cardResumen imagen">
@@ -26,14 +34,14 @@ function Resumen() {
         <div className="cardResumen">
           <h2> <b> Resumen de la cotización </b></h2>
           <h3>Monto Total: </h3>
-          <h5> <b>Esta cotización tiene vigencia hasta el día:</b></h5>
+          <h5> <b>Esta cotización tiene vigencia hasta el día:  {fechaActualTexto}</b></h5>
         </div>
       </div>
       <br/>
       <div className="text-center">
             <button className="btnGeneral2" data-bs-toggle="modal" data-bs-target="#volverModal">Continuar</button>
       </div>
-      <div className="modal fade " id="volverModal" tabindex="-1" aria-labelledby="volverModalLabel" aria-hidden="true">
+      <div className="modal fade " id="volverModal" tabIndex="-1" aria-labelledby="volverModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content modalMensajes">
               <img src={imagenCheck} className="img-fluid check" alt = "Check"/>

@@ -4,7 +4,7 @@ const infoBloque = (props) => {
   const {titulo, descripcion}=props
   return (
     <div>
-    <h5 class = "text-center"><b>{titulo}</b></h5>
+    <p>{titulo}</p>
     <div>{descripcion}</div>
     </div>
   )

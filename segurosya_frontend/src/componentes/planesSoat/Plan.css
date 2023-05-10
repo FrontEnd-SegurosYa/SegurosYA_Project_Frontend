@@ -9,10 +9,11 @@
     display: inline-block;
     position: relative; /* Agrega esta propiedad para establecer el contexto de posicionamiento */
     border-radius: 38px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    height:1000px;
   }
 
-  .plan:hover{
+  .plan:hover, .plan.clicked{
     background-color: var(--colorCeleste2);  ; /* Color de fondo del card al hacer hover */
   }
   

@@ -1,0 +1,52 @@
+.IniciarSesion {
+    display: flex;
+
+}
+
+.IniciarSesion > .Registrar {
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding-left: 0%;
+    width: 50%;
+    height: auto;
+    padding-top: 3%;
+}
+
+.IniciarSesion > .Imagen {
+    text-align: center;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.ImgMujer {
+    width: 70%;
+}
+
+.ImgHombre {
+    width: 70%;
+}
+
+.Titulo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.BotonIniciar {
+    width: 40%;
+    background-color: #2B3467;
+    color: #FFFFFF;
+}
+
+.BotonGoogle {
+    width: 40%;
+    background-color: #FFFFFF;
+}
+
+.Ingresa {
+    width: 40%;
+}
+
+.Izq {
+    text-align: left;
+}

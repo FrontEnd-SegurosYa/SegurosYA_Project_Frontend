@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
 import "./DatosSeleccionados.css";
 import '../../index.css'
 import { Link } from 'react-router-dom';
 
-export const DatosSeleccionados = () => {
+export const DatosSeleccionados = ({carroSeleccionado}) => {
   return (
     <>
       <br/>
@@ -18,16 +17,14 @@ export const DatosSeleccionados = () => {
                     <li>+51 993 912 114</li>
                 </ul>
             </div>
-            <div class="border-top my-3 borde"></div>
+            <div className="border-top my-3 borde"></div>
             <div>
                 <p><b>Sobre el vehiculo:</b></p>
                 <ul>
                     <li><b>Marca, modelo y año</b></li>
-                        <p> - Fiat 500 2015</p>
+                        <p> - {carroSeleccionado.marca} {carroSeleccionado.modelo} {carroSeleccionado.anhoFabricacion}</p>
                     <li><b>Número de asientos</b></li>
-                        <p> - 4</p>
-                    <li><b>Uso</b></li>
-                        <p> - Particular</p>
+                        <p> - {carroSeleccionado.numeroAsientos}</p>
                 </ul>
                 <p><b>Seguro Base: S/. 40.00</b></p>
             </div>
@@ -37,12 +34,12 @@ export const DatosSeleccionados = () => {
         </div>
       </div>
       <div className = "botones text-center">
-        <div class="btn-group" role="group" aria-label="Botones con separación">
+        <div className="btn-group" role="group" aria-label="Botones con separación">
           <Link to={"/cotizacion2"}>
-            <button type="button" class="btnGeneral2 mx-3">Volver</button>
+            <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
-          <Link to={"/cotizacion4"}>
-            <button type="button" class="btnGeneral mx-3">Continuar</button>
+          <Link to={"/cotizacion4"} state={carroSeleccionado}>
+            <button type="button" className="btnGeneral mx-3">Continuar</button>
           </Link>
         </div>
       </div>

@@ -10,7 +10,7 @@ import imagenTrabajando from '../../img/hombresTrabajando.png'
 
 
 
-const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, image }) => {
+const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
   return (
     <>
       <div className="contenedor-plan">
@@ -20,6 +20,7 @@ const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, image }) => {
           costo="S/50.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Asistencias adicionales no están incluídas']}
+          beneficios={['20 % de Dscto. en grúas']}
           image={plan1}
           />
           <Plan
@@ -28,6 +29,7 @@ const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, image }) => {
           costo="S/100.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Cambio de neumático', 'Carga de batería']}
+          beneficios={['30 % de Dscto. en servicios de mantenimiento preventivo','15% de Dscto. en planchado y pintura']}
           image={plan2}
           />
           <Plan
@@ -36,12 +38,13 @@ const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, image }) => {
           costo="S/180.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Servicio de grúa','Cambio de neumático', 'Suministro de combustible','Carga de batería','Cerrajería vial']}
+          beneficios={['20% de Dscto. en planchado y pintura','25% de Dscto. en llantas y aros','15% de Dscto. en venta de baterias']}
           image={plan3}
           />
       </div>
       <div className ="botones text-center">
           <div className="btn-group" role="group" aria-label="Botones con separación">
-              <Link to={"/soat2"}>
+              <Link to={"/"}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
               <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>     
