@@ -47,9 +47,16 @@ function FormularioPlaca () {
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
+                <div>
+                    <p>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" {...register('poseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
+                    </p>
+                    <p>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" {...register('poseePlaca')}/> No tengo placa.</label>
+                    </p>                     
+                </div>
            
                 <div className="ContenedorBotonInput">
-                    {/* <BotonInputPlaca/> */}
                     <button type="submit" className="btnGeneral2" >Cotizar</button> 
                 </div>
                 <div className="Texto2Formulario">
@@ -57,14 +64,7 @@ function FormularioPlaca () {
                         Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
                     </p>                
                 </div>
-                <div>
-                    <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" value="first_checkbox" {...register('poseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
-                    </p>
-                    <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" value="first_checkbox" {...register('poseePlaca')}/> No tengo placa.</label>
-                    </p>                     
-                </div>
+                
             </div> 
         </form>               
     );

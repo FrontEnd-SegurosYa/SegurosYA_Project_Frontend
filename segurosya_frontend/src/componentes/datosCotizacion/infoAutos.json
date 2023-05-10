@@ -1,0 +1,176 @@
+{
+    "marcas": [
+      {
+        "nombre": "Toyota",
+        "modelos": [
+          {
+            "nombre": "Corolla",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "4"
+                  },
+                  {
+                    "numero": "5"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Camry",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "6"
+                  },
+                  {
+                    "numero": "7"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Rav4",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "6"
+                  },
+                  {
+                    "numero": "7"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Honda",
+        "modelos": [
+          {
+            "nombre": "Accord",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "6"
+                  },
+                  {
+                    "numero": "7"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Civic",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "4"
+                  },
+                  {
+                    "numero": "5"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "CR-V",
+            "años": [
+              {
+                "año": "2021",
+                "asientos": [
+                  {
+                    "numero": "5"
+                  },
+                  {
+                    "numero": "6"
+                  }
+                ]
+              },
+              {
+                "año": "2022",
+                "asientos": [
+                  {
+                    "numero": "6"
+                  },
+                  {
+                    "numero": "7"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
