@@ -3,16 +3,17 @@ import "./DatosCarro.css";
 import '../../index.css'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import { useState, useEffect } from "react";
 
 export const DatosCarro = () => {
   const navigate = useNavigate();
-    // Declaraciones para botones
-    const {register, handleSubmit} = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
-        navigate("/cotizacion3", {state:data});
-    }
+  const { control, handleSubmit } = useForm();
+  // Declaraciones para botones
+  const onSubmit = (data) => {
+      console.log(data);
+      navigate("/cotizacion3", {state:data});
+  }
   return (
     <>
      <div className='containerR'>
@@ -23,31 +24,31 @@ export const DatosCarro = () => {
               <div className='Form'>
                 <div className='Opciones'>
                   <p className='SubsubTitulo'>Marca</p>
-                  <select className='Resultado' {...register('marca')}>
+                  {/* <select className='Resultado' {...register('marca')}>
                     <option>Toyota</option>
                     <option>Honda</option>
-                  </select>
+                  </select> */}
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Modelo</p>
-                  <select className='Resultado' {...register('modelo')}>
+                  {/* <select className='Resultado' {...register('modelo')}>
                     <option>Corolla</option>
                     <option>Civic</option>
-                  </select>
+                  </select> */}
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Año de fabricacion</p>
-                  <select className='Resultado' {...register('anhoFabricacion')}>
+                  {/* <select className='Resultado' {...register('anhoFabricacion')}>
                     <option>1999</option>
                     <option>2000</option>
-                  </select>
+                  </select> */}
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Número de asientos</p>
-                  <select className='Resultado' {...register('numeroAsientos')}>
+                  {/* <select className='Resultado' {...register('numeroAsientos')}>
                     <option>4</option>
                     <option>5</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>
               <button type="submit" class="btnGeneral mx-3">Continuar</button>
