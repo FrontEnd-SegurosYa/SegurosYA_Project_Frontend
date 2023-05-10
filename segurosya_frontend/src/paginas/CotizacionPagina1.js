@@ -4,13 +4,16 @@ import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js'
 import InfoCotizaciones from '../componentes/infoCotizacion/InfoCotizaciones.js';
 import {FormularioPlacaCotizacion} from "../componentes/formularioPlacaCotizacion/FormularioPlacaCotizacion.js"
+import { useLocation } from "react-router-dom";
 
 function CotizacionPagina1() {
+  const location = useLocation();
+  const datosCliente = location.state;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {1}/>
-      <FormularioPlacaCotizacion/>
+      <FormularioPlacaCotizacion datosCliente = {datosCliente}/>
       <InfoCotizaciones/>
     </>   
   );

@@ -13,7 +13,7 @@ function CotizacionPagina4() {
     <>
       <Navbar/>
       <BarraProgreso paso = {4}/>
-      <Resumen carroSeleccionado = {datosCarro}/>
+      <Resumen/>
     </>   
   );
 }

@@ -9,14 +9,14 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
-export function FormularioPlacaCotizacion () {
+export function FormularioPlacaCotizacion ({datosCliente}) {
     return (
         <div className="FormularioPlacaCotizacion">
             <div className="ContenedorImagen">
                 <img src={imagenCotizacion1} alt="imagenCotizacion1" height={"90%"} />
             </div>
             <div className="ContenedorFormulario">
-                <FormularioPlaca/>                
+                <FormularioPlaca datosCliente = {datosCliente}/>                
             </div>
         </div>
         
@@ -24,13 +24,13 @@ export function FormularioPlacaCotizacion () {
 }
 
 // Formulario
-function FormularioPlaca () {
+function FormularioPlaca ({datosCliente}) {
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit} = useForm();
     const onSubmit = (data) => {
         console.log(data);
-        navigate("/cotizacion2");
+        navigate("/cotizacion2", {state: datosCliente});
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

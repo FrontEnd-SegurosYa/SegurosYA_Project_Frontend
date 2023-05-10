@@ -6,12 +6,12 @@ import { useLocation } from "react-router-dom";
 
 function CotizacionPagina3() {
   const location = useLocation();
-  const datosCarro = location.state;
+  const datosCliente = location.state;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {3}/>
-      <DatosSeleccionados carroSeleccionado = {datosCarro}/>
+      <DatosSeleccionados datosCliente = {datosCliente}/>
     </>   
   );
 }

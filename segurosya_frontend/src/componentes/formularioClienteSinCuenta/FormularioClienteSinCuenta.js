@@ -74,7 +74,7 @@ function ContenedorPrincipal ( ) {
         };
         console.log(informacionClienteSinCuenta);
         alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
-        navigate("/cotizacion1");
+        navigate("/cotizacion1", {state: informacionClienteSinCuenta});
         
     }
    

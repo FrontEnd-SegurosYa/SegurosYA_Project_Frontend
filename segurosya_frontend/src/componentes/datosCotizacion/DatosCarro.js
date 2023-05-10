@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from "react";
 
-export const DatosCarro = () => {
+export const DatosCarro = ({datosCliente}) => {
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
   // Declaraciones para botones
   const onSubmit = (data) => {
       console.log(data);
-      navigate("/cotizacion3", {state:data});
+      navigate("/cotizacion3", {state: datosCliente});
   }
   return (
     <>

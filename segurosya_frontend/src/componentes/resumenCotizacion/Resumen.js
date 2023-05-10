@@ -6,7 +6,7 @@ import './fecha'
 import { Link } from "react-router-dom";
 import DatosCarroSoat from "../datosCarroSoat/datosCarroSoat";
 
-function Resumen({carroSeleccionado}) {
+function Resumen() {
   const fechaActual = new Date();
   fechaActual.setFullYear(fechaActual.getFullYear() + 1);
   const dia = fechaActual.getDate().toString().padStart(2, '0');
@@ -20,10 +20,10 @@ function Resumen({carroSeleccionado}) {
         <div className="cardResumen">
           <h2><b>Información del auto</b></h2>
           <ol>
-            <li> Marca: {carroSeleccionado.marca}</li>
-            <li> Modelo: {carroSeleccionado.modelo}</li>
-            <li> Año de fabricación: {carroSeleccionado.anhoFabricacion}</li>
-            <li> Número de asientos: {carroSeleccionado.numeroAsientos}</li>
+            <li> Marca: </li>
+            <li> Modelo: </li>
+            <li> Año de fabricación: </li>
+            <li> Número de asientos: </li>
           </ol>
         </div>
         <div className="cardResumen imagen">

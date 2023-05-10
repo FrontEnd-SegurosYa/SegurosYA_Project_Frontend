@@ -3,7 +3,7 @@ import '../../index.css'
 import carro from '../datosSeleccionados/CarroSeguro.png'
 import { Link } from 'react-router-dom';
 
-export const DatosSeleccionados = ({carroSeleccionado}) => {
+export const DatosSeleccionados = ({datosCliente}) => {
   return (
     <>
       <br/>
@@ -13,9 +13,9 @@ export const DatosSeleccionados = ({carroSeleccionado}) => {
               <br/>
                 <p><b>Sobre ti:</b></p>
                 <ul>
-                    <li>William Levy Gutierrez</li>
-                    <li>william.levy@pucp.edu.pe</li>
-                    <li>+51 993 912 114</li>
+                    <li>{datosCliente.nombreCompleto}</li>
+                    <li>{datosCliente.correoElectronico}</li>
+                    <li>{datosCliente.telefonoCelular}</li>
                 </ul>
             </div>
             <div class="border-top my-3 borde"></div>
@@ -41,7 +41,7 @@ export const DatosSeleccionados = ({carroSeleccionado}) => {
           <Link to={"/cotizacion2"}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
-          <Link to={"/cotizacion4"} state={carroSeleccionado}>
+          <Link to={"/cotizacion4"}>
             <button type="button" className="btnGeneral mx-3">Continuar</button>
           </Link>
         </div>
