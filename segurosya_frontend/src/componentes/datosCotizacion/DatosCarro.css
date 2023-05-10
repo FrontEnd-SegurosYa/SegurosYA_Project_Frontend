@@ -4,13 +4,13 @@
     align-items: center;
     margin: 175px;
 }
-.Form {
+.DatosCarro > .Form {
     width: 100%;
 }
-.Imagen {
+.DatosCarro > .Imagen {
     width: 50%;
 }
-.Subtitulo {
+.DatosCarro > .Subtitulo {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -20,7 +20,7 @@
     color: #2B3467;
 }
 
-.SubsubTitulo {
+.DatosCarro > .SubsubTitulo {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -30,7 +30,7 @@
     color: #2B3467;
 }
 
-.Resultado {
+.DatosCarro > .Resultado {
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 400;
@@ -42,36 +42,11 @@ border: 0;
 color: #2B3467;
 }
 
-.CarroCotiza {
+.DatosCarro > .CarroCotiza {
 width: 100%;
 }
 
-.Opciones {
-padding: 5px 80px 5px 16px;
-}
-
-.lista-horizontal {
-    display: flex;
-    flex-direction: row;
-}
-
-.bloque-datos {
-    justify-content: center;
-    align-items: center;
-}
-
-.Subtitulo-datos {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
-    color: #2B3467;
-    text-align: center;
-}
-
-.container {
+.DatosCarro > .container {
     width: 70%;
     height: auto;
     box-sizing: border-box;

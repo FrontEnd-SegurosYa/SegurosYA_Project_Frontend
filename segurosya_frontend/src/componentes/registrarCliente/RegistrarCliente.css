@@ -1,0 +1,62 @@
+.RegistrarCliente {
+    display: flex;
+    justify-content: center;
+    margin-left: 15%;
+    width: 70%;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+.RegistrarCliente > .DatosCliente {
+    margin-left: 5%;
+    margin-top: 3%;
+    width: 123%;
+}
+
+.RegistrarCliente > .DatosCliente > .Titulo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.RegistrarCliente > .DatosCliente > .Subtitulo {
+    font-size: 20px;
+}
+
+.RegistrarCliente > .DatosCliente > .IngresaDato {
+    background: #EEEEEE;
+    padding-left: 2%;
+    margin-bottom: 2%;
+    padding-bottom: 2%;
+    width: 90%;
+}
+
+.Negrita {
+    font-weight: bold;
+}
+
+.Ingresar {
+    width: 80%;
+}
+
+.RegistrarCliente > .DatosCliente > .Trio {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    width: 90%;
+    
+}
+
+.RegistrarCliente > .DatosCliente > .Trio > .IngresaDatoTrio {
+    padding-left: 2%;
+    background: #EEEEEE;
+    width: 100%;
+    padding-bottom: 2%;
+}
+
+.RegistrarCliente > .DatosCliente > .Trio > .Medio {
+    margin-left:2%;
+    margin-right:2%;
+}
+
+.Celeste {
+    color: #2BBCC6;
+}

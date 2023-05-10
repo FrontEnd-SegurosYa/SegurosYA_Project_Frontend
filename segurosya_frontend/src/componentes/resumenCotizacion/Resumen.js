@@ -25,7 +25,7 @@ function Resumen() {
         <div class="cardResumen">
           <h2> <b> Resumen de la cotización </b></h2>
           <h3>Monto Total: </h3>
-          <h5> <b>Esta cotización tiene vigencia hasta el día: <span id="fecha"></span></b></h5>
+          <h5> <b>Esta cotización tiene vigencia hasta el día: <span id="fecha">20</span></b></h5>
         </div>
       </div>
       <div class="text-center">

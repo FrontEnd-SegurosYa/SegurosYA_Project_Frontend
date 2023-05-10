@@ -5,7 +5,6 @@ import carro from '../datosCotizacion/Carro.png'
 
 export const DatosCarro = () => {
   return (
-    <>
       <div className='DatosCarro'>
         <div className='container'>
           <p className='Subtitulo'>Ingresa los datos de tu auto para cotizar</p>
@@ -39,7 +38,6 @@ export const DatosCarro = () => {
           <img className='CarroCotiza' src={carro}/>
         </div>
       </div>
-    </>
   )
 }
 
