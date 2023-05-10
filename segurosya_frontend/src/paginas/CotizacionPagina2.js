@@ -4,7 +4,7 @@ import DatosCarro from '../componentes/datosCotizacion/DatosCarro.js'
 import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js' 
 
-function CotizacionPagina1() {
+function CotizacionPagina2() {
   return (
     <>
       <Navbar/>
@@ -13,4 +13,4 @@ function CotizacionPagina1() {
     </>   
   );
 }
-export default CotizacionPagina1;
+export default CotizacionPagina2;

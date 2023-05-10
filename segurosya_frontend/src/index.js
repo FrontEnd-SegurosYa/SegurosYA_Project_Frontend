@@ -12,9 +12,8 @@ import CotizacionPagina4 from './paginas/CotizacionPagina4';
 import FormularioClientesSinCuenta from './paginas/FormularioClienteSinCuenta'
 import SoatPagina3 from './paginas/SoatPagina3';
 import SoatPagina2 from './paginas/SoatPagina2';
-import CrearCuenta from './paginas/CrearCuenta';
 import IngresarCuenta from './paginas/IngresarCuenta';
-
+import CrearCuenta from './paginas/CrearCuenta';
 
 const router = createBrowserRouter([
     {

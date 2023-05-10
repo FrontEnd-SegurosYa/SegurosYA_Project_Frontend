@@ -1,5 +1,6 @@
 import "./DatosSeleccionados.css";
 import '../../index.css'
+import carro from '../datosSeleccionados/CarroSeguro.png'
 import { Link } from 'react-router-dom';
 
 export const DatosSeleccionados = ({carroSeleccionado}) => {
@@ -17,14 +18,16 @@ export const DatosSeleccionados = ({carroSeleccionado}) => {
                     <li>+51 993 912 114</li>
                 </ul>
             </div>
-            <div className="border-top my-3 borde"></div>
+            <div class="border-top my-3 borde"></div>
             <div>
                 <p><b>Sobre el vehiculo:</b></p>
                 <ul>
                     <li><b>Marca, modelo y año</b></li>
-                        <p> - {carroSeleccionado.marca} {carroSeleccionado.modelo} {carroSeleccionado.anhoFabricacion}</p>
+                        <p> - Fiat 500 2015</p>
                     <li><b>Número de asientos</b></li>
-                        <p> - {carroSeleccionado.numeroAsientos}</p>
+                        <p> - 4</p>
+                    <li><b>Uso</b></li>
+                        <p> - Particular</p>
                 </ul>
                 <p><b>Seguro Base: S/. 40.00</b></p>
             </div>

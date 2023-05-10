@@ -4,6 +4,7 @@
     display: flex;
     width: 70%;
     margin-left: 15%;
+    background: #FFFFFF;
     background: var(--colorBlanco2);
     border-radius: 10px;
     font-family: "Montserrat";
@@ -27,4 +28,3 @@
     border: 2px solid var(--colorAzul1);
     border-left-width: 5px
 }
-

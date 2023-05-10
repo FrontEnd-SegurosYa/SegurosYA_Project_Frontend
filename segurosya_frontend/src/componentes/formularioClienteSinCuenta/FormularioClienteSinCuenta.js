@@ -30,6 +30,7 @@ function ContenedorPrincipal ( ) {
         console.log(departamentos[0].nombre);
         console.log(departamentos[0].provincias[0].distritos[0].nombre);
         navigate("/cotizacion1");
+        
     }
 
     //Controlador de opciones de direccion:

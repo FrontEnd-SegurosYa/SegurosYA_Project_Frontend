@@ -1,13 +1,46 @@
-.blanco > .lista-horizontal {
+@import "../../index.css"; 
+
+
+.Opciones {
+    padding: 5px 80px 5px 16px;
+    }
+    
+.lista-horizontal {
     display: flex;
     flex-direction: row;
+    width: 100%; 
+    margin-left: 2%;
 }
-
-.blanco > .bloque-datos {
+    
+.bloque-datos {
     justify-content: center;
     align-items: center;
+    font-family: "Montserrat"
 }
 
-.blanco {
-    background-color: white;
+.Subtitulo-datos {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 22px;
+    /* identical to box height */
+    color: var(--colorBlanco2);
+    text-align: center;
+}
+
+
+
+.contenedorCotizacion1{
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    background-color: var(--colorCeleste2);
+    border-radius: 2px;
+    margin-right: 60px;
+    display: inline-block;
+    position: relative; /* Agrega esta propiedad para establecer el contexto de posicionamiento */
+    border-radius: 18px;
+    box-sizing: border-box;
+    color: var(--colorAzul1);
 }
