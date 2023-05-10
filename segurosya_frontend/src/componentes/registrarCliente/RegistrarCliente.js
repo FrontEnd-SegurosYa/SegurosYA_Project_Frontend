@@ -65,7 +65,7 @@ export const RegistrarCliente = () => {
     </div>
     <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-        <Link to={"/"}>
+        <Link to={"/iniciarSesion"}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
         </Link>
         <Link to={"/"}>
