@@ -3,6 +3,7 @@ import './FormularioPlacaSoat.css';
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 // IMAGENES
 import imagenSoat1 from '../../img/imagenAutoSoat.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
@@ -26,43 +27,114 @@ export function FormularioPlacaSoat ({datosCliente}) {
 // Formulario
 function FormularioPlaca ({datosCliente}) {
     const navigate = useNavigate();
+    const [selectedCheckbox, setSelectedCheckbox] = useState("vacio");
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
-    const onSubmit = (data) => {
-        const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
+    
+
+    const { setValue } = useForm({
+        defaultValues: {
+          checkbox1: false,
+          checkbox2: false,
+          checkbox3: false,
+        },
+      });
+
+    const cambioCheckBox = (value) => {
+        setSelectedCheckbox(value);
+        // Use setValue function to update the value of checkboxes
+        if (value === "checkbox1") {
+            setValue("checkbox1", true);
+            setValue("checkbox2", false);
+            setValue("checkbox3", false);
+        } else if (value === "checkbox2") {
+            setValue("checkbox2", true);
+            setValue("checkbox1", false);
+            setValue("checkbox3", false);
+        } else if (value === "checkbox3") {
+            setValue("checkbox3", true);
+            setValue("checkbox1", false);
+            setValue("checkbox2", false);
+        }
+      };
+
+      const onSubmit = (data) => {
+        var tipoAuto;
+        if(selectedCheckbox=="vacio"){
+            setSelectedCheckbox(null);
+            return;
+        }else if(selectedCheckbox === "checkbox1"){
+            tipoAuto = "Particular";
+        }else if(selectedCheckbox === "checkbox2"){
+            tipoAuto = "Taxi";
+        } else {
+            tipoAuto = "Carga";
+        }
+        const informacionPlaca = {placa: data.placa, uso: tipoAuto};
         const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
         console.log(informacionCliente);
 
         // console.log(informacionPlaca);
-        navigate("/cotizacion2", {state: informacionCliente});
+        navigate("/soat2", {state: informacionCliente});
     }
-    const sinPlaca = watch("noPoseePlaca");
+
+    // const sinPlaca = watch("placa");
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="TamannhosAreasFormularios">
                 <div className="Texto1Formulario">
-                    Asegúrate desde S/.30
+                    Seleccione el tipo de auto
+                </div>
+                <div>
+                    <label htmlFor="checkbox1">
+                        Particular
+                    </label>
+                    <input
+                    {...register("checkbox1")}
+                    type="checkbox"
+                    checked={selectedCheckbox === "checkbox1"}
+                    onChange={() => cambioCheckBox("checkbox1")}
+                    className='CheckboxCircular'
+                    />
+                    
+                    <label htmlFor="checkbox2">
+                        Taxi
+                    </label>
+                    <input
+                    {...register("checkbox2")}
+                    type="checkbox"
+                    checked={selectedCheckbox === "checkbox2"}
+                    onChange={() => cambioCheckBox("checkbox2")}
+                    className='CheckboxCircular'
+                    />                    
+
+                    <label htmlFor="checkbox3">
+                        Particular
+                    </label>
+                    <input
+                    {...register("checkbox3")}
+                    type="checkbox"
+                    checked={selectedCheckbox === "checkbox3"}
+                    onChange={() => cambioCheckBox("checkbox3")}
+                    className='CheckboxCircular'
+                    />
+                        
+
                 </div>
                 <div className="ContenedorInputPlaca">
                     {/* <TextInputPlaca/>                                 */}
                     <div className='ContenedorBarraInputPlaca'>        
                         <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
-                            required: !sinPlaca,
+                            required: true,
                             pattern: /^[A-Z]{3}-\d{3}$/
                             })}/>
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
-                {!sinPlaca && errors.placa && <p className="error-message">Ingrese la placa en mayúsculas y con in guión.</p>}
-                <div>
-                    <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"    {...register('noPoseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
-                    </p>
-                    <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"  {...register('noPoseePlaca')}/> No tengo placa.</label>
-                    </p>                     
-                </div>
-           
+                {errors.placa && <p className="error-message">Ingrese la placa en mayúsculas y con in guión.</p>}
+                
+                {selectedCheckbox===null && <p className="error-message">Seleccione un tipo de auto.</p>}
+                {/* {selectedCheckbox} */}
                 <div className="ContenedorBotonInput">
                     <button type="submit" className="btnGeneral2" >Cotizar</button> 
                 </div>
