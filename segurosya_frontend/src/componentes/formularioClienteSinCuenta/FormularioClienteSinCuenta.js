@@ -11,17 +11,17 @@ import { useState, useEffect } from 'react';
 import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
-export function FormularioClienteSinCuenta () {
+export function FormularioClienteSinCuenta ({rumbo}) {
 
     return (
         <>
-            <ContenedorPrincipal />
+            <ContenedorPrincipal rumbo = {rumbo} />
         </>
         
     );
 }
 
-function ContenedorPrincipal ( ) {
+function ContenedorPrincipal ( {rumbo} ) {
 
     const navigate = useNavigate();
 
@@ -73,8 +73,10 @@ function ContenedorPrincipal ( ) {
             ubicacion: ubicacion
         };
         console.log(informacionClienteSinCuenta);
+        if(rumbo === "Soat") navigate("/cotizacion1", {state: informacionClienteSinCuenta});
+        else navigate("/soat1", {state: informacionClienteSinCuenta});
         // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
-        navigate("/cotizacion1", {state: informacionClienteSinCuenta});
+        
         
     }
    
