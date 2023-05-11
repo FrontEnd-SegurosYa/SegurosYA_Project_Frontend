@@ -22,7 +22,7 @@
     margin-bottom: 40px;
     background-color: var(--colorBlanco2);
     border-radius: 25px;
-    height: 700px;
+    height: 880px;
 
 }
 
@@ -30,14 +30,14 @@
     display: grid;
     background-color: transparent;
     grid-template-rows:  
-        1fr, /*Fila 1*/
-        1fr, /*Fila 2*/
-        1fr, /*Fila 3*/ 
-        1fr, /*Fila 4*/
-        1fr, /*Fila 5*/
-        1fr, /*Fila 6*/
-        1fr, /*Fila 7*/
-        1fr; /*Fila 8*/
+        0.2fr, /*Fila 1*/
+        0.2fr, /*Fila 2*/
+        1.5fr, /*Fila 3*/ 
+        1.5fr, /*Fila 4*/
+        1.5fr, /*Fila 5*/
+        1.5fr, /*Fila 6*/
+        1.5fr, /*Fila 7*/
+        1.5fr; /*Fila 8*/
     width: 100%;
     padding-left: 8%;
 }
@@ -52,10 +52,16 @@
 }
 
 .Texto1 {
+    align-items: center;
+    display: flex;
+    padding-top: 5px;
+
     color: var(--colorAzul1);
     font-size: 30px;
     font-weight: 600;
     text-align: left;
+    vertical-align: middle;
+    /* border: 1px solid black; */
 }
 
 .Texto2 {
@@ -63,12 +69,13 @@
     font-size: 20px;
     font-weight: 400;
     text-align: left;
+    
 }
 
 .ContenedorCampoFormulario {
     background-color: var(--colorBlanco1);
     border-radius: 12px;
-    width: 72%;
+    width: 100%;
     height: 80%;
     padding-left: 2%;
     padding-top: 1%;
@@ -76,6 +83,16 @@
     color: var(--colorAzul1);
     font-weight: 700;
     text-align: left;
+}
+
+.ContenedorCampoFormularioUbicacion {
+    /* background-color: red; */    
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    
+
 }
 
 .ContenedorLink {
@@ -100,6 +117,48 @@
 .error-message {
     color: red;
 }
+
+.InputTexto {
+    text-align: left;
+    background-color: var(--colorBlanco1);
+    width: 70%;
+    border: 0px;
+    font-size: 20px; 
+    font-weight: 600;
+    color: var(--colorAzul1);
+  }
+
+  .InputTexto:focus {
+    outline: none;
+    
+  }
+
+  .ContenedorCampoUbicacion {
+
+    background-color: var(--colorBlanco1);
+    border-radius: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: table;
+    /*  */
+    color: var(--colorAzul1);
+    font-weight: 700;
+  }
+
+  .InputUbicacion {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    border: none;
+    color: var(--colorAzul1);
+    font-weight: 700;
+    text-align: center;
+    background-color: var(--colorBlanco1);
+  }
+
+  .ContenedorSelectUbicacion {
+    vertical-align: middle;
+  }
 
 
 

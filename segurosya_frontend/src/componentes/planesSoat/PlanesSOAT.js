@@ -8,11 +8,12 @@ import plan2 from '../../img/plan2.png';
 import plan3 from '../../img/plan3.png';
 import imagenTrabajando from '../../img/hombresTrabajando.png'
 
+import planesSoatJSON from './planesSOAT.json';
 
-
-// const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
 
 // informacionCliente contiene: datosCliente,informacionPlaca,informacionAuto
+
+// const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
 const PlanesSOAT = ({ informacionCliente }) => {
   return (
     <>

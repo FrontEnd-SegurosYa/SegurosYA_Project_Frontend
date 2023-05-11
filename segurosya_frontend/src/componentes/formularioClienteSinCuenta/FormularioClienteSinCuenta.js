@@ -94,7 +94,7 @@ function ContenedorPrincipal ( {rumbo} ) {
                 <div >
                     <div className='ContenedorCampoFormulario'>
                         Nombre Completo: <br/>                        
-                        <input type='text' {...register('nombreCompleto',{
+                        <input type='text' className='InputTexto' {...register('nombreCompleto',{
                             required: true,             
                             pattern: /[a-zA-Z]+\s+[a-zA-Z]+$/,
                         })}/>
@@ -106,7 +106,7 @@ function ContenedorPrincipal ( {rumbo} ) {
                 <div>
                     <div className='ContenedorCampoFormulario'>
                         DNI: <br/>                        
-                        <input type='text' {...register('DNI',{
+                        <input type='text' className='InputTexto' {...register('DNI',{
                             required: true,
                             pattern: /^[0-9]*$/,
                             minLength: 8,
@@ -124,7 +124,8 @@ function ContenedorPrincipal ( {rumbo} ) {
                                 required: true,
                                 pattern: /^\S+@\S+$/
                                 })
-                            }/>
+                            }
+                            className='InputTexto'/>
                         {errors.email && (<p className="error-message">Ingrese un correo electrónico válido.</p>)}
                     </div>
                     
@@ -135,65 +136,93 @@ function ContenedorPrincipal ( {rumbo} ) {
                         <input type='text' {...register('telefonoCelular',{
                             required: true,
                             pattern: /^(?:\d{9}|\d{7})$/
-                        })}/>
+                        })}
+                        className='InputTexto'
+                        />
                         {errors.telefonoCelular && (<p className="error-message">Ingrese un numero de un celular o de un domicilio.</p>)}
                     </div>
                 </div>
                 <div>
-                    <div className='ContenedorCampoFormulario'>
-                        Direccion: <br/>
-                        Departamento:
-                        <Controller
-                            name="departamento"
-                            control={control}
-                            render={({ field: { onChange } }) => (
-                                <select onChange={(e) => {
-                                    onChange(e.target.value);
-                                    cambioDepartamento(e.target.value);
-                                }}>
-                                {listaDepartamentos.map((option) => (
-                                    <option key={option.nombre} value={option.nombre}>
-                                        {option.nombre}
-                                    </option>
-                                ))}
-                                </select>
-                            )}
-                        />
-                        Provincia:
-                        <Controller
-                            name="provincia"
-                            control={control}
-                            render={({ field: { onChange } }) => (
-                                <select onChange={(e) => {
-                                    onChange(e.target.value);
-                                    cambioProvincia(e.target.value);
-                                }}>
-                                {listaProvincias.map((option) => (
-                                    <option key={option.nombre} value={option.nombre}>
-                                        {option.nombre}
-                                    </option>
-                                ))}
-                                </select>     
-                            )}
-                        />
-                        Distrito:
-                        <Controller
-                            name="distrito"
-                            control={control}
-                            render={({ field: { onChange } }) => (
-                                <select 
-                                    onChange={(e) => { 
-                                        onChange(e.target.value); 
-                                        cambioDistrito(e.target.value);
-                                    }}>
-                                {listaDistritos.map((distrito) => (
-                                    <option key={distrito} value={distrito}>
-                                        {distrito}
-                                    </option>
-                                ))}
-                                </select>
-                            )}  
-                        />
+                    <div className='ContenedorCampoFormularioUbicacion'>
+                        <div className='ContenedorCampoUbicacion'>
+                            <div><p>Departamento:</p></div>
+                            <div>
+                                <Controller
+                                    name="departamento"
+                                    control={control}
+                                    render={({ field: { onChange } }) => (
+                                        <select onChange={(e) => {
+                                            onChange(e.target.value);
+                                            cambioDepartamento(e.target.value);
+                                        }}
+                                        className='InputUbicacion'
+                                        >
+                                        {listaDepartamentos.map((option) => (
+                                            <option key={option.nombre} value={option.nombre}>
+                                                {option.nombre}
+                                            </option>
+                                        ))}
+                                        </select>
+                                    )}
+                                />
+                            </div>                            
+                            
+                        </div>
+
+
+                        <div className='ContenedorCampoUbicacion'>
+                            <div><p>Provincia:</p></div>
+                            <div>
+                                <Controller
+                                    name="provincia"
+                                    control={control}
+                                    render={({ field: { onChange } }) => (
+                                        <select onChange={(e) => {
+                                            onChange(e.target.value);
+                                            cambioProvincia(e.target.value);
+                                        }}
+                                        className='InputUbicacion'
+                                        >
+                                        {listaProvincias.map((option) => (
+                                            <option key={option.nombre} value={option.nombre}>
+                                                {option.nombre}
+                                            </option>
+                                        ))}
+                                        </select>     
+                                    )}
+                                />
+                            </div>
+                            
+                        </div>
+
+
+                        <div className='ContenedorCampoUbicacion'>
+                            <div><p>Distrito:</p></div>
+                            <div>
+                                <Controller
+                                name="distrito"
+                                control={control}
+                                render={({ field: { onChange } }) => (
+                                    <select 
+                                        onChange={(e) => { 
+                                            onChange(e.target.value); 
+                                            cambioDistrito(e.target.value);
+                                        }}
+                                    className='InputUbicacion'
+                                    >
+                                    {listaDistritos.map((distrito) => (
+                                        <option key={distrito} value={distrito}>
+                                            {distrito}
+                                        </option>
+                                    ))}
+                                    </select>
+                                )}  
+                                />
+                            </div>                            
+                        </div>
+                        
+                        
+                        
                     </div>
                 </div>
                 <div className='ContenedorLink'>
