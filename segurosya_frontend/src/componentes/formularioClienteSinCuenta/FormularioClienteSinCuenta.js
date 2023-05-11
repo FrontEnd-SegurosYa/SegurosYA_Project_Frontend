@@ -198,7 +198,7 @@ function ContenedorPrincipal ( {rumbo} ) {
 
                         <div className='ContenedorCampoUbicacion'>
                             <div><p>Distrito:</p></div>
-                            <div>
+                            <div className='ContenedorSelectUbicacion'>
                                 <Controller
                                 name="distrito"
                                 control={control}

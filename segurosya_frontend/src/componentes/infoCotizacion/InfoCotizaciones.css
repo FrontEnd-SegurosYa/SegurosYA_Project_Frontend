@@ -44,3 +44,7 @@
     box-sizing: border-box;
     color: var(--colorAzul1);
 }
+
+.br {
+    width: 100%;
+}

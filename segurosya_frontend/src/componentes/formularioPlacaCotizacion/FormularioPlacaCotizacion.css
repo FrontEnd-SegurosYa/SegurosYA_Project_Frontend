@@ -6,43 +6,46 @@
     display: grid;
     grid-template-columns: 7fr 7fr ;
     grid-gap: 10px;
+    width: 100%;
+    max-height: 800px;
 }
 
-.ContenedorImagen {
-    padding: 20px;
+.ContenedorImagenCotizacion {
+    padding: 10px;
     text-align: right;
     vertical-align: middle;
-    max-width: 100%;
+    width: 70%;
     height: 423px;
     background-color: var(--colorAzul1);
+    /* background-color: red; */
 }
 
-.ContenedorFormulario {
-    /* padding: (top and bottom) (left and right)*/
-    /* margin-top: 2%;
-    margin-bottom: 6.5%;
-    margin-left: 1%;
-    margin-right: 40%; */
+.ContenedorFormularioCotizacion {
+    display: block;
     text-align: center;
     background-color: var(--colorBlanco2);
     border-radius: 38px;
     z-index: 2;
+    max-width: 100%;
+    height: 20.5%;
     padding-right: 10%;
-
+    background-color: transparent;
   }
 
   /* Estilos Forlmulario Placa Cotizacion */
 
-.TamannhosAreasFormularios {
+.TamannhosAreasFormulariosCotizacion {
+  height: 1fr;
     display: grid;
     grid-template-rows: 1.5fr 1fr 1fr 0.5fr 1.5fr;
     background-color: var(--colorBlanco2);
     border-radius: 38px;
-    max-width: 100%;
+    width: 100%;
     margin-left: 5%;
     margin-left: 5%;
     margin-top: 1%;
     margin-bottom: 4%;
+    
     text-align: center;
   }
   

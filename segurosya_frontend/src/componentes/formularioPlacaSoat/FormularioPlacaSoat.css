@@ -8,7 +8,7 @@
     grid-gap: 10px;
 }
 
-.ContenedorImagen {
+.ContenedorImagenSoat {
     padding: 20px;
     text-align: right;
     vertical-align: middle;
@@ -17,7 +17,7 @@
     background-color: var(--colorAzul1);
 }
 
-.ContenedorFormulario {
+.FormularioPlacaSoat .ContenedorFormulario {
     /* padding: (top and bottom) (left and right)*/
     /* margin-top: 2%;
     margin-bottom: 6.5%;
@@ -193,7 +193,14 @@
   .ContenedorOpciones {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    padding-left: 30%;
+    padding-right: 30%;
+    /* padding-top: 1%; */
+    padding-bottom: 1.5%;
     /* grid-auto-rows: minmax(100px, auto); */
+    font-weight: 900;
+    color: var(--colorAzul1);
+    height: fit-content;
   }
   
   

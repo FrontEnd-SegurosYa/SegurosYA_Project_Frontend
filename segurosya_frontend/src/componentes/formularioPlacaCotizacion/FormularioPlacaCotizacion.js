@@ -12,10 +12,10 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 export function FormularioPlacaCotizacion ({datosCliente}) {
     return (
         <div className="FormularioPlacaCotizacion">
-            <div className="ContenedorImagen">
+            <div className="ContenedorImagenCotizacion">
                 <img src={imagenCotizacion1} alt="imagenCotizacion1" height={"90%"} />
             </div>
-            <div className="ContenedorFormulario">
+            <div className="ContenedorFormularioCotizacion">
                 <FormularioPlaca datosCliente = {datosCliente} />                
             </div>
         </div>
@@ -38,8 +38,8 @@ function FormularioPlaca ({datosCliente}) {
     }
     const sinPlaca = watch("noPoseePlaca");
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="TamannhosAreasFormularios">
+        <form onSubmit={handleSubmit(onSubmit)} className="TamannhosAreasFormulariosCotizacion">
+            
                 <div className="Texto1Formulario">
                     Asegúrate desde S/.30
                 </div>
@@ -72,7 +72,7 @@ function FormularioPlaca ({datosCliente}) {
                     </p>                
                 </div>
                 
-            </div> 
+             
         </form>               
     );
 }

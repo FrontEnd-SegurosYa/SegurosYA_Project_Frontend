@@ -9,7 +9,7 @@ const InfoCotizaciones = () => {
   return (
     <div className='InformacionCotizaciones'>
         <div className='bloque-datos'>
-            <br/>
+            <br></br>
             <TituloBloques titulo='¿Qué te ofrecemos?'/>
             <br/>
             <div className='lista-horizontal'>

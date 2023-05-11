@@ -13,7 +13,7 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 export function FormularioPlacaSoat ({datosCliente}) {
     return (
         <div className="FormularioPlacaCotizacion">
-            <div className="ContenedorImagen">
+            <div className="ContenedorImagenSoat">
                 <img src={imagenSoat1} alt="imagenAutoSoat" height={"90%"} />
             </div>
             <div className="ContenedorFormulario">
@@ -135,7 +135,7 @@ function FormularioPlaca ({datosCliente}) {
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
-                {errors.placa && <p className="error-message">Ingrese la placa en mayúsculas y con in guión.</p>}
+                {errors.placa && <p className="error-message">Ingrese la placa con este formato: "ABC-123".</p>}
                 
                 {selectedCheckbox===null && <p className="error-message">Seleccione un tipo de auto.</p>}
                 {/* {selectedCheckbox} */}
