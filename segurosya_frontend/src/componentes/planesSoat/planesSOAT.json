@@ -1,0 +1,110 @@
+{
+    "planes": [
+      {
+        "titulo": "Plan Básico",
+        "periodicidad_pago": "Anual",
+        "costo": "300.00",
+        "coberturas": [
+          {
+            "nombre": "Responsabilidad Civil",
+            "descripcion": "Cubre daños a terceros en caso de accidente de tránsito."
+          },
+          {
+            "nombre": "Gastos Médicos",
+            "descripcion": "Cubre gastos médicos de los ocupantes del vehículo asegurado en caso de accidente."
+          }
+        ],
+        "asistencias": [
+          {
+            "nombre": "Grúa",
+            "descripcion": "Servicio de grúa en caso de accidente o avería mecánica."
+          },
+          {
+            "nombre": "Asistencia Legal",
+            "descripcion": "Asesoría legal en caso de accidente de tránsito."
+          }
+        ],
+        "beneficios": [
+          {
+            "nombre": "Descuentos en talleres",
+            "descripcion": "Descuentos en talleres autorizados para la reparación de tu vehículo asegurado."
+          },
+          {
+            "nombre": "Atención al cliente",
+            "descripcion": "Atención personalizada al cliente las 24 horas del día, los 7 días de la semana."
+          }
+        ]
+      },
+      {
+        "titulo": "Plan Intermedio",
+        "periodicidad_pago": "Semestral",
+        "costo": "200.00",
+        "coberturas": [
+          {
+            "nombre": "Responsabilidad Civil",
+            "descripcion": "Cubre daños a terceros en caso de accidente de tránsito."
+          },
+          {
+            "nombre": "Gastos Médicos",
+            "descripcion": "Cubre gastos médicos de los ocupantes del vehículo asegurado en caso de accidente."
+          }
+        ],
+        "asistencias": [
+          {
+            "nombre": "Grúa",
+            "descripcion": "Servicio de grúa en caso de accidente o avería mecánica."
+          },
+          {
+            "nombre": "Asistencia Legal",
+            "descripcion": "Asesoría legal en caso de accidente de tránsito."
+          }
+        ],
+        "beneficios": [
+          {
+            "nombre": "Descuentos en talleres",
+            "descripcion": "Descuentos en talleres autorizados para la reparación de tu vehículo asegurado."
+          },
+          {
+            "nombre": "Atención al cliente",
+            "descripcion": "Atención personalizada al cliente las 24 horas del día, los 7 días de la semana."
+          }
+        ]
+      },
+      {
+        "titulo": "Plan Premium",
+        "periodicidad_pago": "Trimestral",
+        "costo": "150.00",
+        "coberturas": [
+          {
+            "nombre": "Responsabilidad Civil",
+            "descripcion": "Cubre daños a terceros en caso de accidente de tránsito."
+          },
+          {
+            "nombre": "Gastos Médicos",
+            "descripcion": "Cubre gastos médicos de los ocupantes del vehículo asegurado en caso de accidente."
+          }
+        ],
+        "asistencias": [
+          {
+            "nombre": "Grúa",
+            "descripcion": "Servicio de grúa en caso de accidente o avería mecánica."
+          },
+          {
+            "nombre": "Asistencia Legal",
+            "descripcion": "Asesoría legal en caso de accidente de tránsito."
+          }
+        ],
+        "beneficios": [
+          {
+            "nombre": "Descuentos en talleres",
+            "descripcion": "Descuentos en talleres autorizados para la reparación de tu vehículo asegurado."
+          },
+          {
+            "nombre": "Atención al cliente",
+            "descripcion": "Atención personalizada al cliente las 24 horas del día, los 7 días de la semana."
+          }
+        ]
+      }
+    ]
+}
+  

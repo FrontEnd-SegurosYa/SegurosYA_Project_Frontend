@@ -89,7 +89,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
                       <select onChange={(e) => {
                           onChange(e.target.value);
                           cambioMarca(e.target.value);
-                      }}>
+                      }} className='Resultado'>
                       {listaMarcas.map((option) => (
                         <option key={option.nombre} value={option.nombre}>
                             {option.nombre}
@@ -108,7 +108,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
                       <select onChange={(e) => {
                           onChange(e.target.value);
                           cambioModelo(e.target.value);
-                      }}>
+                      }} className='Resultado'>
                       {listaModelos.map((option) => (
                         <option key={option.nombre} value={option.nombre}>
                             {option.nombre}
@@ -127,7 +127,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
                       <select onChange={(e) => {
                           onChange(e.target.value);
                           cambioAnhoFabricacion(e.target.value);
-                      }}>
+                      }} className='Resultado'>
                       {listaAnhosFabricacion.map((option) => (
                         <option key={option} value={option}>
                             {option}
@@ -146,7 +146,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
                       <select onChange={(e) => {
                           onChange(e.target.value);
                           cambioNumeroAsientos(e.target.value);
-                      }}>
+                      }} className='Resultado'>
                       {listaNumeroAsientos.map((option) => (
                         <option key={option} value={option}>
                             {option}

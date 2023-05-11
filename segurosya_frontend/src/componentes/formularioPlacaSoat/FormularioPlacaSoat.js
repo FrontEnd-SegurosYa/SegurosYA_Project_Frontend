@@ -21,6 +21,7 @@ export function FormularioPlacaSoat ({datosCliente}) {
             </div>
         </div>
         
+        
     );
 }
 
@@ -60,7 +61,7 @@ function FormularioPlaca ({datosCliente}) {
 
       const onSubmit = (data) => {
         var tipoAuto;
-        if(selectedCheckbox=="vacio"){
+        if(selectedCheckbox==="vacio"){
             setSelectedCheckbox(null);
             return;
         }else if(selectedCheckbox === "checkbox1"){
@@ -85,40 +86,43 @@ function FormularioPlaca ({datosCliente}) {
                 <div className="Texto1Formulario">
                     Seleccione el tipo de auto
                 </div>
-                <div>
-                    <label htmlFor="checkbox1">
-                        Particular
-                    </label>
-                    <input
-                    {...register("checkbox1")}
-                    type="checkbox"
-                    checked={selectedCheckbox === "checkbox1"}
-                    onChange={() => cambioCheckBox("checkbox1")}
-                    className='CheckboxCircular'
-                    />
-                    
-                    <label htmlFor="checkbox2">
-                        Taxi
-                    </label>
-                    <input
-                    {...register("checkbox2")}
-                    type="checkbox"
-                    checked={selectedCheckbox === "checkbox2"}
-                    onChange={() => cambioCheckBox("checkbox2")}
-                    className='CheckboxCircular'
-                    />                    
-
-                    <label htmlFor="checkbox3">
-                        Particular
-                    </label>
-                    <input
-                    {...register("checkbox3")}
-                    type="checkbox"
-                    checked={selectedCheckbox === "checkbox3"}
-                    onChange={() => cambioCheckBox("checkbox3")}
-                    className='CheckboxCircular'
-                    />
+                <div className='ContenedorOpciones'>
+                    <div>
+                        <p>Particular</p>
+                        <input
+                        {...register("checkbox1")}
+                        type="checkbox"
+                        checked={selectedCheckbox === "checkbox1"}
+                        onChange={() => cambioCheckBox("checkbox1")}
+                        className='CheckboxCircular'
+                        />
                         
+                    </div>
+
+                        
+                    <div>
+                        <p>Taxi</p>
+                        <input
+                        {...register("checkbox2")}
+                        type="checkbox"
+                        checked={selectedCheckbox === "checkbox2"}
+                        onChange={() => cambioCheckBox("checkbox2")}
+                        className='CheckboxCircular'
+                        />   
+                        
+                    </div>
+
+                    <div>
+                        <p>Carga</p>
+                        <input
+                        {...register("checkbox3")}
+                        type="checkbox"
+                        checked={selectedCheckbox === "checkbox3"}
+                        onChange={() => cambioCheckBox("checkbox3")}
+                        className='CheckboxCircular'
+                        />
+                        
+                    </div>
 
                 </div>
                 <div className="ContenedorInputPlaca">

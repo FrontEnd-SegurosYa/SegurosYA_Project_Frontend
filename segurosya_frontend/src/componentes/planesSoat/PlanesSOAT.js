@@ -10,7 +10,10 @@ import imagenTrabajando from '../../img/hombresTrabajando.png'
 
 
 
-const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
+// const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
+
+// informacionCliente contiene: datosCliente,informacionPlaca,informacionAuto
+const PlanesSOAT = ({ informacionCliente }) => {
   return (
     <>
       <div className="contenedor-plan">
