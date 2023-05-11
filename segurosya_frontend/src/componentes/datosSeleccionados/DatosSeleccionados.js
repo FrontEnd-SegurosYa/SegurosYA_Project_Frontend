@@ -19,7 +19,7 @@ export const DatosSeleccionados = ({datosCliente, informacionPlaca, informacionA
                     <li>{datosCliente.telefonoCelular}</li>
                 </ul>
             </div>
-            <div class="border-top my-3 borde"></div>
+            <div className="border-top my-3 borde"></div>
             <div>
                 <p><b>Sobre el vehiculo:</b></p>
                 <ul>
