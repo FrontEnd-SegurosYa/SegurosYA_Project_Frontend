@@ -68,7 +68,7 @@ function ContenedorPrincipal ( ) {
         const informacionClienteSinCuenta = {
             nombreCompleto: data.nombreCompleto,
             DNI: data.DNI,
-            correoElectronico: data.correoElectronico,
+            correoElectronico: data.email,
             telefonoCelular: data.telefonoCelular,
             ubicacion: ubicacion
         };
@@ -110,9 +110,12 @@ function ContenedorPrincipal ( ) {
                 <div>
                     <div className='ContenedorCampoFormulario'>
                         Correo electrónico: <br/>                        
-                        <input type='email' {...register('correoElectonico',{
-                            required: true,
-                        })}/>
+                        <input type='email' 
+                            {...register('email',{
+                                required: true,
+                                pattern: /^\S+@\S+$/i
+                                })
+                            }/>
                     </div>
                 </div>  
                 <div>
