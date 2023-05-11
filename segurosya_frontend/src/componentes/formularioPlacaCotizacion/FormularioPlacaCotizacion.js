@@ -16,7 +16,7 @@ export function FormularioPlacaCotizacion ({datosCliente}) {
                 <img src={imagenCotizacion1} alt="imagenCotizacion1" height={"90%"} />
             </div>
             <div className="ContenedorFormulario">
-                <FormularioPlaca datosCliente = {datosCliente}/>                
+                <FormularioPlaca datosCliente = {datosCliente} />                
             </div>
         </div>
         
@@ -29,8 +29,9 @@ function FormularioPlaca ({datosCliente}) {
     // Declaraciones para botones
     const {register, handleSubmit} = useForm();
     const onSubmit = (data) => {
-        console.log(data);
-        navigate("/cotizacion2", {state: datosCliente});
+        const informacionCliente = {datosCliente: datosCliente, informacionPlaca: data};
+        console.log(informacionCliente);
+        navigate("/cotizacion2", {state: informacionCliente});
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

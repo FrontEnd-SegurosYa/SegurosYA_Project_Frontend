@@ -7,12 +7,13 @@ import { useLocation } from "react-router-dom";
 
 function CotizacionPagina2() {
   const location = useLocation();
-  const datosCliente = location.state;
+  const datosCliente = location.state.datosCliente;
+  const informacionPlaca = location.state.informacionPlaca;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {2}/>
-      <DatosCarro datosCliente = {datosCliente}/>
+      <DatosCarro datosCliente = {datosCliente} informacionPlaca={informacionPlaca}/>
     </>   
   );
 }

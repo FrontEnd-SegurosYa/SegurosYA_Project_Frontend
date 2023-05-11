@@ -8,12 +8,12 @@ import { useLocation } from "react-router-dom";
 
 function CotizacionPagina1() {
   const location = useLocation();
-  const datosCliente = location.state;
+  const informacionClienteSinCuenta = location.state;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {1}/>
-      <FormularioPlacaCotizacion datosCliente = {datosCliente}/>
+      <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} />
       <InfoCotizaciones/>
     </>   
   );

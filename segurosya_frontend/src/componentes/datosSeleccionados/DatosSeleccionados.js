@@ -3,7 +3,8 @@ import '../../index.css'
 import carro from '../datosSeleccionados/CarroSeguro.png'
 import { Link } from 'react-router-dom';
 
-export const DatosSeleccionados = ({datosCliente}) => {
+export const DatosSeleccionados = ({datosCliente, informacionPlaca, informacionAuto}) => {
+  const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
   return (
     <>
       <br/>
@@ -23,11 +24,12 @@ export const DatosSeleccionados = ({datosCliente}) => {
                 <p><b>Sobre el vehiculo:</b></p>
                 <ul>
                     <li><b>Marca, modelo y año</b></li>
-                        <p> - Fiat 500 2015</p>
+                        {/* <p> - Fiat 500 2015</p> */}
+                        <p> - {informacionAuto.marca} {informacionAuto.modelo} {informacionAuto.anhoFabricacion}</p>
                     <li><b>Número de asientos</b></li>
-                        <p> - 4</p>
-                    <li><b>Uso</b></li>
-                        <p> - Particular</p>
+                        <p> - {informacionAuto.numeroAsientos}</p>
+                    {/* <li><b>Uso</b></li>
+                        <p> - Particular</p> */}
                 </ul>
                 <p><b>Seguro Base: S/. 40.00</b></p>
             </div>
@@ -41,7 +43,7 @@ export const DatosSeleccionados = ({datosCliente}) => {
           <Link to={"/cotizacion2"}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
-          <Link to={"/cotizacion4"}>
+          <Link to={"/cotizacion4"} state={informacionCliente}>
             <button type="button" className="btnGeneral mx-3">Continuar</button>
           </Link>
         </div>
