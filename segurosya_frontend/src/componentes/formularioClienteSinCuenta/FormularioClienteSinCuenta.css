@@ -97,5 +97,9 @@
     color: var(--colorCeleste1);
 }
 
+.error-message {
+    color: red;
+}
+
 
 

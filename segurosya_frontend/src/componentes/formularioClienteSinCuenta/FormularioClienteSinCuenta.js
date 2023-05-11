@@ -25,7 +25,7 @@ function ContenedorPrincipal ( ) {
 
     const navigate = useNavigate();
 
-    const { control, register,handleSubmit } = useForm();
+    const { control, register,handleSubmit,formState: { errors } } = useForm();
     
     const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
     const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
@@ -93,9 +93,12 @@ function ContenedorPrincipal ( ) {
                     <div className='ContenedorCampoFormulario'>
                         Nombre Completo: <br/>                        
                         <input type='text' {...register('nombreCompleto',{
-                            required: true,
+                            required: true,             
+                            pattern: /[a-zA-Z]+\s+[a-zA-Z]+$/,
                         })}/>
+                        {errors.nombreCompleto && <p className="error-message">Debe ingresar un nombre y un apellido</p>}
                     </div>
+                    
                     
                 </div>
                 <div>
@@ -103,7 +106,11 @@ function ContenedorPrincipal ( ) {
                         DNI: <br/>                        
                         <input type='text' {...register('DNI',{
                             required: true,
+                            pattern: /^[0-9]*$/,
+                            minLength: 8,
+                            maxLength: 8,
                         })}/>
+                        {errors.DNI && (<p className="error-message">DNI debe ser de 8 números</p>)}
                     </div>
                     
                 </div>
@@ -113,17 +120,21 @@ function ContenedorPrincipal ( ) {
                         <input type='email' 
                             {...register('email',{
                                 required: true,
-                                pattern: /^\S+@\S+$/i
+                                pattern: /^\S+@\S+$/
                                 })
                             }/>
+                        {errors.email && (<p className="error-message">Ingrese un correo electrónico válido.</p>)}
                     </div>
+                    
                 </div>  
                 <div>
                     <div className='ContenedorCampoFormulario'>
                         Teléfono celular: <br/>                        
                         <input type='text' {...register('telefonoCelular',{
                             required: true,
+                            pattern: /^\d{7}|\d{9}$/
                         })}/>
+                        {errors.telefonoCelular && (<p className="error-message">Ingrese un numero de un celular o de un domicilio.</p>)}
                     </div>
                 </div>
                 <div>
@@ -193,11 +204,11 @@ function ContenedorPrincipal ( ) {
         </div>
                 <div className='ImagenConductor'/>
             </div>
-            <div class ="botones text-center">
-                <div class="btn-group" role="group" aria-label="Botones con separación">
+            <div className ="botones text-center">
+                <div className="btn-group" role="group" aria-label="Botones con separación">
 
                     <Link to={"/"}>
-                        <button type="button" class="btnGeneral2 mx-3">Volver</button>
+                        <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 
                     <button type="submit" className='btnGeneral mx-3'>Continuar</button> 
