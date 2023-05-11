@@ -4,8 +4,69 @@ import '../../index.css'
 import hombre from '../registrarCliente/HombresManos.png'
 import { Link } from 'react-router-dom';
 
+
+import { useForm, Controller} from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+
+import ubicacionesJSON from "./ubicaciones.json";
+
 export const RegistrarCliente = () => {
-  return (
+    const navigate = useNavigate();
+
+    const { control, register,handleSubmit,formState: { errors } } = useForm();
+    
+    const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
+    const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
+    const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
+    const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
+    const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
+    const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
+
+    const ubicacion = {
+        departamento: departamento,
+        provincia: provincia,
+        distrito: distrito
+    };
+
+    const cambioDepartamento = (depSelec) => {
+        const depObtenido = ubicacionesJSON.find( (departamento)  => departamento.nombre === depSelec);
+        setdepartamento(depObtenido.nombre);
+        setProvincia(depObtenido.provincias[0].nombre);
+        setListaProvincias( depObtenido.provincias );
+        setDistrito(depObtenido.provincias[0].distritos[0]);
+        setListaDistritos( depObtenido.provincias[0].distritos);
+    };
+
+    const cambioProvincia = (provSelec) => {
+        const provObtenida = listaProvincias.find( (provincia)  => provincia.nombre === provSelec);
+        setProvincia(provObtenida.nombre);
+        setListaDistritos( provObtenida.distritos );
+        setDistrito(provObtenida.distritos[0]);
+    };
+
+    const cambioDistrito = (distSelec) => {
+        setDistrito(distSelec);
+    };
+
+    useEffect(() => {
+        setListaDepartamentos( ubicacionesJSON );
+    }, []);
+
+    const onSubmit = (data) => {
+        const informacionClienteSinCuenta = {
+            nombreCompleto: data.nombreCompleto,
+            DNI: data.DNI,
+            correoElectronico: data.email,
+            telefonoCelular: data.telefonoCelular,
+            ubicacion: ubicacion
+        };
+        console.log(informacionClienteSinCuenta);
+        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
+        navigate("/cotizacion1", {state: informacionClienteSinCuenta});
+        
+    }
+    return (
     <>
     <div className='RegistrarCliente'>
       <div className='DatosCliente'>

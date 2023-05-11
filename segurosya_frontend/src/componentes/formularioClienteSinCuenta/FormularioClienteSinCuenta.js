@@ -132,7 +132,7 @@ function ContenedorPrincipal ( ) {
                         Teléfono celular: <br/>                        
                         <input type='text' {...register('telefonoCelular',{
                             required: true,
-                            pattern: /^\d{7}|\d{9}$/
+                            pattern: /^(?:\d{9}|\d{7})$/
                         })}/>
                         {errors.telefonoCelular && (<p className="error-message">Ingrese un numero de un celular o de un domicilio.</p>)}
                     </div>

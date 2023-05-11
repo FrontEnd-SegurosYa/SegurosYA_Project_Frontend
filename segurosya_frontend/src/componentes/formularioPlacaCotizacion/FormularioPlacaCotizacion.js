@@ -27,12 +27,16 @@ export function FormularioPlacaCotizacion ({datosCliente}) {
 function FormularioPlaca ({datosCliente}) {
     const navigate = useNavigate();
     // Declaraciones para botones
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit,watch,formState: { errors }} = useForm();
     const onSubmit = (data) => {
-        const informacionCliente = {datosCliente: datosCliente, informacionPlaca: data};
+        const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
+        const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
         console.log(informacionCliente);
+
+        // console.log(informacionPlaca);
         navigate("/cotizacion2", {state: informacionCliente});
     }
+    const sinPlaca = watch("noPoseePlaca");
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="TamannhosAreasFormularios">
@@ -43,17 +47,19 @@ function FormularioPlaca ({datosCliente}) {
                     {/* <TextInputPlaca/>                                 */}
                     <div className='ContenedorBarraInputPlaca'>        
                         <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
-                            required: true,
+                            required: !sinPlaca,
+                            pattern: /^[A-Z]{3}-\d{3}$/
                             })}/>
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
+                {!sinPlaca && errors.placa && <p className="error-message">Ingrese la placa en mayúsculas y con in guión.</p>}
                 <div>
                     <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" {...register('poseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"    {...register('noPoseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
                     </p>
                     <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox" {...register('poseePlaca')}/> No tengo placa.</label>
+                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"  {...register('noPoseePlaca')}/> No tengo placa.</label>
                     </p>                     
                 </div>
            
