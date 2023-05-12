@@ -3,6 +3,7 @@ import './FormularioPlacaCotizacion.css';
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 // IMAGENES
 import imagenCotizacion1 from '../../img/imagenAutoCotizacionInicio.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
@@ -28,7 +29,35 @@ function FormularioPlaca ({datosCliente}) {
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
+    const [listaAutos, setListaAutos] = useState([]);
+    const obtenerPlacas = async () => {
+        const data = await (
+          await fetch("http://3.89.34.248:8080/api/auto/listar")
+        ).json();    
+        // set state when the data received
+        setListaAutos(data);
+        console.log(data);
+      };
+      useEffect(() => {
+        // fetch data
+        obtenerPlacas();
+      }, []);
+
+      const checkPlaca = (listaAutos, placaB) =>{
+        for (let i = 0; i < listaAutos.length; i++) {
+            
+            if(listaAutos[i].placa === placaB) return true;
+            // console.log(`Marca: ${carro.marca}, Modelo: ${carro.modelo}, Placa: ${carro.placa}`);
+        }
+        return false;
+      }
     const onSubmit = (data) => {
+        if (checkPlaca(listaAutos,data.placa) ){
+            alert("La placa ingresada ya posee un seguro.");
+            return;
+        }else{
+            // alert("La placa ingresada ya posee una poliza.");
+        }
         const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
         const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
         console.log(informacionCliente);

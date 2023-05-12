@@ -31,7 +31,16 @@ function FormularioPlaca ({datosCliente}) {
     const [selectedCheckbox, setSelectedCheckbox] = useState("vacio");
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
+    const [listaAutos, setListaAutos] = useState([]);
     
+    const obtenerPlacas = async () => {
+        const data = await (
+          await fetch("http://3.89.34.248:8080/api/auto/listar")
+        ).json();    
+        // set state when the data received
+        setListaAutos(data);
+        console.log(data);
+      };   
 
     const { setValue } = useForm({
         defaultValues: {
@@ -59,8 +68,28 @@ function FormularioPlaca ({datosCliente}) {
         }
       };
 
+      useEffect(() => {
+        // fetch data
+        obtenerPlacas();
+      }, []);
+
+      const checkPlaca = (listaAutos, placaB) =>{
+        for (let i = 0; i < listaAutos.length; i++) {
+            
+            if(listaAutos[i].placa === placaB) return true;
+            // console.log(`Marca: ${carro.marca}, Modelo: ${carro.modelo}, Placa: ${carro.placa}`);
+        }
+        return false;
+      }
+
       const onSubmit = (data) => {
         var tipoAuto;
+        if (checkPlaca(listaAutos,data.placa) ){
+            alert("La placa ingresada ya posee una poliza.");
+            return;
+        }else{
+            // alert("La placa ingresada ya posee una poliza.");
+        }
         if(selectedCheckbox==="vacio"){
             setSelectedCheckbox(null);
             return;
