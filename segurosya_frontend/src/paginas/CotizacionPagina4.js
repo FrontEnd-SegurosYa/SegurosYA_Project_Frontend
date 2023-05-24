@@ -15,7 +15,7 @@ function CotizacionPagina4() {
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {4}/>
+      <BarraProgreso paso = {5}/>
       <Resumen datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} />
     </>   
   );

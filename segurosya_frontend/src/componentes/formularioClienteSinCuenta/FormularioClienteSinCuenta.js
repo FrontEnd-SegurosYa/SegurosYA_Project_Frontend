@@ -1,5 +1,6 @@
 import './FormularioClienteSinCuenta.css';
 import { Link } from 'react-router-dom';
+import {BarraProgreso} from "../barraProgreso/BarraProgreso.js"
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
@@ -11,17 +12,18 @@ import { useState, useEffect } from 'react';
 import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
-export function FormularioClienteSinCuenta ({rumbo}) {
+export function FormularioClienteSinCuenta ({datosPlaca}) {
 
     return (
         <>
-            <ContenedorPrincipal rumbo = {rumbo} />
+            <BarraProgreso paso = {2}/>
+            <ContenedorPrincipal datosPlaca = {datosPlaca} />
         </>
         
     );
 }
 
-function ContenedorPrincipal ( {rumbo} ) {
+function ContenedorPrincipal ( {datosPlaca} ) {
 
     const navigate = useNavigate();
 
@@ -73,8 +75,9 @@ function ContenedorPrincipal ( {rumbo} ) {
             ubicacion: ubicacion
         };
         console.log(informacionClienteSinCuenta);
-        if(rumbo === "Soat") navigate("/cotizacion1", {state: informacionClienteSinCuenta});
-        else navigate("/soat1", {state: informacionClienteSinCuenta});
+        // if(rumbo === "Soat") navigate("/cotizacion1", {state: informacionClienteSinCuenta});
+        // else 
+        navigate("/cotizacion2", {state: datosPlaca}, {state: informacionClienteSinCuenta});
         // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
         
         
@@ -237,8 +240,8 @@ function ContenedorPrincipal ( {rumbo} ) {
             </div>
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
-
-                    <Link to={"/"}>
+                 
+                    <Link to={"/cotizacion1"}>
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 

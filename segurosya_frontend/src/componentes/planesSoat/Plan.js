@@ -1,24 +1,9 @@
 import React , { useState }from 'react';
 import './Plan.css'; // Importa el archivo CSS para estilizar la tarjeta
 
-const Plan = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
-
-    const planes = document.getElementsByClassName('plan');
-
-    for (let i = 0; i < planes.length; i++) {
-      planes[i].addEventListener('click', function() {
-        // Eliminar la clase "clicked" de todos los elementos
-        for (let j = 0; j < planes.length; j++) {
-          planes[j].classList.remove('clicked');
-        }
-
-        // Agregar la clase "clicked" solo al elemento actual
-        this.classList.add('clicked');
-      });
-    }
-    
+const Plan = ({id, selected, onClick, title, pago, costo, coberturas, asistencias, beneficios, image }) => {
     return (
-        <div className="plan">
+        <div className={`plan ${selected ? 'clicked' : ''}`} onClick={onClick}>
           <img src={image} alt={title} />
           <div className="plan-content">
             <h2 class="nombre"><b>{title}</b></h2>

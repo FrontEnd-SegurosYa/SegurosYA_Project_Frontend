@@ -105,7 +105,7 @@ function FormularioPlaca ({datosCliente}) {
         console.log(informacionCliente);
 
         // console.log(informacionPlaca);
-        navigate("/soat2", {state: informacionCliente});
+        navigate("/formularioClienteSinCuentaSOAT", {state: informacionCliente});
     }
 
     // const sinPlaca = watch("placa");

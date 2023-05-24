@@ -10,14 +10,14 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
-export function FormularioPlacaCotizacion ({datosCliente}) {
+export function FormularioPlacaCotizacion(){
     return (
         <div className="FormularioPlacaCotizacion">
             <div className="ContenedorImagenCotizacion">
                 <img src={imagenCotizacion1} alt="imagenCotizacion1" height={"90%"} />
             </div>
             <div className="ContenedorFormularioCotizacion">
-                <FormularioPlaca datosCliente = {datosCliente} />                
+                <FormularioPlaca/>                
             </div>
         </div>
         
@@ -25,7 +25,7 @@ export function FormularioPlacaCotizacion ({datosCliente}) {
 }
 
 // Formulario
-function FormularioPlaca ({datosCliente}) {
+function FormularioPlaca () {
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
@@ -59,11 +59,11 @@ function FormularioPlaca ({datosCliente}) {
             // alert("La placa ingresada ya posee una poliza.");
         }
         const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
-        const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
-        console.log(informacionCliente);
+        // const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
+        // console.log(informacionCliente);
 
         // console.log(informacionPlaca);
-        navigate("/cotizacion2", {state: informacionCliente});
+        navigate("/formularioClienteSinCuentaSeguro", {state: informacionPlaca});
     }
     const sinPlaca = watch("noPoseePlaca");
     return (
@@ -124,7 +124,7 @@ function TextInputPlaca () {
 function BotonInputPlaca () {
     return (
         <>
-        <Link to={"/cotizacion2"}>
+        <Link to={"/formularioClienteSinCuentaSeguro"}>
             <button type="button" className="btnGeneral2" >Cotizar</button> 
         </Link>
         </>

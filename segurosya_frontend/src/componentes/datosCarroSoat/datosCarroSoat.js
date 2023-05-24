@@ -141,17 +141,12 @@ export const DatosCarroSoat = ({informacionPlaca,datosCliente}) => {
                   <Controller
                     name="numeroAsientos"
                     control={control}
-                    render={({ field: { onChange } }) => (
-                      <select onChange={(e) => {
-                          onChange(e.target.value);
-                          cambioNumeroAsientos(e.target.value);
-                      }} className='Resultado'>
-                      {listaNumeroAsientos.map((option) => (
-                        <option key={option} value={option}>
-                            {option}
-                        </option>
-                      ))}
-                      </select>
+                    render={({ field }) => (
+                      <input
+                        type="number"
+                        className="Resultado"
+                        {...field}
+                      />
                     )}
                   />
                 </div>

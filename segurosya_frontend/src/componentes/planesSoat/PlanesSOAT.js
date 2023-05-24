@@ -1,5 +1,5 @@
 import './PlanesSOAT.css';
-import React from 'react';
+import React , { useState } from 'react';
 import Plan from './Plan.js';
 import { Link } from 'react-router-dom';
 
@@ -15,10 +15,19 @@ import planesSoatJSON from './planesSOAT.json';
 
 // const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
 const PlanesSOAT = ({ informacionCliente }) => {
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleClick = (cardId) => {
+    setSelectedCard(cardId);
+  };
+
   return (
     <>
       <div className="contenedor-plan">
           <Plan
+          id={1}
+          selected={selectedCard === 1}
+          onClick={() => handleClick(1)}
           title="Básico"
           pago="Pago anual desde"
           costo="S/50.00"
@@ -28,6 +37,9 @@ const PlanesSOAT = ({ informacionCliente }) => {
           image={plan1}
           />
           <Plan
+          id={2}
+          selected={selectedCard === 2}
+          onClick={() => handleClick(2)}
           title="Intermedio"
           pago="Pago anual desde"
           costo="S/100.00"
@@ -37,6 +49,9 @@ const PlanesSOAT = ({ informacionCliente }) => {
           image={plan2}
           />
           <Plan
+          id={3}
+          selected={selectedCard === 3}
+          onClick={() => handleClick(3)}
           title="Full"
           pago="Pago anual desde"
           costo="S/180.00"
@@ -48,7 +63,7 @@ const PlanesSOAT = ({ informacionCliente }) => {
       </div>
       <div className ="botones text-center">
           <div className="btn-group" role="group" aria-label="Botones con separación">
-              <Link to={"/"}>
+              <Link to={"/soat2"}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
               <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>     
@@ -71,6 +86,8 @@ const PlanesSOAT = ({ informacionCliente }) => {
         </div>
       </div>
     </>
+
+    
      
   );
 };

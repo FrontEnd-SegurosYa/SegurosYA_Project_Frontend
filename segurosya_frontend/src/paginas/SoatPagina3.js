@@ -12,7 +12,7 @@ function SoatPagina3() {
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {3}/>
+      <BarraProgreso paso = {4}/>
       <PlanesSOAT informacionCliente={location.state}/>
     </>   
   );

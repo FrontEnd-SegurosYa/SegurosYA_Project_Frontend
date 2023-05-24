@@ -19,9 +19,10 @@ function ContenedorBarraProgreso ({paso}) {
                     <tbody >
                         <tr>
                             <td><ContenedorParteBarraProgreso valor = {1} etiqueta = "Ingresa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {2} etiqueta = "Completa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {3} etiqueta = "Escoge" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {4} etiqueta = "Valida" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgreso valor = {2} etiqueta = "Registra" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgreso valor = {3} etiqueta = "Completa" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgreso valor = {4} etiqueta = "Escoge" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgreso valor = {5} etiqueta = "Valida" paso={paso}/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,7 +34,7 @@ function ContenedorBarraProgreso ({paso}) {
 
 //Contenedor de un circulo, etiqueta y linea de la barra de progreso
 function ContenedorParteBarraProgreso ({valor,etiqueta,paso}) {
-    if (valor !== 4){
+    if (valor !== 5){
         return(
             <table  height={'100%'}>
                 <tbody>

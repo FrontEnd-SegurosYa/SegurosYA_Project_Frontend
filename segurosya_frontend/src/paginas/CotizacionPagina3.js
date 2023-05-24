@@ -13,7 +13,7 @@ function CotizacionPagina3() {
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {3}/>
+      <BarraProgreso paso = {4}/>
       <DatosSeleccionados datosCliente = {datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto}/>
     </>   
   );

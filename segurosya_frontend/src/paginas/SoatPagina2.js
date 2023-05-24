@@ -11,7 +11,7 @@ function SoatPagina2() {
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {2}/>
+      <BarraProgreso paso = {3}/>
       <DatosCarroSoat informacionPlaca={informacionPlaca} datosCliente={informacionCliente}/>
     </>   
   );
