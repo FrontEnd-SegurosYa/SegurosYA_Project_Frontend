@@ -78,7 +78,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
         console.log(informacionClienteSinCuenta);
         // console.log(rumbo);
         if(rumbo === "Soat"){
-            navigate("/soat2", {state: infoState});
+            navigate("/soat3", {state: infoState});
         }
         else {
             navigate("/cotizacion3", {state: infoState});

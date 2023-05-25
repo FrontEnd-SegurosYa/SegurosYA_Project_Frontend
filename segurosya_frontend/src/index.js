@@ -17,6 +17,7 @@ import SoatPagina3 from './paginas/SoatPagina3';
 import SoatPagina2 from './paginas/SoatPagina2';
 import IngresarCuenta from './paginas/IngresarCuenta';
 import CrearCuenta from './paginas/CrearCuenta';
+import SoatPagina4 from './paginas/SoatPagina4';
 
 const router = createBrowserRouter([
     {
@@ -56,12 +57,16 @@ const router = createBrowserRouter([
       element: <SoatPagina1/>,
     },
     {
+      path: "/soat2",
+      element: <SoatPagina2/>,
+    },
+    {
       path: "/soat3",
       element: <SoatPagina3/>,
     },
     {
-      path: "/soat2",
-      element: <SoatPagina2/>,
+      path: "/soat4",
+      element: <SoatPagina4/>,
     },
     {
       path: "/crearCuenta",

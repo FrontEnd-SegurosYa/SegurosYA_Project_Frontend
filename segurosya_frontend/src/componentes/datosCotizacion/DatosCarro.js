@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 import infoAutosJSON from "./infoAutos.json";
 
-export const DatosCarro = ({datosCliente,informacionPlaca}) => {
+export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
   
   const objetosRecibidos = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
   const navigate = useNavigate();
@@ -75,7 +75,13 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
   const onSubmit = (data) => {      
       const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
       console.log(informacionCliente);
-      navigate("/cotizacion3", {state:informacionCliente});
+      // navigate("/cotizacion4", {state:informacionCliente});
+      if(rumbo === "Soat"){
+        navigate("/soat4", {state:informacionCliente});
+    }
+    else {
+        navigate("/cotizacion4", {state:informacionCliente});
+    }
   }
   return (
     <>
@@ -148,17 +154,18 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
                   <Controller
                     name="numeroAsientos"
                     control={control}
-                    render={({ field }) => (
+                    defaultValue={0}
+                    render={({ field: { onChange, value } }) => (
                       <input
                         type="number"
+                        value={value}
+                        onChange={onChange}
                         className="Resultado"
-                        {...field}
                       />
                     )}
                   />
                 </div>
               </div>
-              
             
         </div>
         <div className='imagenSeguro2 containerImagenCarroSeguro ' alt = "imagenSeguro2">
@@ -170,7 +177,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
           {/* <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link> */}
-          <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver2</button>
+          <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button>
           <button type="submit" className="btnGeneral mx-3">Continuar</button>
         </div>
       </div>

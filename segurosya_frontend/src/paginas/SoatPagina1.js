@@ -8,12 +8,16 @@ import { useLocation } from "react-router-dom";
 
 function SoatPagina1() {
   const location = useLocation();
-  const informacionClienteSinCuenta = location.state;
+  let placaPasada = null;
+  if(location.state !== null){
+    placaPasada = location.state;
+  }
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {1}/>
-      <FormularioPlacaSoat datosCliente = {informacionClienteSinCuenta} />
+      {/* <FormularioPlacaSoat datosCliente = {informacionClienteSinCuenta} /> */}
+      <FormularioPlacaSoat placaPasada={placaPasada}/>
       <InfoCotizaciones/>
     </>   
   );

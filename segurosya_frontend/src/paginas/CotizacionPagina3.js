@@ -17,7 +17,7 @@ function CotizacionPagina3() {
       
       {/* <DatosSeleccionados datosCliente = {datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto}/> */}
       <BarraProgreso paso = {3}/>
-      <DatosCarro datosCliente={informacionCliente} informacionPlaca={informacionPlaca} />
+      <DatosCarro datosCliente={informacionCliente} informacionPlaca={informacionPlaca} rumbo = "seguro"/>
     </>   
   );
 }
