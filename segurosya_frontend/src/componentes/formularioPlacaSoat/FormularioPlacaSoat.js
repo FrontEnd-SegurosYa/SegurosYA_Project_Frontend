@@ -48,13 +48,13 @@ function FormularioPlaca ({datosCliente}) {
           });
     
           if (response.ok) {
-        const data = await response.json();
-        if (data === null) {
-          alert("La placa ingresada ya posee una póliza.");
-        } else {
-            setListaAutos([data]);
-            console.log(data);
-          }
+            const data = await response.json();
+            if (data === null) {
+            alert("La placa ingresada ya posee una póliza.");
+            } else {
+                setListaAutos([data]);
+                console.log(data);
+            }
           } else {
             console.log('Error al buscar el auto');
           }
