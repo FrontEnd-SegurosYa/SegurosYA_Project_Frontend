@@ -17,16 +17,8 @@ const NavbarElements = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
             <li className="nav-item dropdown">
-            <a className="nav-link active dropdown-toggle btn-lg tituloNavbar" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sobre Seguros
-            </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item" href="#">SOAT</a></li>
-                <li><a className="dropdown-item" href="#">Seguros Vehiculares</a></li>
-              </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link active mx-4 tituloNavbar"  aria-current="page" href="#">Atención al cliente</a>
             </li>
           </ul>
           <div className = "telefono">
