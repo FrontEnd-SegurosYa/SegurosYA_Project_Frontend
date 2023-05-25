@@ -33,14 +33,35 @@ function FormularioPlaca ({datosCliente}) {
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
     const [listaAutos, setListaAutos] = useState([]);
     
-    const obtenerPlacas = async () => {
-        const data = await (
-          await fetch("http://3.89.34.248:8080/api/auto/listar")
-        ).json();    
-        // set state when the data received
-        setListaAutos(data);
-        console.log(data);
-      };   
+    const obtenerPlacas = async (data) => {
+        try {
+          const placa = data.placa; // Obtiene el valor de la placa ingresada en el campo de entrada
+    
+          const auto = { placa };
+    
+          const response = await fetch("http://3.89.34.248:8080/api/auto/buscar", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(auto)
+          });
+    
+          if (response.ok) {
+        const data = await response.json();
+        if (data === null) {
+          alert("La placa ingresada ya posee una póliza.");
+        } else {
+            setListaAutos([data]);
+            console.log(data);
+          }
+          } else {
+            console.log('Error al buscar el auto');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const { setValue } = useForm({
         defaultValues: {
