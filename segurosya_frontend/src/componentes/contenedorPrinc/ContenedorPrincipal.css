@@ -1,3 +1,4 @@
+@import "../../index.css"; 
 
 .back-imag{
     position: relative;
@@ -8,7 +9,7 @@
     background-position: center;
 }
 
-.card-container {
+.cardPrincipal {
     position: absolute;
     top: 50%;
     right: 0;
@@ -27,14 +28,16 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
     margin-right: 100px;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
+    font-family: "Roboto";
+    color: var(--colorAzul1);
 }
 
 
 
 @media only screen and (max-width: 768px) {
-    .card-container {
+    .cardPrincipal{
       width: 100%;
       left: 0;
       right: auto;
@@ -46,4 +49,5 @@
 .btnContenedor{
     font-size: 18px;
     padding: 10px 20px;
+    
 }

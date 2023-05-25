@@ -1,0 +1,199 @@
+/* Importacion de colores */
+@import "../../index.css"; 
+
+.FormularioPlacaCotizacion {
+    background-color: var(--colorAzul1);
+    display: grid;
+    grid-template-columns: 7fr 7fr ;
+    grid-gap: 10px;
+    width: 100%;
+    max-height: 800px;
+}
+
+.ContenedorImagenCotizacion {
+    padding: 10px;
+    text-align: right;
+    vertical-align: middle;
+    width: 70%;
+    height: 423px;
+    background-color: var(--colorAzul1);
+    /* background-color: red; */
+}
+
+.ContenedorFormularioCotizacion {
+    display: block;
+    text-align: center;
+    background-color: var(--colorBlanco2);
+    border-radius: 38px;
+    z-index: 2;
+    max-width: 100%;
+    height: 20.5%;
+    padding-right: 10%;
+    background-color: transparent;
+  }
+
+  /* Estilos Forlmulario Placa Cotizacion */
+
+.TamannhosAreasFormulariosCotizacion {
+  height: 1fr;
+    display: grid;
+    grid-template-rows: 1.5fr 1fr 1fr 0.5fr 1.5fr;
+    background-color: var(--colorBlanco2);
+    border-radius: 38px;
+    width: 100%;
+    margin-left: 5%;
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 4%;
+    
+    text-align: center;
+  }
+  
+  .Texto1Formulario {
+    /* UBICACION DE TEXTO */
+    display: grid;
+    align-items: end;
+    margin-bottom: 10px;
+    /* PROPIEDADES TEXTO */
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--colorAzul1);
+    font-family: "Montserrat";
+  }
+  
+  .Texto2Formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* PROPIEDADES TEXTO */
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--colorAzul1);
+    font-family: "Montserrat"
+  }
+  
+  .Texto3Formulario {
+    /* PROPIEDADES TEXTO */
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--colorCeleste1);
+    font-family: "Montserrat"
+  }
+
+  .Texto4Formulario {
+    font-size: 15px;
+    color: var(--colorAzul1);
+    font-weight: bold;
+    font-family: "Montserrat"
+  }
+  
+    
+  .ContenedorInputPlaca {
+    /* UBICACION DE INPUT */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;  
+    width: 100%;
+    /* PROPIEDADES GRAFICAS */
+    background-color: var(--colorBlanco2);
+    font-family: "Montserrat"
+  
+  }
+
+  .ContenedorBarraInputPlaca {
+    /* UBICACION DE INPUT */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;  
+    width: 28%;
+    /* PROPIEDADES GRAFICAS */
+    background-color: var(--colorGris1);
+    border-radius: 1px;
+    border: 1px var(--colorAzul1) solid;
+    font-family: "Montserrat"
+  
+  }
+
+  .ContenedorInputImagen {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    display: flex;
+    justify-content: center;
+    padding-left: 29%;
+    padding-right: 29%;
+ }
+
+ .ContenedorBotonInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: green; */
+ }
+  
+
+  
+  .InputPlaca {
+    text-align: center;
+    background-color: var(--colorGris1);
+    width: 70%;
+    border: 0px;
+    font-size: 20px; 
+    font-weight: 600;
+    color: var(--colorAzul1);
+  }
+
+  .InputPlaca:focus {
+    outline: none;
+    
+  }
+
+  .InputPlaca::first-line {
+    color: var(--colorAzul1);
+  }
+  
+  /* ESTILOS BOTONES */
+  .BotonesGenericos {
+    background-color: var(--colorBlanco2);
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 40px;
+    border: 1px solid var(--colorNaranja1);
+    color: var(--colorNaranja1);
+    width: 38%;
+    /* offset-x | offset-y | blur-radius | color */
+    box-shadow: 0px 4px 3px var(--colorGris1);
+  }
+  
+  .BotonesGenericos:active {
+    background-color: var(--colorNaranja1);
+    border: 3px solid var(--colorNaranja1);
+    color: var(--colorBlanco2);
+    box-shadow: none;
+  }
+
+  .CheckboxCircular {
+    appearance: none;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    border: 2px solid var(--colorAzul1);
+    vertical-align: middle;
+  }
+
+  .CheckboxCircular:checked {
+    background-color: var(--colorAzul1)
+    
+  }
+
+  .error-message {
+    color: red;
+}
+  
+  
+  
+
+  

@@ -1,3 +1,5 @@
+@import "../../index.css"; 
+
 .cardResumen {
     width: 50%;
     height: auto;
@@ -7,10 +9,10 @@
     padding: 50px;
     font-family: 'Montserrat';
     text-align: left;
-    background-color: #FFFFFF;
+    background-color: var(--colorBlanco1);
     border-radius: 38px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    color: #2B3467;
+    color: var(--colorAzul1);
   }
   
   .imagen{
@@ -20,34 +22,25 @@
     background-repeat: no-repeat;
   }
 
-  .container {
+  .containerR {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
   
-  .container .cardResumen {
+  .containerR .cardResumen {
     flex: 1;
     margin-bottom: 10px;
     width: 100%;
   }
   
   @media (max-width: 768px) {    
-    .container .cardResumen {
+    .containerR .cardResumen {
         width: 100%;
         flex-basis: unset;
     }
   }
   
-
-.btnVolverCentrado{
-    font-size: 18px;
-    padding: 5px 70px;
-    margin-top: 5px;
-    margin-bottom: 18px;
-    text-align: center;
-}
-
 .Textos{
     font-family: 'Montserrat';
     text-align: center;
@@ -57,18 +50,7 @@
 }
 
 .check{
-    height: 70px ;
-    width: 70px;
-    margin-top: 15px;
-}
-
-.modalA{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  border-color: #2B3467;
-  border-radius: 20px;
-  border-width: 3px;
+    width: 15%;
+    margin-top: 5%;
 }
 

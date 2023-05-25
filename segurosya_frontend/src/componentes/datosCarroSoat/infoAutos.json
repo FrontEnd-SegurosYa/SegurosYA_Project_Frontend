@@ -1,0 +1,32 @@
+{
+  "marcas": [
+    {
+      "nombre": "Toyota",
+      "modelos": [
+        {
+          "nombre": "Corolla"
+        },
+        {
+          "nombre": "Camry"
+        },
+        {
+          "nombre": "Rav4"
+        }
+      ]
+    },
+    {
+      "nombre": "Honda",
+      "modelos": [
+        {
+          "nombre": "Accord"
+        },
+        {
+          "nombre": "Civic"
+        },
+        {
+          "nombre": "CR-V"
+        }
+      ]
+    }
+  ]
+}

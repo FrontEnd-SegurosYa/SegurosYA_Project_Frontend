@@ -1,0 +1,86 @@
+@import "../../index.css";     
+
+.BarraProgreso {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    background-color: var(--colorAzul1);
+    display: flex;
+    justify-content: center;
+    
+  }
+
+.ContenedorBarraProgreso {
+    background-color: var(--colorAzul2);
+    align-items: center;
+    height: 75px;
+    width: fit-content;
+    padding-left: 30%;
+    padding-right: 30%;
+    border-radius: 10px;
+    color: var(--colorBlanco1);
+    overflow: hidden;
+}
+
+.ContenedorParteBarraProgreso {
+    color: var(--colorBlanco1);
+    font-family: Verdana;
+    font-style: normal;
+    font-weight: 800px;
+    font-size: 13px;
+    color: var(--colorBlanco1);
+}
+
+.CirculoBarraProgresoActual {
+    /* PROPIEDADES CIRCULO */
+    height: 55px;
+    width: 55px;
+    background-color: var(--colorBlanco1);
+    border: 3px solid var(--colorBlanco1);    
+    border-radius: 50%;    
+    display: inline-block;
+    margin: 4px;
+    
+    /* PROPIEDADES TEXTO */
+    display: flex; /* or inline-flex */
+    align-items: center; 
+    justify-content: center;
+    font-size: 35px;
+    font-weight: 900;
+    color: var(--colorAzul1);
+}
+
+.CirculoBarraProgreso {
+    /* PROPIEDADES CIRCULO */
+    height: 55px;
+    width: 55px;
+    background-color: var(--colorAzul2);
+    border-radius: 50%;
+    border: 3px solid var(--colorBlanco1);    
+    margin: 4px;
+    
+    /* PROPIEDADES TEXTO */
+    display: flex; /* or inline-flex */
+    align-items: center; 
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 510;
+    color: var(--colorBlanco1);
+}
+
+.RectanguloParteBarraProgreso { 
+    width: 35px;
+    height: 4px;
+    margin: 4px;
+    background-color: var(--colorBlanco1);
+    color: var(--colorBlanco1);
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    opacity: unset;
+}  
+
+
+  
+
+  

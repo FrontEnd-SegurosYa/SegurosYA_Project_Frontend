@@ -1,3 +1,4 @@
+@import "../../index.css"; 
 .EstiloPresentacion {
     max-width: 800px;
     margin: 0 auto;
@@ -12,8 +13,7 @@
     text-align: center;
     padding: 0 30px;
     margin: 45px 0;
-
-    color: #FFFFFF;
+    color:  var(--colorBlanco1)
 }
 
 .btnPresentacion{

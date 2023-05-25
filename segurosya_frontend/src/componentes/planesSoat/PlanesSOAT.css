@@ -1,0 +1,8 @@
+.contenedor-plan {
+    width: 100%; 
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    display: flex; /* Utiliza Flexbox para el diseño */
+    /*justify-content: center;*/
+    margin-left: 2%;
+  }
+  
