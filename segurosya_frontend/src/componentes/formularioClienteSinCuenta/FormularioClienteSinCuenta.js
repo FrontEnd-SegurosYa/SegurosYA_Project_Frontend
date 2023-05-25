@@ -87,7 +87,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
         const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
         console.log(informacionClienteSinCuenta);
         // console.log(rumbo);
-        if(rumbo === "soat"){
+        if(rumbo === "Soat"){
             navigate("/soat3", {state: infoState});
         }
         else {
