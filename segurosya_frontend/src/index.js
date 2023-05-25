@@ -10,14 +10,17 @@ import CotizacionPagina1 from './paginas/CotizacionPagina1';
 import CotizacionPagina2 from './paginas/CotizacionPagina2';
 import CotizacionPagina3 from './paginas/CotizacionPagina3';
 import CotizacionPagina4 from './paginas/CotizacionPagina4';
+
 import FormularioClientesSinCuentaSeguro from './paginas/FormularioClienteSinCuentaSeguro'
 import FormularioClientesSinCuentaSOAT from './paginas/FormularioClienteSinCuentaSeguro'
+
 import SoatPagina1 from './paginas/SoatPagina1';
 import SoatPagina3 from './paginas/SoatPagina3';
 import SoatPagina2 from './paginas/SoatPagina2';
 import IngresarCuenta from './paginas/IngresarCuenta';
 import CrearCuenta from './paginas/CrearCuenta';
 import SoatPagina4 from './paginas/SoatPagina4';
+
 
 const router = createBrowserRouter([
     {
@@ -38,10 +41,6 @@ const router = createBrowserRouter([
     },
     {
       path: "/cotizacion4",
-      element: <CotizacionPagina4/>,
-    },
-    {
-      path: "/cotizacion5",
       element: <CotizacionPagina4/>,
     },
     {

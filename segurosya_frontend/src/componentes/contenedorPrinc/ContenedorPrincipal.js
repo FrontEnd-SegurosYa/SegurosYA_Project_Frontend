@@ -7,13 +7,13 @@ export function ContenedorPrincipal (){
     <div className="cardPrincipal">
       <div className="card d-flex justify-content-center align-items-center">
         <p>Inicia tu trámite de SOAT con nosotros HOY</p>
-        <Link to={"/soat1"} state={"Seguro"}>
+        <Link to={"/soat1"} >
           <button type="button" className="btnGeneral btnContenedor">Compra AQUÍ</button>
         </Link>   
       </div>
       <div className="card d-flex justify-content-center align-items-center">
         <p>Cotiza tu seguro vehicular aquí HOY</p>
-        <Link to={"/cotizacion1"} state={"Soat"}>
+        <Link to={"/cotizacion1"} >
           <button type="button text-center" className="btnGeneral btnContenedor">Cotiza AQUÍ</button>
         </Link>    
       </div>

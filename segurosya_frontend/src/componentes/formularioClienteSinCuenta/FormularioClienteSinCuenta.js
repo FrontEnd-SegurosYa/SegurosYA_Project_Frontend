@@ -12,21 +12,21 @@ import { useState, useEffect } from 'react';
 import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
-export function FormularioClienteSinCuenta ({informacionPlaca,rumbo}) {
+export function FormularioClienteSinCuenta ({informacionPlaca,rumbo,datosCliente}) {
 
     return (
         <>
-            <ContenedorPrincipal informacionPlaca = {informacionPlaca} rumbo={rumbo} />
+            <ContenedorPrincipal informacionPlaca = {informacionPlaca} rumbo={rumbo} datosCliente={datosCliente} />
         </>
         
     );
 }
 
-function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
+function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
 
     const navigate = useNavigate();
 
-    const { control, register,handleSubmit,formState: { errors } } = useForm();
+    const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
     
     const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
     const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
@@ -63,6 +63,16 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
 
     useEffect(() => {
         setListaDepartamentos( ubicacionesJSON );
+        //Llenado de datos causados por volver
+        if(datosCliente){
+            setValue("nombreCompleto",datosCliente.nombreCompleto);
+            setValue("DNI",datosCliente.DNI);
+            setValue("email",datosCliente.correoElectronico);
+            setValue("telefonoCelular",datosCliente.telefonoCelular);
+            // cambioDepartamento(datosCliente.ubicacion.departamento);
+            // cambioProvincia(datosCliente.ubicacion.provincia);
+            // cambioDistrito(datosCliente.ubicacion.distrito);
+        }
     }, []);
 
     const onSubmit = (data) => {
@@ -77,7 +87,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
         const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
         console.log(informacionClienteSinCuenta);
         // console.log(rumbo);
-        if(rumbo === "Soat"){
+        if(rumbo === "soat"){
             navigate("/soat3", {state: infoState});
         }
         else {
@@ -247,7 +257,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
                  
-                    <Link to={"/"+rumbo+"1"}> 
+                    <Link to={"/"+rumbo+"1"} state={informacionPlaca}> 
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 

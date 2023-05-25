@@ -7,6 +7,9 @@ import { useState, useEffect } from 'react';
 // IMAGENES
 import imagenCotizacion1 from '../../img/imagenAutoCotizacionInicio.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
+//OTROS
+import { procesarPlaca } from './funcionesExtra';
+
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
@@ -27,16 +30,9 @@ export function FormularioPlacaCotizacion({placaPasada}){
 // Formulario
 function FormularioPlaca ({placaPasada}) {
 
-    let valuePlaca;
-    if(placaPasada !== null){
-        valuePlaca = placaPasada;
-    }else{
-        valuePlaca = "";
-    }
-
     const navigate = useNavigate();
     // Declaraciones para botones
-    const {register, handleSubmit,watch,formState: { errors }} = useForm();
+    const {register, handleSubmit,watch,formState: { errors },setValue} = useForm();
     const [listaAutos, setListaAutos] = useState([]);
     
     const obtenerPlacas = async () => {
@@ -45,12 +41,21 @@ function FormularioPlaca ({placaPasada}) {
         ).json();    
         // set state when the data received
         setListaAutos(data);
-        console.log(data);
+        // console.log(data);
       };
 
       useEffect(() => {
         // fetch data
-        obtenerPlacas();
+        // obtenerPlacas();
+        if(placaPasada){
+            setValue("placa",placaPasada.placa);
+            setValue("noPoseeInspeccionVehicular",!placaPasada.poseeInspeccionVehicular);
+            setValue("noPoseePlaca",!placaPasada.poseePlaca);
+        }else{
+            // setValue("placa","");
+            // setValue("noPoseeInspeccionVehicular",!placaPasada.poseeInspeccionVehicular);
+            // setValue("noPoseePlaca",!placaPasada.poseePlaca);
+        }
       }, []);
 
       const checkPlaca = (listaAutos, placaB) =>{
@@ -61,41 +66,59 @@ function FormularioPlaca ({placaPasada}) {
         }
         return false;
       }
+    
+      
+    
     const onSubmit = (data) => {
         if (checkPlaca(listaAutos,data.placa) ){
             alert("La placa ingresada ya posee un seguro.");
             return;
         }
-        const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
+        const informacionPlaca = {placa: procesarPlaca(data.placa), poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
         const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
+        console.log("se envia ");
         console.log(infoState);
         navigate("/cotizacion2", {state: infoState});
     }
     const sinPlaca = watch("noPoseePlaca");
+    
+    const cambioSinPlaca = (e) => {
+        // console.log("Cambio detectado");
+        const esSeleccionado = e.target.checked;    
+        if (esSeleccionado) {
+            // console.log("Se selecciono noPlaca");
+            setValue("noPoseeInspeccionVehicular",true);
+            setValue("placa","");
+        }else{
+            console.log("Se selecciono siPlaca");
+            setValue("noPoseeInspeccionVehicular",false);
+        }
+        
+      };
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="TamannhosAreasFormulariosCotizacion">
-            
                 <div className="Texto1Formulario">
                     Asegúrate desde S/.30
                 </div>
                 <div className="ContenedorInputPlaca">
-                    {/* <TextInputPlaca/>                                 */}
+                    {/* <TextInputPlaca/>*/}
                     <div className='ContenedorBarraInputPlaca'>        
-                        <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
-                            value: valuePlaca,
+                        <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' disabled={sinPlaca} {...register('placa',{
+                            value: placaPasada ? placaPasada.placa : "",
                             required: !sinPlaca,
-                            pattern: /^[A-Z]{3}-\d{3}$/
+                            pattern: /^[A-Za-z0-9]{1,3}-?\d{3}$/
                             })}/>
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
-                {!sinPlaca && errors.placa && <p className="error-message">Ingrese la placa en mayúsculas y con in guión.</p>}
+                {!sinPlaca && errors.placa && <p className="error-message">Ingrese una placa valida.</p>}
                 <div>
                     <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"    {...register('noPoseeInspeccionVehicular')}/> No tengo inspección vehicular.</label>
+                        <label className='Texto4Formulario'><input name='noPoseeInspeccionVehicular' ref={register} className='CheckboxCircular' type="checkbox" disabled={sinPlaca}   {...register('noPoseeInspeccionVehicular',{checked: placaPasada ? !placaPasada.poseeInspeccionVehicular : sinPlaca})}/> No tengo inspección vehicular.</label>
                     </p>
                     <p>
-                        <label className='Texto4Formulario'><input className='CheckboxCircular' type="checkbox"  {...register('noPoseePlaca')}/> No tengo placa.</label>
+                        <label className='Texto4Formulario'><input name='noPoseePlaca' className='CheckboxCircular' ref={register} type="checkbox" {...register('noPoseePlaca', {onChange: cambioSinPlaca})}/> No tengo placa.</label>
                     </p>                     
                 </div>
            
