@@ -63,6 +63,10 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
     setNumeroAsiento(parseInt(numAsientosSelec));
   };
 
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   useEffect(() => {
     setListaMarcas( marcasAutos );
   }, []);
@@ -163,9 +167,10 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
+          {/* <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
-          </Link>
+          </Link> */}
+          <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver2</button>
           <button type="submit" className="btnGeneral mx-3">Continuar</button>
         </div>
       </div>

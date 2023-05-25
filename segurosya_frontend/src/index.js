@@ -4,6 +4,7 @@ import {
     createBrowserRouter,
     RouterProvider,
   } from "react-router-dom";
+
 import PaginaInicio from './paginas/PaginaInicio';
 import CotizacionPagina1 from './paginas/CotizacionPagina1';
 import CotizacionPagina2 from './paginas/CotizacionPagina2';
@@ -71,6 +72,8 @@ const router = createBrowserRouter([
       element: <IngresarCuenta/>,
     },
   ]);
+
+  
   
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
