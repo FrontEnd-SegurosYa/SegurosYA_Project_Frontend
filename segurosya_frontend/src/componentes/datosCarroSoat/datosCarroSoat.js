@@ -9,7 +9,7 @@ import imagenSoat2 from '../../img/carro.png'
 
 import infoAutosJSON from "./infoAutos.json";
 
-export const DatosCarroSoat = ({informacionPlaca,datosCliente}) => {
+export const DatosCarroSoat = ({datosCliente,informacionPlaca}) => {
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
   const marcasAutos = infoAutosJSON.marcas;
@@ -69,13 +69,13 @@ export const DatosCarroSoat = ({informacionPlaca,datosCliente}) => {
   const onSubmit = (data) => {      
       const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
       console.log(informacionCliente);
-      navigate("/soat3", {state:informacionCliente});
+      navigate("/soat4", {state:informacionCliente});
   }
   return (
     <>
     <div className='containerR'>
         <div className="containerFormularioCarroSoat">
-            <h4 class = "TituloSoat2"><b>Verifica tu tarjeta de propiedad y completa los datos</b></h4>
+            <h4 className = "TituloSoat2"><b>Verifica tu tarjeta de propiedad y completa los datos</b></h4>
             <br/>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='Form'>
@@ -158,12 +158,12 @@ export const DatosCarroSoat = ({informacionPlaca,datosCliente}) => {
         </div>
       </div>
       <div className = "botones text-center">
-        <div class="btn-group" role="group" aria-label="Botones con separación">
+        <div className="btn-group" role="group" aria-label="Botones con separación">
           <Link to={"/"}>
-            <button type="button" class="btnGeneral2 mx-3">Volver</button>
+            <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
           <Link to={"/soat3"}>
-            <button type="button" class="btnGeneral mx-3">Continuar</button>
+            <button type="button" className="btnGeneral mx-3">Continuar</button>
           </Link>
         </div>
       </div>

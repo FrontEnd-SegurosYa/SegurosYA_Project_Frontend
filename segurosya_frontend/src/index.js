@@ -4,6 +4,7 @@ import {
     createBrowserRouter,
     RouterProvider,
   } from "react-router-dom";
+
 import PaginaInicio from './paginas/PaginaInicio';
 import CotizacionPagina1 from './paginas/CotizacionPagina1';
 import CotizacionPagina2 from './paginas/CotizacionPagina2';
@@ -16,6 +17,7 @@ import SoatPagina3 from './paginas/SoatPagina3';
 import SoatPagina2 from './paginas/SoatPagina2';
 import IngresarCuenta from './paginas/IngresarCuenta';
 import CrearCuenta from './paginas/CrearCuenta';
+import SoatPagina4 from './paginas/SoatPagina4';
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
       element: <CotizacionPagina4/>,
     },
     {
+      path: "/cotizacion5",
+      element: <CotizacionPagina4/>,
+    },
+    {
       path: "/formularioClienteSinCuentaSeguro",
       element: <FormularioClientesSinCuentaSeguro/>,
     },
@@ -51,12 +57,16 @@ const router = createBrowserRouter([
       element: <SoatPagina1/>,
     },
     {
+      path: "/soat2",
+      element: <SoatPagina2/>,
+    },
+    {
       path: "/soat3",
       element: <SoatPagina3/>,
     },
     {
-      path: "/soat2",
-      element: <SoatPagina2/>,
+      path: "/soat4",
+      element: <SoatPagina4/>,
     },
     {
       path: "/crearCuenta",
@@ -67,6 +77,8 @@ const router = createBrowserRouter([
       element: <IngresarCuenta/>,
     },
   ]);
+
+  
   
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>

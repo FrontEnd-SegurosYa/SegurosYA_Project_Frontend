@@ -14,7 +14,7 @@ import planesSoatJSON from './planesSOAT.json';
 // informacionCliente contiene: datosCliente,informacionPlaca,informacionAuto
 
 // const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
-const PlanesSOAT = ({ informacionCliente }) => {
+const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleClick = (cardId) => {
@@ -63,13 +63,13 @@ const PlanesSOAT = ({ informacionCliente }) => {
       </div>
       <div className ="botones text-center">
           <div className="btn-group" role="group" aria-label="Botones con separación">
-              <Link to={"/soat2"}>
+              <Link to={"/soat3"}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
               <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>     
           </div>
       </div>
-      <div className="modal fade " id="trabajandoModal" tabindex="-1" aria-labelledby="trabajandoModalLabel" aria-hidden="true">
+      <div className="modal fade " id="trabajandoModal" tabIndex="-1" aria-labelledby="trabajandoModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content modalMensajes">
               <img src={imagenTrabajando} className="img-fluid check" alt = "hombresTrabajando"/>

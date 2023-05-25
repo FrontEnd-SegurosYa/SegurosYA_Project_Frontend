@@ -12,7 +12,7 @@ function FormularioClientesSinCuentaSeguroSOAT() {
     <>
       <Navbar/>
       {/* <div> {rumbo} hola </div> */}
-      <FormularioClienteSinCuenta rumbo={rumbo}/>
+      <FormularioClienteSinCuenta rumbo={rumbo} informacionPlaca={informacionPlaca}/>
       
     </>   
   );

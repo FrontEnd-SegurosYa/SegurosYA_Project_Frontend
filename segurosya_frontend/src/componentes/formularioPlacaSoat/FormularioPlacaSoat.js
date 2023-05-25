@@ -10,14 +10,14 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
-export function FormularioPlacaSoat ({datosCliente}) {
+export function FormularioPlacaSoat ({placaPasada}) {
     return (
         <div className="FormularioPlacaCotizacion">
             <div className="ContenedorImagenSoat">
                 <img src={imagenSoat1} alt="imagenAutoSoat" height={"90%"} />
             </div>
             <div className="ContenedorFormulario">
-                <FormularioPlaca datosCliente = {datosCliente} />                
+                <FormularioPlaca placaPasada={placaPasada} />                
             </div>
         </div>
         
@@ -26,7 +26,16 @@ export function FormularioPlacaSoat ({datosCliente}) {
 }
 
 // Formulario
-function FormularioPlaca ({datosCliente}) {
+function FormularioPlaca ({placaPasada}) {
+    //Se agrego el siguiente código
+    let valuePlaca;
+    if(placaPasada !== null){
+        valuePlaca = placaPasada;
+    }else{
+        valuePlaca = "";
+    }
+    //
+
     const navigate = useNavigate();
     const [selectedCheckbox, setSelectedCheckbox] = useState("vacio");
     // Declaraciones para botones
@@ -101,11 +110,14 @@ function FormularioPlaca ({datosCliente}) {
             tipoAuto = "Carga";
         }
         const informacionPlaca = {placa: data.placa, uso: tipoAuto};
-        const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
-        console.log(informacionCliente);
+        const infoState = {informacionPlaca: informacionPlaca, rumbo: "Soat"};
+        console.log(infoState);
+        navigate("/soat2", {state: infoState});
+        //const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
+        //console.log(informacionCliente);
 
         // console.log(informacionPlaca);
-        navigate("/formularioClienteSinCuentaSOAT", {state: informacionCliente});
+        //navigate("/formularioClienteSinCuentaSOAT", {state: informacionCliente});
     }
 
     // const sinPlaca = watch("placa");

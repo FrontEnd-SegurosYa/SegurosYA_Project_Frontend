@@ -12,18 +12,17 @@ import { useState, useEffect } from 'react';
 import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
-export function FormularioClienteSinCuenta ({datosPlaca}) {
+export function FormularioClienteSinCuenta ({informacionPlaca,rumbo}) {
 
     return (
         <>
-            <BarraProgreso paso = {2}/>
-            <ContenedorPrincipal datosPlaca = {datosPlaca} />
+            <ContenedorPrincipal informacionPlaca = {informacionPlaca} rumbo={rumbo} />
         </>
         
     );
 }
 
-function ContenedorPrincipal ( {datosPlaca} ) {
+function ContenedorPrincipal ( {informacionPlaca,rumbo} ) {
 
     const navigate = useNavigate();
 
@@ -74,11 +73,18 @@ function ContenedorPrincipal ( {datosPlaca} ) {
             telefonoCelular: data.telefonoCelular,
             ubicacion: ubicacion
         };
+        // const informacionPlaca = informacionPlaca;
+        const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
         console.log(informacionClienteSinCuenta);
-        // if(rumbo === "Soat") navigate("/cotizacion1", {state: informacionClienteSinCuenta});
-        // else 
-        navigate("/cotizacion2", {state: datosPlaca}, {state: informacionClienteSinCuenta});
-        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
+        // console.log(rumbo);
+        if(rumbo === "Soat"){
+            navigate("/soat3", {state: infoState});
+        }
+        else {
+            navigate("/cotizacion3", {state: infoState});
+        }
+        
+        alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
         
         
     }
@@ -241,7 +247,7 @@ function ContenedorPrincipal ( {datosPlaca} ) {
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
                  
-                    <Link to={"/cotizacion1"}>
+                    <Link to={"/"+rumbo+"1"}> 
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 
@@ -256,94 +262,14 @@ function ContenedorPrincipal ( {datosPlaca} ) {
 }
 
 function ContenedorImagenFormulario () {
+    // window.history.back;
     return(
         <div className='ContenedorImagenFormulario'>
-            <Formulario/>
+            {/* <Formulario/> */}
             
             <div className='ImagenConductor'/>
         </div>
     );
 }
 
-function Formulario () {
-    // const {register, handleSubmit} = useForm();
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    // }
-    return (
-        <>
-        {/* <div className='ContenedorFormulario' onSubmit={handleSubmit(onSubmit)}>
-                <div className='Texto1'>
-                    ¡Protege tu auto, protege tu inversión!
-                </div>
-                <div className='Texto2'>
-                    Ingresa los siguientes datos:
-                </div>
-                <div >
-                    <div className='ContenedorCampoFormulario'>
-                        Nombre Completo: <br/>                        
-                        <input type='text' {...register('nombreCompleto')}/>
-                    </div>
-                    
-                </div>
-                <div>
-                    <div className='ContenedorCampoFormulario'>
-                        DNI: <br/>                        
-                        <input type='text' {...register('DNI',{
-                            required: true,
-                        })}/>
-                    </div>
-                    
-                </div>
-                <div>
-                    <div className='ContenedorCampoFormulario'>
-                        Correo electrónico: <br/>                        
-                        <input type='text' {...register('correoElectonico',{
-                            required: true,
-                        })}/>
-                    </div>
-                </div>  
-                <div>
-                    <div className='ContenedorCampoFormulario'>
-                        Teléfono celular: <br/>                        
-                        <input type='text' {...register('telefonoCelular',{
-                            required: true,
-                        })}/>
-                    </div>
-                </div>
-                <div>
-                    <div className='ContenedorCampoFormulario'>
-                        Direccion: <br/>
-                        Departamento:
-                        <select {...register('departamento')}>
-                            <option value="Lima">Lima</option>
-                            <option value="Ancash">Ancash</option>
-                            <option value="Ica">Ica</option>
-                        </select>
-                        Provincia:
-                        <select {...register('provincia')}>
-                            <option value="LimaMetropolitana">Lima Metropolitana</option>
-                            <option value="Callao">Callao</option>
-                            <option value="Huarochiri">Huarochiri</option>
-                        </select>
-                        Distrito:
-                        <select {...register('distrito')}>
-                            <option value="SanMiguel">San Miguel</option>
-                            <option value="Lince">Lince</option>
-                            <option value="JesusMaria">Jesus María</option>
-                        </select>
-                    </div>
-                </div>
-                <div className='ContenedorLink'>
-                    <p className='Link1'>
-                        Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
-                    </p>    
-                    <input type="submit" value="enviar"/>
-                </div>
 
-        </div> */}
-
-       </>
-    );
-
-}

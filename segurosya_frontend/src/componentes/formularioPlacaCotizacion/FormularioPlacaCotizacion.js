@@ -10,14 +10,14 @@ import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
-export function FormularioPlacaCotizacion(){
+export function FormularioPlacaCotizacion({placaPasada}){
     return (
         <div className="FormularioPlacaCotizacion">
             <div className="ContenedorImagenCotizacion">
                 <img src={imagenCotizacion1} alt="imagenCotizacion1" height={"90%"} />
             </div>
             <div className="ContenedorFormularioCotizacion">
-                <FormularioPlaca/>                
+                <FormularioPlaca placaPasada={placaPasada}/>                
             </div>
         </div>
         
@@ -25,11 +25,20 @@ export function FormularioPlacaCotizacion(){
 }
 
 // Formulario
-function FormularioPlaca () {
+function FormularioPlaca ({placaPasada}) {
+
+    let valuePlaca;
+    if(placaPasada !== null){
+        valuePlaca = placaPasada;
+    }else{
+        valuePlaca = "";
+    }
+
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
     const [listaAutos, setListaAutos] = useState([]);
+    
     const obtenerPlacas = async () => {
         const data = await (
           await fetch("http://3.89.34.248:8080/api/auto/listar")
@@ -38,6 +47,7 @@ function FormularioPlaca () {
         setListaAutos(data);
         console.log(data);
       };
+
       useEffect(() => {
         // fetch data
         obtenerPlacas();
@@ -55,15 +65,11 @@ function FormularioPlaca () {
         if (checkPlaca(listaAutos,data.placa) ){
             alert("La placa ingresada ya posee un seguro.");
             return;
-        }else{
-            // alert("La placa ingresada ya posee una poliza.");
         }
         const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
-        // const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
-        // console.log(informacionCliente);
-
-        // console.log(informacionPlaca);
-        navigate("/formularioClienteSinCuentaSeguro", {state: informacionPlaca});
+        const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
+        console.log(infoState);
+        navigate("/cotizacion2", {state: infoState});
     }
     const sinPlaca = watch("noPoseePlaca");
     return (
@@ -76,6 +82,7 @@ function FormularioPlaca () {
                     {/* <TextInputPlaca/>                                 */}
                     <div className='ContenedorBarraInputPlaca'>        
                         <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
+                            value: valuePlaca,
                             required: !sinPlaca,
                             pattern: /^[A-Z]{3}-\d{3}$/
                             })}/>
