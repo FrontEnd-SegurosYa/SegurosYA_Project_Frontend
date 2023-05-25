@@ -7,13 +7,14 @@ import {FormularioPlacaCotizacion} from "../componentes/formularioPlacaCotizacio
 import { useLocation } from "react-router-dom";
 
 function CotizacionPagina1() {
-  const location = useLocation();
-  const informacionClienteSinCuenta = location.state;
+  // const location = useLocation();
+  // const informacionClienteSinCuenta = location.state;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {1}/>
-      <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} />
+      {/* <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} /> */}
+      <FormularioPlacaCotizacion />
       <InfoCotizaciones/>
     </>   
   );

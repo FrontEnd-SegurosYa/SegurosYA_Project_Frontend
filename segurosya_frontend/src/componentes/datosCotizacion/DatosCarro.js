@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import infoAutosJSON from "./infoAutos.json";
 
 export const DatosCarro = ({datosCliente,informacionPlaca}) => {
+  
+  const objetosRecibidos = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
 
@@ -161,7 +163,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          <Link to={"/cotizacion1"}>
+          <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
           <button type="submit" className="btnGeneral mx-3">Continuar</button>
@@ -172,4 +174,5 @@ export const DatosCarro = ({datosCliente,informacionPlaca}) => {
   )
 
 }
-  export default DatosCarro;
+export default DatosCarro;
+  

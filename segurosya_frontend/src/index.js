@@ -39,6 +39,10 @@ const router = createBrowserRouter([
       element: <CotizacionPagina4/>,
     },
     {
+      path: "/cotizacion5",
+      element: <CotizacionPagina4/>,
+    },
+    {
       path: "/formularioClienteSinCuentaSeguro",
       element: <FormularioClientesSinCuentaSeguro/>,
     },

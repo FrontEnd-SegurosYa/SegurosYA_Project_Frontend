@@ -6,13 +6,14 @@ import { useLocation } from "react-router-dom";
 
 function FormularioClientesSinCuentaSeguro() {
   const location = useLocation();
-  const rumbo = location.state;
+  const informacionPlaca = location.state.informacionPlaca;
+  const rumbo = location.state.rumbo;
   
   return (
     <>
       <Navbar/>
       {/* <div> {rumbo} hola </div> */}
-      <FormularioClienteSinCuenta rumbo={rumbo} />
+      <FormularioClienteSinCuenta rumbo={rumbo} informacionPlaca={informacionPlaca} />
       
     </>   
   );

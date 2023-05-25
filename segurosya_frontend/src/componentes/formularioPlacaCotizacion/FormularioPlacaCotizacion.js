@@ -30,6 +30,7 @@ function FormularioPlaca () {
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
     const [listaAutos, setListaAutos] = useState([]);
+    
     const obtenerPlacas = async () => {
         const data = await (
           await fetch("http://3.89.34.248:8080/api/auto/listar")
@@ -38,6 +39,7 @@ function FormularioPlaca () {
         setListaAutos(data);
         console.log(data);
       };
+
       useEffect(() => {
         // fetch data
         obtenerPlacas();
@@ -59,11 +61,9 @@ function FormularioPlaca () {
             // alert("La placa ingresada ya posee una poliza.");
         }
         const informacionPlaca = {placa: data.placa, poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
-        // const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
-        // console.log(informacionCliente);
-
-        // console.log(informacionPlaca);
-        navigate("/formularioClienteSinCuentaSeguro", {state: informacionPlaca});
+        const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
+        console.log(infoState);
+        navigate("/cotizacion2", {state: infoState});
     }
     const sinPlaca = watch("noPoseePlaca");
     return (
