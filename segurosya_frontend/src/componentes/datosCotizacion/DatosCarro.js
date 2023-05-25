@@ -174,10 +174,10 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          {/* <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
+          <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
-          </Link> */}
-          <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button>
+          </Link>
+          {/* <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button> */}
           <button type="submit" className="btnGeneral mx-3">Continuar</button>
         </div>
       </div>

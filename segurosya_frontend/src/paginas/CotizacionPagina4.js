@@ -1,8 +1,8 @@
-// CotizacionPagina5.js
+// CotizacionPagina4.js
 import React from 'react';
 import Navbar from '../componentes/navbar/Navbar' 
 import Resumen from '../componentes/resumenCotizacion/Resumen';
-import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
+import {BarraProgresoSeguro} from "../componentes/barraProgreso/BarraProgreso.js"
 import { useLocation } from "react-router-dom";
 
 function CotizacionPagina4() {
@@ -15,7 +15,7 @@ function CotizacionPagina4() {
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {5}/>
+      <BarraProgresoSeguro paso = {4}/>
       <Resumen datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} />
     </>   
   );

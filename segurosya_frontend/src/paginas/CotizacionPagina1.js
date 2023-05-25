@@ -1,6 +1,6 @@
 // CotizacionPagina2.js
 import React from 'react';
-import {BarraProgreso} from "../componentes/barraProgreso/BarraProgreso.js"
+import {BarraProgresoSeguro} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js'
 import InfoCotizaciones from '../componentes/infoCotizacion/InfoCotizaciones.js';
 import {FormularioPlacaCotizacion} from "../componentes/formularioPlacaCotizacion/FormularioPlacaCotizacion.js"
@@ -8,16 +8,18 @@ import { useLocation } from "react-router-dom";
 
 function CotizacionPagina1() {
   const location = useLocation();
-  let placaPasada = null;
+  let informacionPlacaPasada = null;
   if(location.state !== null){
-    placaPasada = location.state;
+    informacionPlacaPasada = location.state;
   }
+  console.log('Se recibio ');
+  console.log(informacionPlacaPasada);
   return (
     <>
       <Navbar/>
-      <BarraProgreso paso = {1}/>
+      <BarraProgresoSeguro paso = {1}/>
       {/* <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} /> */}
-      <FormularioPlacaCotizacion placaPasada={placaPasada}/>
+      <FormularioPlacaCotizacion placaPasada={informacionPlacaPasada}/>
       <InfoCotizaciones/>
     </>   
   );
