@@ -173,7 +173,9 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
               </div>
             
         </div>
-        <div className='coberturas'>
+        <div className='imagenSeguro2 containerImagenCarroSeguro ' alt = "imagenSeguro2"></div>
+      
+        {/* <div className='coberturas'>
           <p>Te chocan o te chocan 14.00</p>
           <input type="checkbox" name="colors[]" value="check1" id="check_1" />
           
@@ -194,7 +196,8 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
 
           <p>Ambulancia 16.00</p>
           <input type="checkbox" name="colors[]" value="check7" id="check_7" />
-        </div>
+        </div> */}
+
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
