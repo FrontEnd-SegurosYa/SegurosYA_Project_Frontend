@@ -154,12 +154,17 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
                   <Controller
                     name="numeroAsientos"
                     control={control}
-                    defaultValue={0}
+                    defaultValue={1}
                     render={({ field: { onChange, value } }) => (
                       <input
                         type="number"
                         value={value}
-                        onChange={onChange}
+                        onChange={(e) => {
+                          const inputValue = parseInt(e.target.value);
+                          if (inputValue > 0) {
+                            onChange(inputValue);
+                          }
+                        }}
                         className="Resultado"
                       />
                     )}

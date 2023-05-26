@@ -12,8 +12,8 @@ function CotizacionPagina2() {
   const informacionPlaca = location.state.informacionPlaca;
   if(location.state.datosCliente !== null){
     datosCliente = location.state.datosCliente;
-    console.log("recibi datos de un cliente");
-    console.log(datosCliente);
+    // console.log("recibi datos de un cliente");
+    // console.log(datosCliente);
   }
   // console.log(location.state);
   return (

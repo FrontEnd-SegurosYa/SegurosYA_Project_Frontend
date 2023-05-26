@@ -12,8 +12,8 @@ function CotizacionPagina1() {
   if(location.state !== null){
     informacionPlacaPasada = location.state;
   }
-  console.log('Se recibio ');
-  console.log(informacionPlacaPasada);
+  // console.log('Se recibio ');
+  // console.log(informacionPlacaPasada);
   return (
     <>
       <Navbar/>

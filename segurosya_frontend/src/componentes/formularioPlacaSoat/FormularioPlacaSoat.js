@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 // IMAGENES
 import imagenSoat1 from '../../img/imagenAutoSoat.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
+//OTROS
+import { buscarPlaca, procesarPlaca } from './funcionesExtra';
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
 // de llenado de placa en el flujo cotizacion
@@ -28,50 +30,21 @@ export function FormularioPlacaSoat ({placaPasada}) {
 // Formulario
 function FormularioPlaca ({placaPasada}) {
     //Se agrego el siguiente código
-    let valuePlaca;
-    if(placaPasada !== null){
-        valuePlaca = placaPasada;
-    }else{
-        valuePlaca = "";
-    }
+    // let valuePlaca;
+    // if(placaPasada !== null){
+    //     valuePlaca = placaPasada;
+    // }else{
+    //     valuePlaca = "";
+    // }
     //
 
     const navigate = useNavigate();
     const [selectedCheckbox, setSelectedCheckbox] = useState("vacio");
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors }} = useForm();
-    const [listaAutos, setListaAutos] = useState([]);
-    
-    const obtenerPlacas = async (data) => {
-        try {
-          const placa = data.placa; // Obtiene el valor de la placa ingresada en el campo de entrada
-    
-          const auto = { placa };
-    
-          const response = await fetch("http://3.89.34.248:8080/api/auto/buscar", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(auto)
-          });
-    
-          if (response.ok) {
-        const data = await response.json();
-        if (data === null) {
-          alert("La placa ingresada ya posee una póliza.");
-        } else {
-            setListaAutos([data]);
-            console.log(data);
-          }
-          } else {
-            console.log('Error al buscar el auto');
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
 
+    
+    
     const { setValue } = useForm({
         defaultValues: {
           checkbox1: false,
@@ -87,7 +60,7 @@ function FormularioPlaca ({placaPasada}) {
             setValue("checkbox1", true);
             setValue("checkbox2", false);
             setValue("checkbox3", false);
-        } else if (value === "checkbox2") {
+        } else if (value === "checkbox1") {
             setValue("checkbox2", true);
             setValue("checkbox1", false);
             setValue("checkbox3", false);
@@ -100,7 +73,17 @@ function FormularioPlaca ({placaPasada}) {
 
       useEffect(() => {
         // fetch data
-        obtenerPlacas();
+        // obtenerPlacas();
+        if(placaPasada){
+            setValue("placa",placaPasada.placa);
+            if(placaPasada.uso === "Particular"){
+                cambioCheckBox("checkbox1");
+            }else if(placaPasada.uso === "Taxi"){
+                cambioCheckBox("checkbox2");
+            }else{
+                cambioCheckBox("checkbox3");
+            }
+        }
       }, []);
 
       const checkPlaca = (listaAutos, placaB) =>{
@@ -114,32 +97,47 @@ function FormularioPlaca ({placaPasada}) {
 
       const onSubmit = (data) => {
         var tipoAuto;
-        if (checkPlaca(listaAutos,data.placa) ){
-            alert("La placa ingresada ya posee una poliza.");
-            return;
-        }else{
-            // alert("La placa ingresada ya posee una poliza.");
-        }
-        if(selectedCheckbox==="vacio"){
-            setSelectedCheckbox(null);
-            return;
-        }else if(selectedCheckbox === "checkbox1"){
-            tipoAuto = "Particular";
-        }else if(selectedCheckbox === "checkbox2"){
-            tipoAuto = "Taxi";
-        } else {
-            tipoAuto = "Carga";
-        }
-        const informacionPlaca = {placa: data.placa, uso: tipoAuto};
-        const infoState = {informacionPlaca: informacionPlaca, rumbo: "Soat"};
-        console.log(infoState);
-        navigate("/soat2", {state: infoState});
-        //const informacionCliente = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
-        //console.log(informacionCliente);
+        // console.log(procesarPlaca(data.placa));
+        const placaProcesada = procesarPlaca(data.placa);
+        buscarPlaca(placaProcesada)
+        .then((success) => {
+            if (success) {
+                //Se encontro la placa
+                // console.log("POST request successful");
+                if(selectedCheckbox==="vacio"){
+                    setSelectedCheckbox(null);
+                    return;
+                }
+                alert("La placa ingresada ya posee SOAT.");
+                return;
+                // Handle successful response
+            } else {
+                //No se encontro la placa
+                // console.log("POST request failed");
+                // alert("auto no encontrado");
+                // Handle failed response or error
+                if(selectedCheckbox==="vacio"){
+                        setSelectedCheckbox(null);
+                        return;
+                    }else if(selectedCheckbox === "checkbox1"){
+                        tipoAuto = "Particular";
+                    }else if(selectedCheckbox === "checkbox2"){
+                        tipoAuto = "Taxi";
+                    } else {
+                        tipoAuto = "Carga";
+                    }
+                    const informacionPlaca = {placa: procesarPlaca(data.placa), uso: tipoAuto};
+                    const infoState = {informacionPlaca: informacionPlaca, rumbo: "Soat"};
+                    console.log(infoState);
+                    navigate("/soat2", {state: infoState});
+            }
+          })
+          .catch((error) => {
+            console.error("Error occurred:", error);
+            // Handle other errors
+          });
 
-        // console.log(informacionPlaca);
-        //navigate("/formularioClienteSinCuentaSOAT", {state: informacionCliente});
-    }
+        }
 
     // const sinPlaca = watch("placa");
     return (
@@ -192,12 +190,12 @@ function FormularioPlaca ({placaPasada}) {
                     <div className='ContenedorBarraInputPlaca'>        
                         <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' {...register('placa',{
                             required: true,
-                            pattern: /^[A-Z]{3}-\d{3}$/
+                            pattern: /^[A-Za-z0-9]{1,3}-?\d{3}$/
                             })}/>
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
                 </div>
-                {errors.placa && <p className="error-message">Ingrese la placa con este formato: "ABC-123".</p>}
+                {errors.placa && <p className="error-message">Ingrese una placa valida.</p>}
                 
                 {selectedCheckbox===null && <p className="error-message">Seleccione un tipo de auto.</p>}
                 {/* {selectedCheckbox} */}

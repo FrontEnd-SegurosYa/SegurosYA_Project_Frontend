@@ -94,7 +94,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
             navigate("/cotizacion3", {state: infoState});
         }
         
-        alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
+        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
         
         
     }

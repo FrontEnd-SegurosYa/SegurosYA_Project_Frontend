@@ -50,10 +50,10 @@ function ContenedorBarraProgresoSeguro ({paso}) {
                 <table  width={'100%'} height={'100%'}>
                     <tbody >
                         <tr>
-                            <td><ContenedorParteBarraProgreso valor = {1} etiqueta = "Ingresa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {2} etiqueta = "Completa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {3} etiqueta = "Escoge" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgreso valor = {4} etiqueta = "Valida" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {1} etiqueta = "Ingresa" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {2} etiqueta = "Completa" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {3} etiqueta = "Escoge" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {4} etiqueta = "Valida" paso={paso}/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,6 +66,36 @@ function ContenedorBarraProgresoSeguro ({paso}) {
 //Contenedor de un circulo, etiqueta y linea de la barra de progreso
 function ContenedorParteBarraProgreso ({valor,etiqueta,paso}) {
     if (valor !== 5){
+        return(
+            <table  height={'100%'}>
+                <tbody>
+                    <tr>
+                        <td><CirculoBarraProgreso valor={valor} paso={paso}/></td>
+                        <td>{etiqueta}</td>
+                        <td><RectanguloParteBarraProgreso /></td>
+                    </tr>
+                </tbody>
+            </table>
+        );
+    }
+    else{
+        return(
+            <table>
+                <tbody>
+                    <tr>
+                        <td><CirculoBarraProgreso valor={valor} paso={paso}/></td>
+                        <td>{etiqueta}</td>
+                    </tr>
+                </tbody>
+            </table>
+        );
+    }
+        
+}
+
+//Contenedor de un circulo, etiqueta y linea de la barra de progreso
+function ContenedorParteBarraProgresoSeguro ({valor,etiqueta,paso}) {
+    if (valor !== 4){
         return(
             <table  height={'100%'}>
                 <tbody>

@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react';
 import imagenCotizacion1 from '../../img/imagenAutoCotizacionInicio.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 //OTROS
-import { procesarPlaca } from './funcionesExtra';
+import { procesarPlaca,buscarPlaca } from './funcionesExtra';
+
 
 
 // Division que contenera la barra de progreso junto a la foto y formulario 
@@ -33,20 +34,11 @@ function FormularioPlaca ({placaPasada}) {
     const navigate = useNavigate();
     // Declaraciones para botones
     const {register, handleSubmit,watch,formState: { errors },setValue} = useForm();
-    const [listaAutos, setListaAutos] = useState([]);
-    
-    const obtenerPlacas = async () => {
-        const data = await (
-          await fetch("http://3.89.34.248:8080/api/auto/listar")
-        ).json();    
-        // set state when the data received
-        setListaAutos(data);
-        // console.log(data);
-      };
 
+    
       useEffect(() => {
         // fetch data
-        // obtenerPlacas();
+
         if(placaPasada){
             setValue("placa",placaPasada.placa);
             setValue("noPoseeInspeccionVehicular",!placaPasada.poseeInspeccionVehicular);
@@ -58,27 +50,35 @@ function FormularioPlaca ({placaPasada}) {
         }
       }, []);
 
-      const checkPlaca = (listaAutos, placaB) =>{
-        for (let i = 0; i < listaAutos.length; i++) {
-            
-            if(listaAutos[i].placa === placaB) return true;
-            // console.log(`Marca: ${carro.marca}, Modelo: ${carro.modelo}, Placa: ${carro.placa}`);
-        }
-        return false;
-      }
     
       
     
     const onSubmit = (data) => {
-        if (checkPlaca(listaAutos,data.placa) ){
-            alert("La placa ingresada ya posee un seguro.");
-            return;
-        }
-        const informacionPlaca = {placa: procesarPlaca(data.placa), poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
-        const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
-        console.log("se envia ");
-        console.log(infoState);
-        navigate("/cotizacion2", {state: infoState});
+        const placaProcesada = procesarPlaca(data.placa);
+        buscarPlaca(placaProcesada)
+        .then((success) => {
+            if (success) {
+                //Se encontro la placa
+                alert("La placa ingresada ya posee un seguro.");
+                return;
+                // Handle successful response
+            } else {
+                //No se encontro la placa
+                // alert("auto no encontrado");
+                // Handle failed response or error
+                const informacionPlaca = {placa: procesarPlaca(data.placa), poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
+                const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
+                console.log("se envia ");
+                console.log(infoState);
+                navigate("/cotizacion2", {state: infoState});
+            }
+          })
+          .catch((error) => {
+            console.error("Error occurred:", error);
+            // Handle other errors
+          });
+
+        
     }
     const sinPlaca = watch("noPoseePlaca");
     
