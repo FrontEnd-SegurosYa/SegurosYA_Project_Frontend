@@ -74,7 +74,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
   // Declaraciones para botones
   const onSubmit = (data) => {      
       const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
-      console.log(informacionCliente);
+      //console.log(informacionCliente);
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "Soat"){
         navigate("/soat4", {state:informacionCliente});
@@ -173,8 +173,27 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
               </div>
             
         </div>
-        <div className='imagenSeguro2 containerImagenCarroSeguro ' alt = "imagenSeguro2">
-          <></>
+        <div className='coberturas'>
+          <p>Te chocan o te chocan 14.00</p>
+          <input type="checkbox" name="colors[]" value="check1" id="check_1" />
+          
+          <p>Robo total 13.00</p>
+          <input type="checkbox" name="colors[]" value="check2" id="check_2" />
+          
+          <p>Robo parcial 10.00</p>
+          <input type="checkbox" name="colors[]" value="check3" id="check_3" />
+
+          <p>Lesiones a personas 8.00</p>
+          <input type="checkbox" name="colors[]" value="check4" id="check_4" />
+
+          <p>Daños a otros vehículos y objetos 12.000</p>
+          <input type="checkbox" name="colors[]" value="check5" id="check_5" />
+
+          <p>Dañas a tu vehículo 10.00</p>
+          <input type="checkbox" name="colors[]" value="check6" id="check_6" />
+
+          <p>Ambulancia 16.00</p>
+          <input type="checkbox" name="colors[]" value="check7" id="check_7" />
         </div>
       </div>
       <div className = "botones text-center">
