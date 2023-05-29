@@ -3,7 +3,7 @@ import './Plan.css';
 
 const Plan = ({ id, selected, onClick, title, pago, costo, coberturas, asistencias, beneficios, image }) => {
   const [hovered, setHovered] = useState(false);
-
+  //cambiar el mouse en el hover
   const handleMouseEnter = () => {
     setHovered(true);
   };
