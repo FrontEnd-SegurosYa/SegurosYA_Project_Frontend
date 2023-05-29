@@ -17,6 +17,7 @@
     background-color: var(--colorCeleste2);  ; /* Color de fondo del card al hacer hover */
   }
   
+  /*cursor*/
   .plan.hovered {
     cursor: pointer;
   }

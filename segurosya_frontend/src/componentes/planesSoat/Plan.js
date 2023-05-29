@@ -4,6 +4,7 @@ import './Plan.css';
 const Plan = ({ id, selected, onClick, title, pago, costo, coberturas, asistencias, beneficios, image }) => {
   const [hovered, setHovered] = useState(false);
 
+  //cambiar la mano en hover
   const handleMouseEnter = () => {
     setHovered(true);
   };
