@@ -1,9 +1,24 @@
-import React , { useState }from 'react';
-import './Plan.css'; // Importa el archivo CSS para estilizar la tarjeta
+import React, { useState } from 'react';
+import './Plan.css';
 
-const Plan = ({id, selected, onClick, title, pago, costo, coberturas, asistencias, beneficios, image }) => {
-    return (
-        <div className={`plan ${selected ? 'clicked' : ''}`} onClick={onClick}>
+const Plan = ({ id, selected, onClick, title, pago, costo, coberturas, asistencias, beneficios, image }) => {
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  return (
+        <div
+        className={`plan ${selected ? 'clicked' : ''} ${hovered ? 'hovered' : ''}`}
+        onClick={onClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        >
           <img src={image} alt={title} />
           <div className="plan-content">
             <h2 class="nombre"><b>{title}</b></h2>
