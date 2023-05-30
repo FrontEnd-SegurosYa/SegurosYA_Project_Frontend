@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import plan1 from '../../img/plan1.png';
 import plan2 from '../../img/plan2.png';
 import plan3 from '../../img/plan3.png';
+import { useNavigate } from "react-router-dom";
+import { useForm, Controller} from 'react-hook-form';
 import imagenTrabajando from '../../img/hombresTrabajando.png'
 
 import planesSoatJSON from './planesSOAT.json';
@@ -16,20 +18,34 @@ import planesSoatJSON from './planesSOAT.json';
 // const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
 const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
   const [selectedCard, setSelectedCard] = useState(null);
+  const navigate = useNavigate();
+  
+  const {handleSubmit,formState: { errors } ,setValue} = useForm();
 
   const handleClick = (cardId) => {
     setSelectedCard(cardId);
   };
 
+  const onSubmit = (data) => {
+    // const informacionPlaca = informacionPlaca;
+    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto};
+    console.log("A");
+  
+    navigate("/soat5", {state: infoState});
+    
+    
+    // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);   
+}
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="contenedor-plan">
           <Plan
           id={1}
           selected={selectedCard === 1}
           onClick={() => handleClick(1)}
           title="Básico"
-          pago="Pago anual desde"
+          pago="Pago anual"
           costo="S/50.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Asistencias adicionales no están incluídas']}
@@ -41,7 +57,7 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
           selected={selectedCard === 2}
           onClick={() => handleClick(2)}
           title="Intermedio"
-          pago="Pago anual desde"
+          pago="Pago anual"
           costo="S/100.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Cambio de neumático', 'Carga de batería']}
@@ -53,7 +69,7 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
           selected={selectedCard === 3}
           onClick={() => handleClick(3)}
           title="Full"
-          pago="Pago anual desde"
+          pago="Pago anual"
           costo="S/180.00"
           coberturas={['Coberturas por ley: Todas incluídas']}
           asistencias={['Servicio de grúa','Cambio de neumático', 'Suministro de combustible','Carga de batería','Cerrajería vial']}
@@ -66,10 +82,11 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
               <Link to={"/soat3"}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
-              <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>     
+              {/* <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>      */}
+              <button type="submit" className='btnGeneral mx-3'>Continuar</button>   
           </div>
       </div>
-      <div className="modal fade " id="trabajandoModal" tabIndex="-1" aria-labelledby="trabajandoModalLabel" aria-hidden="true">
+      {/* <div className="modal fade " id="trabajandoModal" tabIndex="-1" aria-labelledby="trabajandoModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content modalMensajes">
               <img src={imagenTrabajando} className="img-fluid check" alt = "hombresTrabajando"/>
@@ -84,8 +101,8 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
               </div>
             </div>
         </div>
-      </div>
-    </>
+      </div> */}
+    </form>
 
     
      
