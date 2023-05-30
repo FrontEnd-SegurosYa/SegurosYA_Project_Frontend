@@ -127,7 +127,7 @@ function FormularioPlaca ({placaPasada}) {
                 </div>
                 <div className="Texto2Formulario">
                     <p>
-                        Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
+                        Al continuar acepto la <a className="Texto3Formulario" href="https://drive.google.com/file/d/1t-hhT6fnScxD_WLUkDCW-lHdzbFAWgNN/view?usp=sharing"  target="_blank" rel="noreferrer">Política de Privacidad</a>
                     </p>                
                 </div>
                 

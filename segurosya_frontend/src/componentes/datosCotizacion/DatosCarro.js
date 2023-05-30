@@ -30,7 +30,6 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
   );
 
   const listaAnhosFabricacion = arrayRange(1999, 2023, 1);
-  const listaNumeroAsientos = arrayRange(2, 8, 1);
 
   const informacionAuto = {
     marca: marca,
@@ -163,6 +162,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
                           const inputValue = parseInt(e.target.value);
                           if (inputValue > 0) {
                             onChange(inputValue);
+                            cambioNumeroAsientos(e.target.value);
                           }
                         }}
                         className="Resultado"
