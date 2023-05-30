@@ -13,10 +13,14 @@
     height:1000px;
   }
 
-  .plan:hover, .plan.clicked{
+  .plan.clicked{
     background-color: var(--colorCeleste2);  ; /* Color de fondo del card al hacer hover */
   }
   
+  /*cursor del hover*/
+  .plan.hovered {
+    cursor: pointer;
+  }
   
   .plan img {
     width: 100%;
