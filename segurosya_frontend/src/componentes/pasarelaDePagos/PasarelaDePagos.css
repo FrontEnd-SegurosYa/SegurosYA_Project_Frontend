@@ -1,0 +1,121 @@
+@import "../../index.css"; 
+.OvModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ContenidoModal {
+    background-color: #fff;
+    width: 550px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 55px;
+  }
+  
+  .ContenidoModal h2 {
+    margin-top: 0;
+  }
+  
+  .ContenidoModal form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ContenidoModal label {
+    margin-bottom: 5px;
+  }
+  
+  .ContenidoModal input {
+    margin-bottom: 10px;
+  }
+  
+  .ContenidoModal button {
+    margin-top: 10px;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .ImagenRadio {
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+    height: 150px; /* Ajusta el alto según tus necesidades */
+    margin-left: 150px; /* Ajusta el margen según tus necesidades */
+  }
+  
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+  }
+
+  .ContenedorColumnas {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ContenedorPasarela{
+    padding: 20px;
+    background-color: var(--colorBlanco1);
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-right: 50px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+  
+  .CuadroResumen{
+    justify-content: center;
+    align-items: flex-start;
+    height: 80px;
+    border: 1px solid  var(--colorAzul1);
+    border-radius: 10px;
+  }
+
+  .TextoResumen{
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 37px;
+    text-align: center;
+
+    color: var(--colorAzul1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; 
+  }
+
+  .Columna1{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .Columna2{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    max-width: 100%;
+    max-height: 100%;
+    margin-right: 70px;
+  }
+
+  .ImagenDerecha{
+    width: 600px;
+    height: auto;
+  }

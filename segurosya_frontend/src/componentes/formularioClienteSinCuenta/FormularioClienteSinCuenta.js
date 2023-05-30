@@ -246,7 +246,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                 </div>
                 <div className='ContenedorLink'>
                     <p className='Link1'>
-                        Al continuar acepto la <a className="Texto3Formulario" href="https://google.com" rel="noreferrer">Política de Privacidad</a>
+                        Al continuar acepto la <a className="Texto3Formulario" href="https://drive.google.com/file/d/11ufJI949A8UPw0QWubV3aH3wCxfjjpb_/view?usp=sharing"  target="_blank" rel="noreferrer">Política de Privacidad</a>
                     </p>    
                     {/* <input type="submit" value="enviar"/> */}
                 </div>
