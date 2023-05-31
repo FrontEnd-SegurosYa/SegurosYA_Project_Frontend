@@ -16,8 +16,6 @@ function SoatPagina6() {
       <Navbar/>
       
       <PDFSoat/>
-      
-     
     </>
   );
 }

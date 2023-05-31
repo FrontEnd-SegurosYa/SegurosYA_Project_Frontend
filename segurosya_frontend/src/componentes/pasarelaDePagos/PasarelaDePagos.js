@@ -4,8 +4,11 @@ import '../../index.css'
 import imagenVISA from '../../img/visa.jpg';
 import imagenPago from '../../img/pago.png';
 import { Link } from 'react-router-dom';
+import {useStripe, useElements } from '@stripe/react-stripe-js';
 
 const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
+  const [isButtonDisabled, setButtonDisabled] = useState(true);
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
@@ -69,6 +72,13 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
     setIsPopupVisible(!isPopupVisible);
   };
 
+  const handlePayment = async () => {
+    // Perform payment processing logic here
+    // ...
+
+    console.log('Payment processed');
+  };
+  
   return (
     <>
         <div className='ContenedorPasarela'>
@@ -150,7 +160,6 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                 </div>
                 </div>
             )}
-            
         </div>
         <div className ="botones text-center">
             <Link to={"/soat4"}>
