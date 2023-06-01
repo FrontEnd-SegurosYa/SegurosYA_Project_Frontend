@@ -107,7 +107,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
   const onSubmit = (data) => {      
       const informacionCliente = {informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca,informacionAuto: informacionAuto};
       // console.log(marca);
-      console.log(informacionAuto);
+      // console.log(informacionAuto);
 
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "soat"){
@@ -236,7 +236,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          <Link to={rumbo==="cotizacion" ? "/cotizacion2" : "/seguro2"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca}}>
+          <Link to={rumbo==="cotizacion" ? "/cotizacion2" : "/soat2"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
           {/* <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button> */}

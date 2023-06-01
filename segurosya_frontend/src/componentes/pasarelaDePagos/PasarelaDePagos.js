@@ -9,10 +9,10 @@ import { useForm, Controller} from 'react-hook-form';
 import check from '../../img/check.png';
 import '../formularioClienteSinCuenta/FormularioClienteSinCuenta.css';
 
-const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto,monto}) => {
+const PasarelaDePagos = ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,planSeleccionado}) => {
   const navigate = useNavigate();
   const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
-
+// monto
 
   const [isChecked, setIsChecked] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
@@ -82,7 +82,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto,monto}) 
   };
 
   const onSubmit = (data) => {
-    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
+    const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, planSeleccionado: planSeleccionado};
     navigate("/soat6", {state: infoState});
     // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);   
   }
@@ -100,7 +100,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto,monto}) 
     <form onSubmit={handleSubmit(onSubmit)}>
         <div className='ContenedorPasarela'>
             <div className='CuadroResumen'>
-                <h3 className='TextoResumen'>TOTAL A PAGAR:  S/ {monto}</h3>
+                <h3 className='TextoResumen'>TOTAL A PAGAR:  S/ {planSeleccionado.monto}</h3>
             </div>
             <br></br>
             <div className='ContenedorColumnas'>
@@ -181,14 +181,14 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto,monto}) 
                     />
                     {errors.cvv && <p className="error-message">Debe ingresar su clave dinámica</p>}
                     </form>
-                    <button onClick={handleButton1Click}  className="btnGeneral mx-3" type="submit">Pagar S/ {monto}</button>
+                    <button onClick={handleButton1Click}  className="btnGeneral mx-3" type="submit">Pagar S/ {planSeleccionado.monto}</button>
                 </div>
                 </div>
             )}
             
         </div>
         <div className ="botones text-center">
-            <Link to={"/soat4"}>
+            <Link to={"/soat4"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca,informacionAuto: informacionAuto,planSeleccionado: planSeleccionado}}>
                 <button type="button" className="btnGeneral2 mx-3">Volver</button>
             </Link>
         </div>
