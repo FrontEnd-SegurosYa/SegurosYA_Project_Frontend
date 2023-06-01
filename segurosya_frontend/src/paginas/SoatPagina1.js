@@ -9,9 +9,16 @@ import { useLocation } from "react-router-dom";
 function SoatPagina1() {
   const location = useLocation();
   let placaPasada = null;
-  if(location.state !== null){
+
+  if(location.state !== null ){
     placaPasada = location.state;
+    console.log('Se recibio en soat1');
+    console.log(placaPasada);
+  }else{
+    console.log('no se recibio nada.');
   }
+
+  
   return (
     <>
       <Navbar/>

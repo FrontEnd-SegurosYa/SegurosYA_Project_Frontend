@@ -1,3 +1,6 @@
+//Importar variables
+import { LINKSERVER } from '../../utiles/constantes.js';
+
 export function procesarPlaca(str) {
     if (str.length === 6) {
         // ABC123
@@ -12,8 +15,8 @@ export function procesarPlaca(str) {
     }
   }
 
-  export function buscarPlaca(placa) {
-    return fetch("http://3.89.34.248:8080/api/auto/buscar", {
+export function buscarPlaca(placa) {
+    return fetch(LINKSERVER+"/api/auto/buscar", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
@@ -41,5 +44,5 @@ export function procesarPlaca(str) {
         console.error("Request error:", error);
         return false;
         });
-    }
+}
     

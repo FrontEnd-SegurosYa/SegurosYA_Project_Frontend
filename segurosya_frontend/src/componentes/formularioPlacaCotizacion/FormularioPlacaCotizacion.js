@@ -67,7 +67,7 @@ function FormularioPlaca ({placaPasada}) {
                 // alert("auto no encontrado");
                 // Handle failed response or error
                 const informacionPlaca = {placa: procesarPlaca(data.placa), poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
-                const infoState = {informacionPlaca: informacionPlaca, rumbo: "seguro"};
+                const infoState = {informacionPlaca: informacionPlaca};
                 console.log("se envia ");
                 console.log(infoState);
                 navigate("/cotizacion2", {state: infoState});
@@ -107,7 +107,7 @@ function FormularioPlaca ({placaPasada}) {
                         <input className="InputPlaca" type="text" placeholder='Ingresa tu placa' disabled={sinPlaca} {...register('placa',{
                             value: placaPasada ? placaPasada.placa : "",
                             required: !sinPlaca,
-                            pattern: /^[A-Za-z0-9]{1,3}-?\d{3}$/
+                            pattern: /^(?:[A-Za-z]{3}\d{3}|[A-Za-z]{3}-\d{3}|[A-Za-z]\d[A-Za-z]\d{3}|[A-Za-z]{2}\d{4}|[A-Za-z]\d[A-Za-z]-\d{3}|[A-Za-z]{2}\d-\d{3})$/
                             })}/>
                         <img src={imagenLapicero1} alt="imagenLapicero1" height={"50%"} />
                     </div>            
