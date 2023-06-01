@@ -112,10 +112,10 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "soat"){
         navigate("/soat4", {state:informacionCliente});
-      }
-      else {
-          navigate("/cotizacion4", {state:informacionCliente});
-      }
+    }
+    else {
+        navigate("/cotizacionExtra", {state:informacionCliente});
+    }
   }
   return (
     <>
