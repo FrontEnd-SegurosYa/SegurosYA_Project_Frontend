@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from "react";
-import Select from 'react-select';
+// import Select from 'react-select';
 
 
 import infoAutosJSON from "./infoAutos.json";

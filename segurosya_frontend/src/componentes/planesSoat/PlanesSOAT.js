@@ -38,7 +38,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
       monto = 180;
     }
 
-    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
+    const infoState = {datosCliente: informacionClienteSinCuenta, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
     navigate("/soat5", {state: infoState});
     
     
