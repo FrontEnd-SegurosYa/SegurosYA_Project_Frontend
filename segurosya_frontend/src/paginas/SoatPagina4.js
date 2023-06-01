@@ -13,6 +13,9 @@ function SoatPagina4() {
   var informacionPlaca = null
   var informacionAuto = null;
 
+  console.log('Se recibio en soat4');
+  console.log(location.state);
+
   if(location.state !== null){
     informacionClientes = location.state;
       informacionClienteSinCuenta = informacionClientes.informacionClienteSinCuenta;

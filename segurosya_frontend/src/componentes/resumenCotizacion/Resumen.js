@@ -6,7 +6,7 @@ import './fecha'
 import { Link } from "react-router-dom";
 import DatosCarroSoat from "../datosCarroSoat/datosCarroSoat";
 
-function Resumen({datosCliente,informacionPlaca,informacionAuto}) {
+function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto}) {
   const fechaActual = new Date();
   fechaActual.setFullYear(fechaActual.getFullYear() + 1);
   const dia = fechaActual.getDate().toString().padStart(2, '0');
@@ -20,8 +20,8 @@ function Resumen({datosCliente,informacionPlaca,informacionAuto}) {
         <div className="cardResumen">
           <h2><b>Información del auto</b></h2>
           <ol>
-            <li> Marca: {informacionAuto.marca}</li>
-            <li> Modelo: {informacionAuto.modelo} </li>
+            <li> Marca: {informacionAuto.marca.nombre}</li>
+            <li> Modelo: {informacionAuto.modelo.nombre} </li>
             <li> Año de fabricación: {informacionAuto.anhoFabricacion} </li>
             <li> Número de asientos: {informacionAuto.numeroAsientos} </li>
           </ol>
@@ -39,7 +39,11 @@ function Resumen({datosCliente,informacionPlaca,informacionAuto}) {
       </div>
       <br/>
       <div className="text-center">
+            <Link to={"/cotizacion3"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca, informacionAuto: informacionAuto}}>
+              <button className="btnGeneral2" >Volver</button>
+            </Link>
             <button className="btnGeneral2" data-bs-toggle="modal" data-bs-target="#volverModal">Continuar</button>
+            
       </div>
       <div className="modal fade " id="volverModal" tabIndex="-1" aria-labelledby="volverModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
@@ -52,7 +56,7 @@ function Resumen({datosCliente,informacionPlaca,informacionAuto}) {
                 <h4>Se le enviará la cotización a su correo electrónico</h4> 
               </div>
               <div className="modal-footer">
-                <Link to={"/"}>
+                <Link to={"/"} >
                   <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Volver</button>
                   </Link>
               </div>

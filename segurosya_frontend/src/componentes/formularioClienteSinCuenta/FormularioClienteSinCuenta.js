@@ -126,10 +126,6 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         else {
             navigate("/cotizacion3", {state: infoState});
         }
-        
-        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
-        
-        
     }
    
     return (
@@ -302,7 +298,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
                  
-                    <Link to={"/"+rumbo+"1"} state={informacionPlaca}> 
+                    <Link to={rumbo==="soat" ? "/soat1" : "/cotizacion2"} state={informacionPlaca}> 
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 
