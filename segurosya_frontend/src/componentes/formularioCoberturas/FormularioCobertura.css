@@ -1,0 +1,57 @@
+@import "../../index.css";
+
+.contenedorD {
+    display: flex;
+    width: 70%;
+    margin-left: 15%;
+    border-radius: 10px;
+    font-family: "Montserrat";
+    justify-content: space-between;
+}
+
+.infoPersonaCoche {
+    margin-left: 5%;
+    width: 20%;
+    background: #FFFFFF;
+    background: var(--colorBlanco2);
+}
+
+.listaCoberturas {
+    margin-left:5%;
+    margin-right:5%;
+    width: 70%;
+    background: #FFFFFF;
+    background: var(--colorBlanco2);
+}
+
+.carroCotiza3{
+    background-image: url('../../img/carroSeguro.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.borde {
+    border: 2px solid var(--colorAzul1);
+    border-left-width: 5px
+}
+
+.subtitulosEspaciadoHorizontal{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cobertura {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nombreCobertura {
+    width: 30%
+}
+
+.listaCob {
+    list-style-type: none;
+}

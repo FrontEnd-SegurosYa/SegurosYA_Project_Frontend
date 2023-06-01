@@ -83,7 +83,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
         navigate("/soat4", {state:informacionCliente});
     }
     else {
-        navigate("/cotizacion4", {state:informacionCliente});
+        navigate("/cotizacionExtra", {state:informacionCliente});
     }
   }
   return (
