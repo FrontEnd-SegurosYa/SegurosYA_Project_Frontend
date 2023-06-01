@@ -20,6 +20,7 @@ function SoatPagina3() {
     informacionPlaca = location.state.informacionPlaca;
     informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
     // auto al volver
+    informacionAuto = location.state.informacionAuto;
   }
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function SoatPagina3() {
     <>
       <Navbar/>
       <BarraProgreso paso = {3}/>
-      <DatosCarro informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} rumbo = "soat"/>
+      <DatosCarro informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} rumbo = "soat" informacionAutoPasado={informacionAuto}/>
     </>   
   );
 }

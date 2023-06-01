@@ -11,18 +11,11 @@ import Select from 'react-select';
 import infoAutosJSON from "./infoAutos.json";
 import { obtenerMarcas, obtenerModelosXMarca } from './funcionesFetch';
 
-export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo}) => {
+export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,informacionAutoPasado}) => {
   
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm();
-  const methods = useForm();
+  const { control, handleSubmit,setValue } = useForm();
 
-  const marcasAutos = infoAutosJSON.marcas;
-
-  // const [marca,setMarca] = useState(marcasAutos[0].nombre);
-  // const [listaMarcas,setListaMarcas] = useState(marcasAutos);
-  // const [modelo,setModelo] = useState(marcasAutos[0].modelos[0].nombre);
-  // const [listaModelos,setListaModelos] = useState(marcasAutos[0].modelos);
   const [marca,setMarca] = useState();
   const [listaMarcas,setListaMarcas] = useState([]);
   const [modelo,setModelo] = useState();
@@ -45,11 +38,10 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
     numeroAsientos: numeroAsientos
   };
 
-  const cambioMarca = (event) => {
-    const nuevaMarca = event.target.value;    
+  const cambioMarca = (nuevoIdMarca) => {
     
-    setMarca( listaMarcas.find(c => c.idMarca === parseInt(nuevaMarca)) );
-    obtenerModelosXMarca(parseInt(nuevaMarca))
+    setMarca( listaMarcas.find(c => c.idMarca === nuevoIdMarca) );
+    obtenerModelosXMarca(nuevoIdMarca)
     .then(listModelos => {
       setListaModelos(listModelos);
       setModelo(listModelos[0]);
@@ -58,9 +50,9 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
     });
   };
 
-  const cambioModelo = (event) => {
-    const nuevoModelo = event.target.value;        
-    setModelo( listaModelos.find(c => c.idModelo === parseInt(nuevoModelo)) );    
+  const cambioModelo = (nuevoIdModelo) => {
+       
+    setModelo( listaModelos.find(c => c.idModelo === nuevoIdModelo) );    
   };
 
  
@@ -78,28 +70,44 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
   useEffect(() => {
     obtenerMarcas()
     .then(listMarcs => {
-        setListaMarcas(listMarcs);
-        setMarca(listMarcs[0]);
-
-        obtenerModelosXMarca(listMarcs[0].idMarca)
-        .then(listModelos => {
-          setListaModelos(listModelos);
-          setModelo(listModelos[0]);
-        }).catch( error => {
-          console.error('Error:', error);
-        });
+        setListaMarcas(listMarcs);        
+        if(informacionAutoPasado){
+          setAnhoFabricacion(informacionAutoPasado.anhoFabricacion);
+          setNumeroAsiento(informacionAutoPasado.numeroAsientos);
+          // setValue("anhoFabricacion",informacionAutoPasado.anhoFabricacion);
+          // setValue("numeroAsientos",informacionAutoPasado.numeroAsientos);
+          setMarca( listMarcs.find(marcaBuscada => marcaBuscada.idMarca === informacionAutoPasado.marca.idMarca) );
+          // cambioMarca(informacionAutoPasado.marca.idMarca);
+          obtenerModelosXMarca(informacionAutoPasado.marca.idMarca)
+          .then(listModelos => {
+            setListaModelos(listModelos);
+            setModelo(listModelos[0]);
+          }).catch( error => {
+            console.error('Error:', error);
+          });
+        }else{
+          setMarca( listMarcs.find(c => c.idMarca === listMarcs[0].idMarca) );
+          // cambioMarca(listMarcs[0].idMarca);
+          obtenerModelosXMarca(listMarcs[0].idMarca)
+          .then(listModelos => {
+            setListaModelos(listModelos);
+            setModelo(listModelos[0]);
+          }).catch( error => {
+            console.error('Error:', error);
+          });
+        }        
       }
     ).catch( error => {
         console.error('Error:', error);
       }      
     );
-  }, []);
+  }, [informacionAutoPasado]);
 
   // Declaraciones para botones
   const onSubmit = (data) => {      
       const informacionCliente = {informacionClienteSinCuenta,informacionPlaca,informacionAuto};
       // console.log(marca);
-      // console.log(modelo);
+      console.log(informacionAuto);
 
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "soat"){
@@ -125,7 +133,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
                     
                   </p> */}
                   
-                  <select onChange={cambioMarca} className='Resultado'>
+                  <select onChange={(e)=>cambioMarca(parseInt(e.target.value))} className='Resultado' value={marca && marca.idMarca}>
                     {listaMarcas && listaMarcas.map((option) => (
                       <option key={option.idMarca} value={option.idMarca}>
                         {option.nombre}
@@ -141,7 +149,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
                     
                   </p> */}
                   
-                  <select onChange={cambioModelo} className='Resultado'>
+                  <select onChange={(e)=>cambioModelo(parseInt(e.target.value))} className='Resultado' value={modelo && modelo.idModelo}>
                     {listaModelos && listaModelos.map((option) => (
                       <option key={option.idModelo} value={option.idModelo}>
                         {option.nombre}
@@ -158,7 +166,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
                     render={({ field: { onChange, value } }) => (
                       <input
                         type="number"
-                        value={value}
+                        value={anhoFabricacion}
                         onChange={(e) => {
                           const inputValue = parseInt(e.target.value);
                           if (inputValue > 0) {
@@ -181,7 +189,7 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo})
                     render={({ field: { onChange, value } }) => (
                       <input
                         type="number"
-                        value={value}
+                        value={numeroAsientos}
                         onChange={(e) => {
                           const inputValue = parseInt(e.target.value);
                           if (inputValue > 0) {

@@ -9,18 +9,22 @@ function SoatPagina4() {
   const navigate = useNavigate();
   const location = useLocation();
   var informacionClientes = null;
-  var datosCliente = null;
+  var informacionClienteSinCuenta = null;
   var informacionPlaca = null
   var informacionAuto = null;
+
+  if(location.state !== null){
+    informacionClientes = location.state;
+      informacionClienteSinCuenta = informacionClientes.informacionClienteSinCuenta;
+      informacionPlaca = informacionClientes.informacionPlaca;
+      informacionAuto = informacionClientes.informacionAuto;
+    //opcion al volver
+
+  }
 
   useEffect(() => {
     if(location.state === null){
       navigate("/");
-    }else{
-      informacionClientes = location.state;
-      datosCliente = informacionClientes.datosCliente;
-      informacionPlaca = informacionClientes.informacionPlaca;
-      informacionAuto = informacionClientes.informacionAuto;
     }
   },[]);
 
@@ -28,7 +32,7 @@ function SoatPagina4() {
     <>
       <Navbar/>
       <BarraProgreso paso = {4}/>
-      <PlanesSOAT datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto}/>
+      <PlanesSOAT informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto}/>
     </>   
   );
 }

@@ -29,16 +29,10 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
 
     const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
     
-    // const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
-    // const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
     const [departamento,setDepartamento] = useState();
     const [listaDepartamentos,setListaDepartamentos] = useState([]);    
-    // const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
-    // const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
     const [provincia,setProvincia] = useState();
     const [listaProvincias, setListaProvincias] = useState([]);
-    // const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
-    // const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
     const [distrito,setDistrito] = useState();
     const [listaDistritos, setListaDistritos] = useState([]);
 
@@ -48,13 +42,10 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         distrito: distrito
     };
 
-    const cambioDepartamento = (depSelec) => {
-        const depObtenido = ubicacionesJSON.find( (departamento)  => departamento.nombre === depSelec);
-        setDepartamento(depObtenido.nombre);
-        setProvincia(depObtenido.provincias[0].nombre);
-        setListaProvincias( depObtenido.provincias );
-        setDistrito(depObtenido.provincias[0].distritos[0]);
-        setListaDistritos( depObtenido.provincias[0].distritos);
+    const cambioDepartamento = (idDepartamento) => {
+        const nuevoIdDepartamento = parseInt(idDepartamento);            
+        setDepartamento(listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento));
+        console.log("id a cambiar: "+idDepartamento);
     };
 
     const cambioProvincia = (provSelec) => {
@@ -70,19 +61,23 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
 
     useEffect(() => {
 
-        // setListaDepartamentos( ubicacionesJSON );
-
         // fetch data
         obtenerDepartamentos()
         .then( listaDeps => {
                 setListaDepartamentos(listaDeps);
-                setDepartamento(listaDeps[0]);
+                if(informacionClienteSinCuenta){
+                    const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
+                    setDepartamento(listaDeps.find( (departamento)  => departamento.idDepartamento === idDepAnterior));
+                    // cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
+                }else{
+                    setDepartamento(listaDeps[0]);
+                }          
 
-                buscarProvinciasDep(listaDeps[0].nombre)
-                .then( listaProvs => {
-                        // console.log(listaProvs);
-                        setListaProvincias(listaProvs);
-                        setProvincia(listaProvs[0]);
+                // buscarProvinciasDep(listaDeps[0].nombre)
+                // .then( listaProvs => {
+                //         // console.log(listaProvs);
+                //         setListaProvincias(listaProvs);
+                //         setProvincia(listaProvs[0]);
 
                         //Temporal
                         // obtenerDistritos()
@@ -91,18 +86,13 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                         //         setDistrito(listaDists[0]);
                         //     }
                         // ).catch();
-                    }
-                ).catch( error => {
+                }).catch( error => {
                     console.error('Error:', error);
-                });
-            }
-        ).catch( error => {
+                })            
+        .catch( error => {
                 console.error('Error:', error);
             }
         ); 
-
-
-
         
         //Llenado de datos causados por volver
         if(informacionClienteSinCuenta){
@@ -112,10 +102,8 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
             setValue("DNI",informacionClienteSinCuenta.DNI);
             setValue("email",informacionClienteSinCuenta.correoElectronico);
             setValue("telefonoCelular",informacionClienteSinCuenta.telefonoCelular);
-            // cambioDepartamento(datosCliente.ubicacion.departamento);
-            // cambioProvincia(datosCliente.ubicacion.provincia);
-            // cambioDistrito(datosCliente.ubicacion.distrito);
-        }
+        };        
+        
     }, []);
 
     const onSubmit = (data) => {
@@ -232,30 +220,20 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                         <div className='ContenedorCampoUbicacion'>
                             <div><p>Departamento:</p></div>
                             <div>
-                                <Controller
-                                    name="departamento"
-                                    control={control}
-                                    render={({ field: { onChange } }) => (
-                                        <select onChange={(e) => {
-                                            onChange(e.target.value);
-                                            // cambioDepartamento(e.target.value);
-                                        }}
-                                        className='InputUbicacion'
-                                        >
+                                <select onChange={(e) => cambioDepartamento(parseInt(e.target.value))} className='Resultado' value={departamento && departamento.idDepartamento}>
                                         {listaDepartamentos && listaDepartamentos.map((option) => (
-                                            <option key={option.idDepartamento} value={option.nombre}>
-                                                {option.nombre}
-                                            </option>
-                                        ))}
-                                        </select>
-                                    )}
-                                />
+                                        <option key={option.idDepartamento} value={option.idDepartamento}>
+                                            {option.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                                
                             </div>                            
-                            
+                            {/* {departamento && departamento.idDepartamento} */}
                         </div>
 
 
-                        <div className='ContenedorCampoUbicacion'>
+                        {/* <div className='ContenedorCampoUbicacion'>
                             <div><p>Provincia:</p></div>
                             <div>
                                 <Controller
@@ -279,7 +257,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 />
                             </div>
                             
-                        </div>
+                        </div> */}
 
 
                         {/* <div className='ContenedorCampoUbicacion'>
