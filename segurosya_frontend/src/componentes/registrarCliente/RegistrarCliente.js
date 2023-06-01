@@ -142,7 +142,15 @@ export const RegistrarCliente = () => {
                 <p className='Negrita'>Contraseña</p>
                 <input className='Ingresar'></input>
             </div> */}
-            <p>Al continuar acepto la <a className="Celeste">Política de privacidad</a></p>
+            <p>Al continuar acepto la 
+                <a  className="Celeste"
+                    href="https://drive.google.com/file/d/1RAmiOhMD-OB50419L_x_ZYObrvLpqwVV/view"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+
+                    Política de privacidad</a>
+                </p>
         </div>
         <div className='Imagen'>
             <img className='VentaCarro' src={hombre}/>
