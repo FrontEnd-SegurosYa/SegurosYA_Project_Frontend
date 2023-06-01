@@ -9,8 +9,6 @@ import { useState, useEffect } from "react";
 import infoAutosJSON from "./infoAutos.json";
 
 export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
-  
-  const objetosRecibidos = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
 
@@ -72,8 +70,14 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
 
   // Declaraciones para botones
   const onSubmit = (data) => {      
+      const informacionAuto = {
+        marca: data.marca,
+        modelo: data.modelo,
+        anhoFabricacion: data.anhoFabricacion,
+        numeroAsientos: data.numeroAsientos
+      };
       const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
-      //console.log(informacionCliente);
+      console.log(informacionAuto);
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "Soat"){
         navigate("/soat4", {state:informacionCliente});

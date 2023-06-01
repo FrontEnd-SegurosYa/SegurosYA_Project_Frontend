@@ -10,11 +10,12 @@ function SoatPagina5() {
   const datosCliente = informacionClientes.datosCliente;
   const informacionPlaca = informacionClientes.informacionPlaca;
   const informacionAuto = informacionClientes.informacionAuto;
+  const monto = informacionClientes.monto;
   return (
     <>
       <Navbar/>
       <BarraProgreso paso = {5}/>
-      <PasarelaDePagos datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto}/>
+      <PasarelaDePagos datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} monto = {monto}/>
     </>   
   );
 }

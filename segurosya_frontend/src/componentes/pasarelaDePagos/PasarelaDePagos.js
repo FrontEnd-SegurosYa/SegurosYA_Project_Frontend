@@ -4,17 +4,26 @@ import '../../index.css'
 import imagenVISA from '../../img/visa.jpg';
 import imagenPago from '../../img/pago.png';
 import { Link } from 'react-router-dom';
-import {useStripe, useElements } from '@stripe/react-stripe-js';
+import { useNavigate } from "react-router-dom";
+import { useForm, Controller} from 'react-hook-form';
+import check from '../../img/check.png';
+import '../formularioClienteSinCuenta/FormularioClienteSinCuenta.css';
 
-const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
-  const [isButtonDisabled, setButtonDisabled] = useState(true);
+const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto,monto}) => {
+  const navigate = useNavigate();
+  const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
 
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
   const [isChecked, setIsChecked] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
   const [cardName, setCardName] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [cvv, setCvv] = useState('');
+
+  const centrarBoton = {
+    display: 'flex',
+    justifyContent: 'center',
+  };
 
   const handleCardNumberChange = (e) => {
     const value = e.target.value;
@@ -44,7 +53,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
     setCvv(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit2 = (e) => {
     e.preventDefault();
     // Realizar cualquier acción necesaria con los datos encriptados
     const encryptedCardNumber = btoa(cardNumber);
@@ -72,18 +81,26 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
     setIsPopupVisible(!isPopupVisible);
   };
 
-  const handlePayment = async () => {
-    // Perform payment processing logic here
-    // ...
-
-    console.log('Payment processed');
-  };
+  const onSubmit = (data) => {
+    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
+    navigate("/soat6", {state: infoState});
+    // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);   
+  }
   
+ 
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isButton2Disabled, setButton2Disabled] = useState(true);
+
+  const handleButton1Click = () => {
+    setButton2Disabled(false);
+    setIsPopupVisible(false);
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
         <div className='ContenedorPasarela'>
             <div className='CuadroResumen'>
-                <h3 className='TextoResumen'>TOTAL A PAGAR:  S/ </h3>
+                <h3 className='TextoResumen'>TOTAL A PAGAR:  S/ {monto}</h3>
             </div>
             <br></br>
             <div className='ContenedorColumnas'>
@@ -104,8 +121,12 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                             style={{ transform: 'scale(1.5)' }}
                         />
                         <img src={imagenVISA} alt="Imagen" className="ImagenRadio" /> 
+                        <br></br>
+                        <br></br>
                     </label>
-                    {/* boton continuar */}
+                    
+                    <button type="submit" disabled={isButton2Disabled} className='btnGeneral  mx-3' data-bs-toggle="modal" data-bs-target="#envioSoat" >Continuar</button>   
+                    
                 </div>
 
                 <div className='Columna2'>
@@ -118,7 +139,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                 <div className="OvModal">
                 <div className="ContenidoModal">
                 <h2>Complete sus datos</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit2}>
                     <label htmlFor="cardNumber">Número de tarjeta:</label>
                     <input
                         type="text"
@@ -128,6 +149,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                         maxLength={16}
                         placeholder="Ej: 1234 5678 9012 3456"
                     />
+                    {errors.cardNumber && <p className="error-message">Debe ingresar un número de tarjeta</p>}
                     <label htmlFor="cardName">Nombre en la tarjeta:</label>
                     <input
                         type="text"
@@ -137,6 +159,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                         maxLength={50}
                         placeholder="Ej: JOSE JAVIER"
                     />
+                    {errors.cardName && <p className="error-message">Debe ingresar un nombre</p>}
                     <label htmlFor="expirationDate">Fecha de Expiración:</label>
                     <input
                         type="text"
@@ -146,6 +169,7 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                         maxLength={5}
                         placeholder="Ej: 02/26"
                     />
+                    {errors.expirationDate && <p className="error-message">Debe ingresar una fecha</p>}
                     <label htmlFor="cvv">CVV:</label>
                     <input
                         type="password"
@@ -155,11 +179,13 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
                         maxLength={3}
                         placeholder="***"
                     />
+                    {errors.cvv && <p className="error-message">Debe ingresar su clave dinámica</p>}
                     </form>
-                    <button onClick={() => setIsPopupVisible(false)} type="submit">Pagar S/</button>
+                    <button onClick={handleButton1Click}  className="btnGeneral mx-3" type="submit">Pagar S/ {monto}</button>
                 </div>
                 </div>
             )}
+            
         </div>
         <div className ="botones text-center">
             <Link to={"/soat4"}>
@@ -167,7 +193,25 @@ const PasarelaDePagos = ({datosCliente,informacionPlaca,informacionAuto}) => {
             </Link>
         </div>
         <br></br>
-    </>
+        <div className="modal fade " id="envioSoat" tabIndex="-1" aria-labelledby="envioSoat" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content modalMensajes">
+              <img src={check} className="img-fluid check" alt = "envioSoatCheck"/>
+              <div className="modal-header">
+                <h3 className="modal-title Textos" id="agradecimientoModalLabel"> <b>Gracias por comprar con SegurosYA!</b></h3>
+              </div>
+              <div className="modal-body Textos" >
+                <h4>Se le envió una copia de su SOAT a su correo electrónico</h4> 
+              </div>
+              <div className="modal-footer">
+                  <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Aceptar</button>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+    </form>
+    
     
   );
 };

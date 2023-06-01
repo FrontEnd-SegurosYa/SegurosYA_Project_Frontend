@@ -6,16 +6,17 @@ import { PDFViewer } from '@react-pdf/renderer';
 
 
 function SoatPagina6() {
-  // const location = useLocation();
-  // const informacionClientes = location.state;
-  // const datosCliente = informacionClientes.datosCliente;
-  // const informacionPlaca = informacionClientes.informacionPlaca;
-  // const informacionAuto = informacionClientes.informacionAuto;
+  const location = useLocation();
+  const informacionClientes = location.state;
+  const datosCliente = informacionClientes.datosCliente;
+  const informacionPlaca = informacionClientes.informacionPlaca;
+  const informacionAuto = informacionClientes.informacionAuto;
+  const monto = informacionClientes.monto;
   return (
     <>
       <Navbar/>
       
-      <PDFSoat/>
+      <PDFSoat datosCliente={datosCliente} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} monto = {monto}/>
     </>
   );
 }

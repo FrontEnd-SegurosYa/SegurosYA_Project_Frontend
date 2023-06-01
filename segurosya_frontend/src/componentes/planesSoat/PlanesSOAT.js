@@ -27,10 +27,18 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
   };
 
   const onSubmit = (data) => {
-    // const informacionPlaca = informacionPlaca;
-    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto};
-    console.log("A");
-  
+    let monto;
+    if (selectedCard === 1){
+      monto = 50;
+    }
+    else if (selectedCard === 2){
+      monto = 100;
+    }
+    else if (selectedCard === 3){
+      monto = 180;
+    }
+
+    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
     navigate("/soat5", {state: infoState});
     
     
@@ -103,8 +111,6 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
         </div>
       </div> */}
     </form>
-
-    
      
   );
 };
