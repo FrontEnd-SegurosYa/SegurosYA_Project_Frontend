@@ -16,7 +16,7 @@ import planesSoatJSON from './planesSOAT.json';
 // informacionCliente contiene: datosCliente,informacionPlaca,informacionAuto
 
 // const PlanesSOAT = ({ title, pago, costo, coberturas, asistencias, beneficios, image }) => {
-const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
+const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAuto}) => {
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
   
@@ -38,7 +38,7 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
       monto = 180;
     }
 
-    const infoState = {datosCliente: datosCliente, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
+    const infoState = {datosCliente: informacionClienteSinCuenta, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, monto: monto};
     navigate("/soat5", {state: infoState});
     
     
@@ -87,7 +87,7 @@ const PlanesSOAT = ({datosCliente,informacionPlaca,informacionAuto}) => {
       </div>
       <div className ="botones text-center">
           <div className="btn-group" role="group" aria-label="Botones con separación">
-              <Link to={"/soat3"}>
+              <Link to={"/soat3"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca, informacionAuto: informacionAuto}}>
                   <button type="button" className="btnGeneral2 mx-3">Volver</button>
               </Link>   
               {/* <button type="submit" className='btnGeneral mx-3'  data-bs-toggle="modal" data-bs-target="#trabajandoModal">Continuar</button>      */}

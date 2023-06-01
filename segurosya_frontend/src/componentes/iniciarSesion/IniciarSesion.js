@@ -9,29 +9,61 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 
-import ubicacionesJSON from "./ubicaciones.json";
-
 export const IniciarSesion = () => {
   
   const navigate = useNavigate();
+  const {register, handleSubmit,watch,formState: { errors }} = useForm();
+  
+  const onSubmit = (data) => {
 
-    
+  }
+  
   return (
     <div className='IniciarSesion'>
       <div className='Imagen'>
         <img className='ImgMujer' src={mujer}/>
       </div>
-      <div className='Registrar'>
-        <p className='Titulo'>Registrarse</p>
-        <p><input className= "Ingresa" value="Correo electrónico"></input></p>
-        <p><input className= "Ingresa" value="Contraseña"></input></p>
-        <Link to={"/"}><p><button className="BotonIniciar">Iniciar sesión</button></p></Link>
-        <a>¿No tienes una cuenta?</a>;
+
+      <form onSubmit={handleSubmit(onSubmit)} className='Registrar'>
+        <p className='Titulo'>Iniciar Sesión</p>
+        <p><input type='text' className= "Ingresa" placeholder="Correo electrónico" 
+        {...register("correo",{
+              required: true,
+              pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+            }
+          )
+        }
+        >          
+        </input> </p>
+        <p>
+          {errors.correo && (<p className="error-message">Ingrese un correo electrónico válido.</p>)}
+        </p>
+
+        <p><input type='password' className= "Ingresa" placeholder="Contraseña"
+        {...register("constrasenha",{
+              required: true,
+            }
+          )
+        }
+        ></input></p>
+        <p>
+          {errors.constrasenha && (<p className="error-message">Ingrese una contraseña.</p>)}
+        </p>
+
+
+        {/* <Link to={"/"}><p><button className="BotonIniciar">Iniciar sesión</button></p></Link> */}
+        <p><button className="BotonIniciar">Iniciar sesión</button></p>
+        <a>¿No tienes una cuenta?  </a>
         <Link to={"/crearCuenta"}><a>Registrate</a></Link>
-        <p><a>¿Has olvidado tu contraseña?</a></p>
-        <p>------------o------------</p>
-        <Link to={"/"}><button className="BotonGoogle">Iniciar sesión con Google</button></Link>
-      </div>
+        {/* <a>Regístrate</a> */}
+        <Link>
+          <p><a>¿Has olvidado tu contraseña?</a></p>
+        </Link>
+        
+        {/* <p>------------o------------</p>
+        <Link to={"/"}><button className="BotonGoogle">Iniciar sesión con Google</button></Link> */}
+      </form>
+
       <div className='Imagen'>
         <img className='ImgHombre' src={hombre}/>
       </div>

@@ -5,6 +5,7 @@
     width: 70%;
     background: #FFFFFF;
     border-radius: 10px;
+    height: fit-content;
 }
 .RegistrarCliente > .DatosCliente {
     margin-left: 5%;
@@ -13,7 +14,7 @@
 }
 
 .RegistrarCliente > .DatosCliente > .Titulo {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -26,7 +27,7 @@
     padding-left: 2%;
     margin-bottom: 2%;
     padding-bottom: 2%;
-    width: 90%;
+    width: 80%;
 }
 
 .Negrita {
@@ -38,10 +39,10 @@
 }
 
 .RegistrarCliente > .DatosCliente > .Trio {
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     margin-bottom: 2%;
-    width: 90%;
+    width: 80%;
     
 }
 

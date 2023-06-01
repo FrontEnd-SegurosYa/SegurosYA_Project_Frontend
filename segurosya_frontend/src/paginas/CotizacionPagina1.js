@@ -1,4 +1,4 @@
-// CotizacionPagina2.js
+// CotizacionPagina1.js
 import React from 'react';
 import {BarraProgresoSeguro} from "../componentes/barraProgreso/BarraProgreso.js"
 import Navbar from '../componentes/navbar/Navbar.js'
@@ -11,6 +11,8 @@ function CotizacionPagina1() {
   let informacionPlacaPasada = null;
   if(location.state !== null){
     informacionPlacaPasada = location.state;
+    console.log('Se recibio ');
+    console.log(informacionPlacaPasada);
   }
   // console.log('Se recibio ');
   // console.log(informacionPlacaPasada);
