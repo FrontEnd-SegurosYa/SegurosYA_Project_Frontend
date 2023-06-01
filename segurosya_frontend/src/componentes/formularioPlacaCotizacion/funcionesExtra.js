@@ -15,7 +15,7 @@ export function procesarPlaca(str) {
     }
   }
 
-  export function buscarPlaca(placa) {
+export function buscarPlaca(placa) {
     return fetch(LINKSERVER+"/api/auto/buscar", {
         method: "POST",
         headers: {
@@ -44,5 +44,5 @@ export function procesarPlaca(str) {
         console.error("Request error:", error);
         return false;
         });
-    }
+}
     

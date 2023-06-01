@@ -5,21 +5,28 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from "react";
+import Select from 'react-select';
+
 
 import infoAutosJSON from "./infoAutos.json";
+import { obtenerMarcas, obtenerModelosXMarca } from './funcionesFetch';
 
-export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
+export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo}) => {
   
-  const objetosRecibidos = {datosCliente: datosCliente, informacionPlaca: informacionPlaca};
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
+  const methods = useForm();
 
   const marcasAutos = infoAutosJSON.marcas;
 
-  const [marca,setMarca] = useState(marcasAutos[0].nombre);
-  const [listaMarcas,setListaMarcas] = useState(marcasAutos);
-  const [modelo,setModelo] = useState(marcasAutos[0].modelos[0].nombre);
-  const [listaModelos,setListaModelos] = useState(marcasAutos[0].modelos);
+  // const [marca,setMarca] = useState(marcasAutos[0].nombre);
+  // const [listaMarcas,setListaMarcas] = useState(marcasAutos);
+  // const [modelo,setModelo] = useState(marcasAutos[0].modelos[0].nombre);
+  // const [listaModelos,setListaModelos] = useState(marcasAutos[0].modelos);
+  const [marca,setMarca] = useState();
+  const [listaMarcas,setListaMarcas] = useState([]);
+  const [modelo,setModelo] = useState();
+  const [listaModelos,setListaModelos] = useState([]);
   const [anhoFabricacion,setAnhoFabricacion] = useState(1999);
   const [numeroAsientos,setNumeroAsiento] = useState(2);
   
@@ -38,20 +45,25 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
     numeroAsientos: numeroAsientos
   };
 
-  const cambioMarca = (marcaSelec) => {
-    const marcaObtenida = marcasAutos.find( (marca)  => marca.nombre === marcaSelec);
-
-    setMarca(marcaObtenida.nombre);
-
-    setListaModelos(marcaObtenida.modelos);
-    setModelo(marcaObtenida.modelos[0].nombre);
+  const cambioMarca = (event) => {
+    const nuevaMarca = event.target.value;    
+    
+    setMarca( listaMarcas.find(c => c.idMarca === parseInt(nuevaMarca)) );
+    obtenerModelosXMarca(parseInt(nuevaMarca))
+    .then(listModelos => {
+      setListaModelos(listModelos);
+      setModelo(listModelos[0]);
+    }).catch( error => {
+      console.error('Error:', error);
+    });
   };
 
-  const cambioModelo = (modeloSelec) => {
-    const modeloObtenido = listaModelos.find( (modelo)  => modelo.nombre === modeloSelec);
-
-    setModelo(modeloObtenido.nombre);
+  const cambioModelo = (event) => {
+    const nuevoModelo = event.target.value;        
+    setModelo( listaModelos.find(c => c.idModelo === parseInt(nuevoModelo)) );    
   };
+
+ 
 
   const cambioAnhoFabricacion = (anhoSelec) => {
     setAnhoFabricacion(parseInt(anhoSelec));
@@ -62,25 +74,40 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
     setNumeroAsiento(parseInt(numAsientosSelec));
   };
 
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
+  
   useEffect(() => {
-    setListaMarcas( marcasAutos );
+    obtenerMarcas()
+    .then(listMarcs => {
+        setListaMarcas(listMarcs);
+        setMarca(listMarcs[0]);
+
+        obtenerModelosXMarca(listMarcs[0].idMarca)
+        .then(listModelos => {
+          setListaModelos(listModelos);
+          setModelo(listModelos[0]);
+        }).catch( error => {
+          console.error('Error:', error);
+        });
+      }
+    ).catch( error => {
+        console.error('Error:', error);
+      }      
+    );
   }, []);
 
   // Declaraciones para botones
   const onSubmit = (data) => {      
-      const informacionCliente = {datosCliente,informacionPlaca,informacionAuto};
-      //console.log(informacionCliente);
+      const informacionCliente = {informacionClienteSinCuenta,informacionPlaca,informacionAuto};
+      // console.log(marca);
+      // console.log(modelo);
+
       // navigate("/cotizacion4", {state:informacionCliente});
-      if(rumbo === "Soat"){
+      if(rumbo === "soat"){
         navigate("/soat4", {state:informacionCliente});
-    }
-    else {
-        navigate("/cotizacion4", {state:informacionCliente});
-    }
+      }
+      else {
+          navigate("/cotizacion4", {state:informacionCliente});
+      }
   }
   return (
     <>
@@ -93,60 +120,57 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
               <div className='Form'>
                 <div className='Opciones'>
                   <p className='SubsubTitulo'>Marca</p>
-                  <Controller
-                    name="marca"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <select onChange={(e) => {
-                          onChange(e.target.value);
-                          cambioMarca(e.target.value);
-                      }} className='Resultado'>
-                      {listaMarcas.map((option) => (
-                        <option key={option.nombre} value={option.nombre}>
-                            {option.nombre}
-                        </option>
-                      ))}
-                      </select>
-                    )}
-                  />
+                  {/* <p>
+                    {marca && marca.idMarca}
+                    
+                  </p> */}
+                  
+                  <select onChange={cambioMarca} className='Resultado'>
+                    {listaMarcas && listaMarcas.map((option) => (
+                      <option key={option.idMarca} value={option.idMarca}>
+                        {option.nombre}
+                      </option>
+                    ))}
+                  </select>
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Modelo</p>
-                  <Controller
-                    name="modelo"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <select onChange={(e) => {
-                          onChange(e.target.value);
-                          cambioModelo(e.target.value);
-                      }} className='Resultado'>
-                      {listaModelos.map((option) => (
-                        <option key={option.nombre} value={option.nombre}>
-                            {option.nombre}
-                        </option>
-                      ))}
-                      </select>
-                    )}
-                  />
+                  {/* <p>
+                    
+                    {modelo && modelo.idModelo}
+                    
+                  </p> */}
+                  
+                  <select onChange={cambioModelo} className='Resultado'>
+                    {listaModelos && listaModelos.map((option) => (
+                      <option key={option.idModelo} value={option.idModelo}>
+                        {option.nombre}
+                      </option>
+                    ))}
+                  </select>
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Año de fabricacion</p>
                   <Controller
                     name="anhoFabricacion"
                     control={control}
-                    render={({ field: { onChange } }) => (
-                      <select onChange={(e) => {
-                          onChange(e.target.value);
-                          cambioAnhoFabricacion(e.target.value);
-                      }} className='Resultado'>
-                      {listaAnhosFabricacion.map((option) => (
-                        <option key={option} value={option}>
-                            {option}
-                        </option>
-                      ))}
-                      </select>
+                    defaultValue={1999}
+                    render={({ field: { onChange, value } }) => (
+                      <input
+                        type="number"
+                        value={value}
+                        onChange={(e) => {
+                          const inputValue = parseInt(e.target.value);
+                          if (inputValue > 0) {
+                            onChange(inputValue);
+                            cambioAnhoFabricacion(e.target.value);
+                          }
+                        }}
+                        className="Resultado"
+                      />
                     )}
                   />
+                  
                   <br/>
                   <br/>
                   <p className='SubsubTitulo'>Número de asientos</p>
@@ -171,6 +195,9 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
                   />
                 </div>
               </div>
+              
+
+              
             
         </div>
         <div className='imagenSeguro2 containerImagenCarroSeguro ' alt = "imagenSeguro2"></div>
@@ -201,7 +228,7 @@ export const DatosCarro = ({datosCliente,informacionPlaca,rumbo}) => {
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          <Link to={"/cotizacion2"} state={{datosCliente: datosCliente, informacionPlaca: informacionPlaca}}>
+          <Link to={"/"+rumbo+"2"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
           {/* <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button> */}

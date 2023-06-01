@@ -1,21 +1,31 @@
 // CotizacionPagina1.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import DatosCarro from '../componentes/datosCotizacion/DatosCarro.js'
 import {BarraProgresoSeguro} from "../componentes/barraProgreso/BarraProgreso.js"
 import {FormularioClienteSinCuenta} from '../componentes/formularioClienteSinCuenta/FormularioClienteSinCuenta'
 import Navbar from '../componentes/navbar/Navbar.js' 
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CotizacionPagina2() {
   const location = useLocation();
+  const navigate = useNavigate();
   var datosCliente = null;
-  const informacionPlaca = location.state.informacionPlaca;
-  if(location.state.datosCliente !== null){
+  var informacionPlaca = null;
+
+  if(location.state !== null){
     datosCliente = location.state.datosCliente;
-    // console.log("recibi datos de un cliente");
-    // console.log(datosCliente);
+    informacionPlaca = location.state.informacionPlaca;
+
   }
-  // console.log(location.state);
+
+  //Redirigir a inicio si no se realizo el flujo anterior
+  useEffect(() => {
+    if(location.state === null){
+      navigate("/");
+    }
+  },[]);
+
   return (
     <>
       <Navbar/>

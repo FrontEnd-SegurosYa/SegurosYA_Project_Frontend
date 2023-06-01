@@ -1,6 +1,7 @@
 import './FormularioClienteSinCuenta.css';
 import { Link } from 'react-router-dom';
 import {BarraProgreso} from "../barraProgreso/BarraProgreso.js"
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos} from './solicitarInformacion';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
@@ -12,28 +13,34 @@ import { useState, useEffect } from 'react';
 import ubicacionesJSON from "./ubicaciones.json";
 
 //Contenedor principal
-export function FormularioClienteSinCuenta ({informacionPlaca,rumbo,datosCliente}) {
+export function FormularioClienteSinCuenta ({informacionPlaca,rumbo,informacionClienteSinCuenta}) {
 
     return (
         <>
-            <ContenedorPrincipal informacionPlaca = {informacionPlaca} rumbo={rumbo} datosCliente={datosCliente} />
+            <ContenedorPrincipal informacionPlaca = {informacionPlaca} rumbo={rumbo} informacionClienteSinCuenta={informacionClienteSinCuenta} />
         </>
         
     );
 }
 
-function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
+function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuenta} ) {
 
     const navigate = useNavigate();
 
     const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
     
-    const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
-    const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
-    const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
-    const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
-    const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
-    const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
+    // const [departamento,setdepartamento] = useState(ubicacionesJSON[0].nombre);
+    // const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
+    const [departamento,setDepartamento] = useState();
+    const [listaDepartamentos,setListaDepartamentos] = useState([]);    
+    // const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
+    // const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
+    const [provincia,setProvincia] = useState();
+    const [listaProvincias, setListaProvincias] = useState([]);
+    // const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
+    // const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
+    const [distrito,setDistrito] = useState();
+    const [listaDistritos, setListaDistritos] = useState([]);
 
     const ubicacion = {
         departamento: departamento,
@@ -43,7 +50,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
 
     const cambioDepartamento = (depSelec) => {
         const depObtenido = ubicacionesJSON.find( (departamento)  => departamento.nombre === depSelec);
-        setdepartamento(depObtenido.nombre);
+        setDepartamento(depObtenido.nombre);
         setProvincia(depObtenido.provincias[0].nombre);
         setListaProvincias( depObtenido.provincias );
         setDistrito(depObtenido.provincias[0].distritos[0]);
@@ -62,13 +69,49 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
     };
 
     useEffect(() => {
-        setListaDepartamentos( ubicacionesJSON );
+
+        // setListaDepartamentos( ubicacionesJSON );
+
+        // fetch data
+        obtenerDepartamentos()
+        .then( listaDeps => {
+                setListaDepartamentos(listaDeps);
+                setDepartamento(listaDeps[0]);
+
+                buscarProvinciasDep(listaDeps[0].nombre)
+                .then( listaProvs => {
+                        // console.log(listaProvs);
+                        setListaProvincias(listaProvs);
+                        setProvincia(listaProvs[0]);
+
+                        //Temporal
+                        // obtenerDistritos()
+                        // .then( listaDists => {
+                        //         setListaDistritos(listaDists);
+                        //         setDistrito(listaDists[0]);
+                        //     }
+                        // ).catch();
+                    }
+                ).catch( error => {
+                    console.error('Error:', error);
+                });
+            }
+        ).catch( error => {
+                console.error('Error:', error);
+            }
+        ); 
+
+
+
+        
         //Llenado de datos causados por volver
-        if(datosCliente){
-            setValue("nombreCompleto",datosCliente.nombreCompleto);
-            setValue("DNI",datosCliente.DNI);
-            setValue("email",datosCliente.correoElectronico);
-            setValue("telefonoCelular",datosCliente.telefonoCelular);
+        if(informacionClienteSinCuenta){
+            setValue("nombre",informacionClienteSinCuenta.nombre);
+            setValue("apellidoPaterno",informacionClienteSinCuenta.apellidoPaterno);
+            setValue("apellidoMaterno",informacionClienteSinCuenta.apellidoMaterno);
+            setValue("DNI",informacionClienteSinCuenta.DNI);
+            setValue("email",informacionClienteSinCuenta.correoElectronico);
+            setValue("telefonoCelular",informacionClienteSinCuenta.telefonoCelular);
             // cambioDepartamento(datosCliente.ubicacion.departamento);
             // cambioProvincia(datosCliente.ubicacion.provincia);
             // cambioDistrito(datosCliente.ubicacion.distrito);
@@ -77,7 +120,9 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
 
     const onSubmit = (data) => {
         const informacionClienteSinCuenta = {
-            nombreCompleto: data.nombreCompleto,
+            nombre: data.nombre,
+            apellidoPaterno: data.apellidoPaterno,
+            apellidoMaterno: data.apellidoMaterno,
             DNI: data.DNI,
             correoElectronico: data.email,
             telefonoCelular: data.telefonoCelular,
@@ -85,9 +130,9 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
         };
         // const informacionPlaca = informacionPlaca;
         const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
-        console.log(informacionClienteSinCuenta);
+        // console.log(informacionClienteSinCuenta);
         // console.log(rumbo);
-        if(rumbo === "Soat"){
+        if(rumbo === "soat"){
             navigate("/soat3", {state: infoState});
         }
         else {
@@ -112,16 +157,37 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                 </div>
                 <div >
                     <div className='ContenedorCampoFormulario'>
-                        Nombre Completo: <br/>                        
-                        <input type='text' className='InputTexto' {...register('nombreCompleto',{
+                        Nombres: <br/>                        
+                        <input type='text' className='InputTexto' {...register('nombre',{
                             required: true,             
-                            pattern: /[a-zA-Z]+\s+[a-zA-Z]+$/,
+                            pattern: /^([A-Za-z]+)( [A-Za-z]+)?( [A-Za-z]+)?$/,
                         })}/>
-                        {errors.nombreCompleto && <p className="error-message">Debe ingresar un nombre y un apellido</p>}
-                    </div>
-                    
-                    
+                        {errors.nombre && <p className="error-message">Debe ingresar un nombre</p>}
+                    </div>                   
                 </div>
+
+                <div >
+                    <div className='ContenedorCampoFormulario'>
+                        Apellido Paterno: <br/>                        
+                        <input type='text' className='InputTexto' {...register('apellidoPaterno',{
+                            required: true,             
+                            pattern: /^(?!.*(ll|ch))[A-Za-z][A-Za-z]+(?: de [A-Za-z][A-Za-z]+)?(?: [A-Za-z][A-Za-z]+)?$/,
+                        })}/>
+                        {errors.apellidoPaterno && <p className="error-message">Debe ingresar un apellido paterno válido.</p>}
+                    </div>                   
+                </div>
+
+                <div >
+                    <div className='ContenedorCampoFormulario'>
+                        Apellido Materno: <br/>                        
+                        <input type='text' className='InputTexto' {...register('apellidoMaterno',{
+                            required: true,             
+                            pattern: /^(?!.*(ll|ch))[A-Za-z][A-Za-z]+(?: [A-Za-z][A-Za-z]+)?$/,
+                        })}/>
+                        {errors.apellidoMaterno && <p className="error-message">Debe ingresar un nombre y un apellido</p>}
+                    </div>                   
+                </div>
+
                 <div>
                     <div className='ContenedorCampoFormulario'>
                         DNI: <br/>                        
@@ -151,14 +217,14 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                 </div>  
                 <div>
                     <div className='ContenedorCampoFormulario'>
-                        Teléfono celular: <br/>                        
+                        Número celular: <br/>                        
                         <input type='text' {...register('telefonoCelular',{
                             required: true,
-                            pattern: /^(?:\d{9}|\d{7})$/
+                            pattern: /^9\d{8}$/
                         })}
                         className='InputTexto'
                         />
-                        {errors.telefonoCelular && (<p className="error-message">Ingrese un numero de un celular o de un domicilio.</p>)}
+                        {errors.telefonoCelular && (<p className="error-message">Ingrese un numero celular valido.</p>)}
                     </div>
                 </div>
                 <div>
@@ -172,12 +238,12 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                                     render={({ field: { onChange } }) => (
                                         <select onChange={(e) => {
                                             onChange(e.target.value);
-                                            cambioDepartamento(e.target.value);
+                                            // cambioDepartamento(e.target.value);
                                         }}
                                         className='InputUbicacion'
                                         >
-                                        {listaDepartamentos.map((option) => (
-                                            <option key={option.nombre} value={option.nombre}>
+                                        {listaDepartamentos && listaDepartamentos.map((option) => (
+                                            <option key={option.idDepartamento} value={option.nombre}>
                                                 {option.nombre}
                                             </option>
                                         ))}
@@ -197,13 +263,14 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                                     control={control}
                                     render={({ field: { onChange } }) => (
                                         <select onChange={(e) => {
-                                            onChange(e.target.value);
-                                            cambioProvincia(e.target.value);
+                                            onChange(e.target);
+                                            console.log(e.target);
+                                            // cambioProvincia(e.target.value);
                                         }}
                                         className='InputUbicacion'
                                         >
-                                        {listaProvincias.map((option) => (
-                                            <option key={option.nombre} value={option.nombre}>
+                                        {listaProvincias && listaProvincias.map((option) => (
+                                            <option key={option.idProvincia} value={option.nombre}>
                                                 {option.nombre}
                                             </option>
                                         ))}
@@ -215,7 +282,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                         </div>
 
 
-                        <div className='ContenedorCampoUbicacion'>
+                        {/* <div className='ContenedorCampoUbicacion'>
                             <div><p>Distrito:</p></div>
                             <div className='ContenedorSelectUbicacion'>
                                 <Controller
@@ -224,21 +291,21 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,datosCliente} ) {
                                 render={({ field: { onChange } }) => (
                                     <select 
                                         onChange={(e) => { 
-                                            onChange(e.target.value); 
-                                            cambioDistrito(e.target.value);
+                                            onChange(e.target); 
+                                            // cambioDistrito(e.target.value);
                                         }}
                                     className='InputUbicacion'
                                     >
-                                    {listaDistritos.map((distrito) => (
-                                        <option key={distrito} value={distrito}>
-                                            {distrito}
+                                    {listaDistritos && listaDistritos.map((distrito) => (
+                                        <option key={distrito.idDistrito} value={distrito.nombre}>
+                                            {distrito.nombre}
                                         </option>
                                     ))}
                                     </select>
                                 )}  
                                 />
                             </div>                            
-                        </div>
+                        </div> */}
                         
                         
                         

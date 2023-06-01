@@ -10,16 +10,20 @@ function SoatPagina2() {
   const navigate = useNavigate();
   const location = useLocation();
   var informacionPlaca = null;
-  var informacionCliente = null;
-  console.log(location);  
+  var informacionClienteSinCuenta = null;
+
+  console.log('Se recibio en soat2');
+  console.log(location.state);
+
+  if(location.state !== null){
+    informacionPlaca = location.state.informacionPlaca;
+    informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
+  }
 
   //Redirigir a inicio si no se realizo el flujo anterior
   useEffect(() => {
     if(location.state === null){
       navigate("/");
-    }else{
-      informacionPlaca = location.state.informacionPlaca;
-      informacionCliente = location.state.informacionCliente;
     }
   },[]);
     
@@ -29,7 +33,7 @@ function SoatPagina2() {
       <Navbar/>
       <BarraProgreso paso = {2}/>
       {/* <DatosCarroSoat informacionPlaca={informacionPlaca} datosCliente={informacionCliente}/> */}
-      <FormularioClienteSinCuenta rumbo="Soat" informacionPlaca={informacionPlaca}/>
+      <FormularioClienteSinCuenta rumbo="soat" informacionPlaca={informacionPlaca} informacionClienteSinCuenta={informacionClienteSinCuenta} />
     </>   
   );
 }
