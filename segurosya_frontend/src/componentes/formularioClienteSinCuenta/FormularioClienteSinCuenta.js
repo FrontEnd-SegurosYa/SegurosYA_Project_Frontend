@@ -43,41 +43,54 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
     };
 
     const cambioDepartamento = (idDepartamento) => {
-        const nuevoIdDepartamento = parseInt(idDepartamento);            
-        setDepartamento(listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento));
+        const nuevoIdDepartamento = parseInt(idDepartamento);
+        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento);            
+        setDepartamento(nuevoDepartamento);
+        buscarProvinciasDep(nuevoDepartamento.nombre)
+        .then(nuListaProv => {
+            setListaProvincias(nuListaProv);
+            setProvincia(nuListaProv[0]);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
         console.log("id a cambiar: "+idDepartamento);
     };
 
-    const cambioProvincia = (provSelec) => {
-        const provObtenida = listaProvincias.find( (provincia)  => provincia.nombre === provSelec);
-        setProvincia(provObtenida.nombre);
-        setListaDistritos( provObtenida.distritos );
-        setDistrito(provObtenida.distritos[0]);
+    const cambioProvincia = (idProvincia) => {
+        const nuevoIdProvincia = parseInt(idProvincia);
+        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === nuevoIdProvincia);
+        setProvincia(provObtenida);
+        // setListaDistritos( provObtenida.distritos );
+        // setDistrito(provObtenida.distritos[0]);
     };
 
     const cambioDistrito = (distSelec) => {
         setDistrito(distSelec);
     };
 
-    useEffect(() => {
+    useEffect( () => {
 
         // fetch data
         obtenerDepartamentos()
         .then( listaDeps => {
+                var idDepAparicion = null;
                 setListaDepartamentos(listaDeps);
                 if(informacionClienteSinCuenta){
                     const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
                     setDepartamento(listaDeps.find( (departamento)  => departamento.idDepartamento === idDepAnterior));
-                    // cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
+                    idDepAparicion = idDepAnterior;
+                    cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
                 }else{
                     setDepartamento(listaDeps[0]);
+                    idDepAparicion = listaDeps[0].idDepartamento;
                 }          
 
-                // buscarProvinciasDep(listaDeps[0].nombre)
-                // .then( listaProvs => {
-                //         // console.log(listaProvs);
-                //         setListaProvincias(listaProvs);
-                //         setProvincia(listaProvs[0]);
+                buscarProvinciasDep(listaDeps[0].nombre)
+                .then( listaProvs => {
+                        console.log(listaProvs);
+                        setListaProvincias(listaProvs);
+                        setProvincia(listaProvs[0]);
 
                         //Temporal
                         // obtenerDistritos()
@@ -88,11 +101,11 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                         // ).catch();
                 }).catch( error => {
                     console.error('Error:', error);
-                })            
-        .catch( error => {
+                });  
+
+            }).catch( error => {
                 console.error('Error:', error);
-            }
-        ); 
+            }); 
         
         //Llenado de datos causados por volver
         if(informacionClienteSinCuenta){
@@ -104,7 +117,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
             setValue("telefonoCelular",informacionClienteSinCuenta.telefonoCelular);
         };        
         
-    }, []);
+    }, [] );
 
     const onSubmit = (data) => {
         const informacionClienteSinCuenta = {
@@ -126,10 +139,6 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         else {
             navigate("/cotizacion3", {state: infoState});
         }
-        
-        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
-        
-        
     }
    
     return (
@@ -232,6 +241,23 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                             {/* {departamento && departamento.idDepartamento} */}
                         </div>
 
+                        <div className='ContenedorCampoUbicacion'>
+                            <div><p>Provincia:</p></div>
+                            <div>
+                                <select onChange={(e) => cambioProvincia(parseInt(e.target.value))} className='Resultado' value={provincia && provincia.idProvincia}>
+                                        {listaProvincias && listaProvincias.map((option) => (
+                                        <option key={option.idProvincia} value={option.idProvincia}>
+                                            {option.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                                
+                            </div>                            
+                            {/* {departamento && departamento.idDepartamento} */}
+                        </div>
+
+                        
+
 
                         {/* <div className='ContenedorCampoUbicacion'>
                             <div><p>Provincia:</p></div>
@@ -302,7 +328,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
                  
-                    <Link to={"/"+rumbo+"1"} state={informacionPlaca}> 
+                    <Link to={rumbo==="soat" ? "/soat1" : "/cotizacion2"} state={informacionPlaca}> 
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 

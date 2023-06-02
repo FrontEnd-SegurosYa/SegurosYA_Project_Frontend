@@ -8,6 +8,9 @@ import { useForm, Controller} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
+//Utiles
+import { iniciarSesion } from './funcionesExtras';
+
 
 export const IniciarSesion = () => {
   
@@ -15,7 +18,17 @@ export const IniciarSesion = () => {
   const {register, handleSubmit,watch,formState: { errors }} = useForm();
   
   const onSubmit = (data) => {
-
+    iniciarSesion()
+    .then(resultado => {
+      if(resultado.response_msg === "Login Success"){
+        alert("Inicio de sesion correcto.");
+      }else{
+        alert("Inicio de sesion fallido.");
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
   
   return (

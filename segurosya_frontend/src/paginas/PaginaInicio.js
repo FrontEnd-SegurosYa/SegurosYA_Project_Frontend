@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 function PaginaInicio() {
     return (
         <>
-          <Navbar/>
+          <Navbar comportamiento={"mostrar"}/>
           <ContenedorPrincipal/>
           <Presentacion/>
         </>

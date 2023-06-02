@@ -21,7 +21,7 @@ function SoatPagina1() {
   
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {1}/>
       {/* <FormularioPlacaSoat datosCliente = {informacionClienteSinCuenta} /> */}
       <FormularioPlacaSoat placaPasada={placaPasada}/>

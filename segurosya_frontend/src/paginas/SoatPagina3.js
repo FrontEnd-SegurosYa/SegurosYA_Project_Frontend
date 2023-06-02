@@ -31,7 +31,7 @@ function SoatPagina3() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {3}/>
       <DatosCarro informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} rumbo = "soat" informacionAutoPasado={informacionAuto}/>
     </>   

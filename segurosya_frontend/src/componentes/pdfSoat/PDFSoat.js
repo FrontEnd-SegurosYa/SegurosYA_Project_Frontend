@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function PDFSoat ({datosCliente,informacionPlaca,informacionAuto,monto})  {
+function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,planSeleccionado})  {
   const fechaActual = new Date();
   const fechaDiaDespues = addDays(fechaActual, 1); // Sumar un día
   const fechaFutura = addYears(fechaDiaDespues, 1); // Sumar un año
@@ -169,12 +169,13 @@ function PDFSoat ({datosCliente,informacionPlaca,informacionAuto,monto})  {
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>VEHICULO ASEGURADO</Text>
-                  <Text style={styles.headers}>Placa</Text>
-                  <Text style={styles.datos}>{placaMayusculas}</Text>
+                  {/* <Text style={styles.headers}>{informacionPlaca.placa}</Text> */}
+                  <Text style={styles.datos}>{informacionPlaca.placa}</Text>
                   <Text style={styles.headers}>Categoria</Text>
-                  <Text style={styles.datos}>AUTOMOVIL AUTO</Text>
+                  {/* <Text style={styles.datos}>{informacionPlaca.uso}</Text> */}
+                  <Text style={styles.datos}>AUTOMOVIL</Text>
                   <Text style={styles.headers}>Uso</Text>
-                  <Text style={styles.datos}>{strMayusculas}</Text>
+                  <Text style={styles.datos}>{informacionPlaca.uso.toUpperCase()}</Text>
                   <Text style={styles.headers}>Vln / N° de serie</Text>
                   <Text style={styles.datos}>G4HSJT576823</Text>
                 </View>    
@@ -186,9 +187,9 @@ function PDFSoat ({datosCliente,informacionPlaca,informacionAuto,monto})  {
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>CONTRATANTE / ASEGURADO</Text>
-                  <Text style={styles.datos}>{datosCliente.nombreCompleto}</Text>
+                  <Text style={styles.datos}>{informacionClienteSinCuenta.nombre+" "+informacionClienteSinCuenta.apellidoPaterno+" "+informacionClienteSinCuenta.apellidoMaterno}</Text>
                   <Text style={styles.headers}>Importe de la prima</Text>
-                  <Text style={styles.datos}>{monto}</Text>
+                  <Text style={styles.datos}>{planSeleccionado.monto}</Text>
                   <Text style={styles.headers}>Fecha</Text>
                   <Text style={styles.datos}>{format(fechaActual, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers}>Hora de emisión</Text>

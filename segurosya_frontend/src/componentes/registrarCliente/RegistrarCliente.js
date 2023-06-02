@@ -186,7 +186,7 @@ export const RegistrarCliente = () => {
 
             <p>Al continuar acepto la 
                 <a  className="Celeste"
-                    href="https://drive.google.com/file/d/1RAmiOhMD-OB50419L_x_ZYObrvLpqwVV/view"
+                    href="https://drive.google.com/file/d/11ufJI949A8UPw0QWubV3aH3wCxfjjpb_/view?usp=sharing"
                     target="_blank"
                     rel="noreferrer"
                 >

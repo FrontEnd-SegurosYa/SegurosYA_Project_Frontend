@@ -17,6 +17,7 @@ function SoatPagina2() {
 
   if(location.state !== null){
     informacionPlaca = location.state.informacionPlaca;
+    //Informacion que es devuelta
     informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
   }
 
@@ -30,7 +31,7 @@ function SoatPagina2() {
    
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {2}/>
       {/* <DatosCarroSoat informacionPlaca={informacionPlaca} datosCliente={informacionCliente}/> */}
       <FormularioClienteSinCuenta rumbo="soat" informacionPlaca={informacionPlaca} informacionClienteSinCuenta={informacionClienteSinCuenta} />

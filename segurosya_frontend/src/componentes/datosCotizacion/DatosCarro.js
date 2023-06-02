@@ -105,17 +105,18 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
 
   // Declaraciones para botones
   const onSubmit = (data) => {      
-      const informacionCliente = {informacionClienteSinCuenta,informacionPlaca,informacionAuto};
+      const informacionCliente = {informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca,informacionAuto: informacionAuto};
       // console.log(marca);
-      console.log(informacionAuto);
+      // console.log(informacionAuto);
 
       // navigate("/cotizacion4", {state:informacionCliente});
       if(rumbo === "soat"){
         navigate("/soat4", {state:informacionCliente});
-    }
-    else {
-        navigate("/cotizacionExtra", {state:informacionCliente});
-    }
+      }
+      else {
+          // navigate("/cotizacion4", {state:informacionCliente});
+          navigate("/cotizacionTemp", {state:informacionCliente});
+      }
   }
   return (
     <>
@@ -210,33 +211,10 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
         </div>
         <div className='imagenSeguro2 containerImagenCarroSeguro ' alt = "imagenSeguro2"></div>
       
-        {/* <div className='coberturas'>
-          <p>Te chocan o te chocan 14.00</p>
-          <input type="checkbox" name="colors[]" value="check1" id="check_1" />
-          
-          <p>Robo total 13.00</p>
-          <input type="checkbox" name="colors[]" value="check2" id="check_2" />
-          
-          <p>Robo parcial 10.00</p>
-          <input type="checkbox" name="colors[]" value="check3" id="check_3" />
-
-          <p>Lesiones a personas 8.00</p>
-          <input type="checkbox" name="colors[]" value="check4" id="check_4" />
-
-          <p>Daños a otros vehículos y objetos 12.000</p>
-          <input type="checkbox" name="colors[]" value="check5" id="check_5" />
-
-          <p>Dañas a tu vehículo 10.00</p>
-          <input type="checkbox" name="colors[]" value="check6" id="check_6" />
-
-          <p>Ambulancia 16.00</p>
-          <input type="checkbox" name="colors[]" value="check7" id="check_7" />
-        </div> */}
-
       </div>
       <div className = "botones text-center">
         <div className="btn-group" role="group" aria-label="Botones con separación">
-          <Link to={"/"+rumbo+"2"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca}}>
+          <Link to={rumbo==="cotizacion" ? "/cotizacion2" : "/soat2"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca}}>
             <button type="button" className="btnGeneral2 mx-3">Volver</button>
           </Link>
           {/* <button onClick={handleGoBack} type="button" className="btnGeneral2 mx-3">Volver</button> */}

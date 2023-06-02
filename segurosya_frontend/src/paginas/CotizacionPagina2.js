@@ -10,11 +10,15 @@ import { useNavigate } from "react-router-dom";
 function CotizacionPagina2() {
   const location = useLocation();
   const navigate = useNavigate();
-  var datosCliente = null;
+  var informacionClienteSinCuenta = null;
   var informacionPlaca = null;
 
+  console.log("cotizacion2 se recibio");
+  console.log(location.state);
+
   if(location.state !== null){
-    datosCliente = location.state.datosCliente;
+    
+    informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
     informacionPlaca = location.state.informacionPlaca;
 
   }
@@ -28,11 +32,11 @@ function CotizacionPagina2() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       {/* <BarraProgreso paso = {3}/> */}
       {/* <DatosCarro datosCliente = {datosCliente} informacionPlaca={informacionPlaca}/> */}
       <BarraProgresoSeguro paso = {2}/>
-      <FormularioClienteSinCuenta rumbo="cotizacion" informacionPlaca={informacionPlaca} datosCliente={datosCliente}/>
+      <FormularioClienteSinCuenta rumbo="cotizacion" informacionPlaca={informacionPlaca} informacionClienteSinCuenta={informacionClienteSinCuenta}/>
     </>   
   );
 }
