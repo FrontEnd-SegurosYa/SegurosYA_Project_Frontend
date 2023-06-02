@@ -14,6 +14,7 @@ function CotizacionPagina4() {
   var informacionClienteSinCuenta = null;
   var informacionPlaca = null;
   var informacionAuto = null;
+  var listaDeIdCoberturas = null;
 
   console.log("cotizacion3 se recibio");
   console.log(location.state);
@@ -23,6 +24,7 @@ function CotizacionPagina4() {
     informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
     informacionPlaca = location.state.informacionPlaca;    
     informacionAuto = location.state.informacionAuto;
+    listaDeIdCoberturas = location.state.listaDeIdCoberturas;
   }
 
   //Redirigir a inicio si no se realizo el flujo anterior
@@ -34,9 +36,9 @@ function CotizacionPagina4() {
 
   return (
     <>
-      <Navbar/>
-      <BarraProgresoSeguro paso = {4}/>
-      <Resumen informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} />
+      <Navbar comportamiento={"mostrar"}/>
+      <BarraProgresoSeguro paso = {5}/>
+      <Resumen informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} listaDeIdCoberturas={listaDeIdCoberturas}/>
     </>   
   );
 }

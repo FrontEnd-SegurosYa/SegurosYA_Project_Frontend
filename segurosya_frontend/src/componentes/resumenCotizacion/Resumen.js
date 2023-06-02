@@ -6,13 +6,45 @@ import './fecha'
 import { Link } from "react-router-dom";
 import DatosCarroSoat from "../datosCarroSoat/datosCarroSoat";
 
-function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto}) {
+import { useNavigate } from "react-router-dom";
+import { useForm, Controller } from 'react-hook-form';
+import { useState, useEffect } from "react";
+
+import { crearCotizacion } from "./funcionesExtras";
+
+function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas}) {
+  
+  const { control, handleSubmit,setValue } = useForm();
   const fechaActual = new Date();
   fechaActual.setFullYear(fechaActual.getFullYear() + 1);
   const dia = fechaActual.getDate().toString().padStart(2, '0');
   const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
   const anio = fechaActual.getFullYear();
   const fechaActualTexto= `${dia}/${mes}/${anio}`;
+
+  const onSubmit = (data) => {      
+    // const informacionCotizacion = {
+    //   newCliente: {
+    //     nombre: informacionClienteSinCuenta.nombre,
+    //     apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
+    //     apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
+    //     dni: informacionClienteSinCuenta.DNI
+    //   },
+    //   newAuto: {
+    //     placa: informacionPlaca.placa,
+    //     anhoFab: informacionAuto.anhoFabricacion,
+    //     valorComercial: 19000,
+    //     uso: "Particular",
+    //   },
+    // }
+    // crearCotizacion(informacionCotizacion)
+    // .then( respuesta => {
+    //   alert(respuesta);
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
+}
 
   return (
     <>
@@ -42,7 +74,11 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto})
             <Link to={"/cotizacion3"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca, informacionAuto: informacionAuto}}>
               <button className="btnGeneral2" >Volver</button>
             </Link>
-            <button className="btnGeneral2" data-bs-toggle="modal" data-bs-target="#volverModal">Continuar</button>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <button className="btnGeneral2" data-bs-toggle="modal" data-bs-target="#volverModal">Continuar</button>
+            </form>
+            
             
       </div>
       <div className="modal fade " id="volverModal" tabIndex="-1" aria-labelledby="volverModalLabel" aria-hidden="true">

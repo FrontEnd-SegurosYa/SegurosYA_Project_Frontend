@@ -10,6 +10,7 @@ import CotizacionPagina1 from './paginas/CotizacionPagina1';
 import CotizacionPagina2 from './paginas/CotizacionPagina2';
 import CotizacionPagina3 from './paginas/CotizacionPagina3';
 import CotizacionPagina4 from './paginas/CotizacionPagina4';
+import CotizacionPaginaCoberturas from './paginas/CotizacionPaginaCoberturas';
 
 import FormularioClientesSinCuentaSeguro from './paginas/FormularioClienteSinCuentaSeguro'
 import FormularioClientesSinCuentaSOAT from './paginas/FormularioClienteSinCuentaSeguro'
@@ -22,6 +23,7 @@ import SoatPagina2 from './paginas/SoatPagina2';
 import SoatPagina4 from './paginas/SoatPagina4';
 import SoatPagina5 from './paginas/SoatPagina5';
 import SoatPagina6 from './paginas/SoatPagina6';
+
 
 
 const router = createBrowserRouter([
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
     {
       path: "/cotizacion4",
       element: <CotizacionPagina4/>,
+    },
+    {
+      path: "/cotizacionTemp",
+      element: <CotizacionPaginaCoberturas/>,
     },
     {
       path: "/formularioClienteSinCuentaSeguro",

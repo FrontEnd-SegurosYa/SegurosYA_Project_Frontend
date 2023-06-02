@@ -6,7 +6,7 @@ import Navbar from '../componentes/navbar/Navbar';
 function IngresarCuenta() {
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"ocultar"}/>
       <IniciarSesion/>
     </>
   );

@@ -32,7 +32,7 @@ function CotizacionPagina2() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       {/* <BarraProgreso paso = {3}/> */}
       {/* <DatosCarro datosCliente = {datosCliente} informacionPlaca={informacionPlaca}/> */}
       <BarraProgresoSeguro paso = {2}/>

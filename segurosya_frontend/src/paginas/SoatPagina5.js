@@ -33,7 +33,7 @@ function SoatPagina5() {
   },[]);
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {5}/>
       <PasarelaDePagos informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} planSeleccionado = {planSeleccionado}/>
     </>   

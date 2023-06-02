@@ -18,7 +18,7 @@ function CotizacionPagina1() {
   // console.log(informacionPlacaPasada);
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       <BarraProgresoSeguro paso = {1}/>
       {/* <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} /> */}
       <FormularioPlacaCotizacion placaPasada={informacionPlacaPasada}/>

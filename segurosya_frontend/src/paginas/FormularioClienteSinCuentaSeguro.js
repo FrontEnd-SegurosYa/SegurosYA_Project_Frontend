@@ -11,7 +11,7 @@ function FormularioClientesSinCuentaSeguro() {
   
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       {/* <div> {rumbo} hola </div> */}
       <FormularioClienteSinCuenta rumbo={rumbo} informacionPlaca={informacionPlaca} />
       

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Page, Text, View, Document, StyleSheet,Image,Font } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import logoImage from '../../img/logoMinisterio.png';
@@ -136,10 +136,6 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
   const placaMini = informacionPlaca.placa;
   const placaMayusculas = placaMini.toUpperCase();
 
-  useEffect(() => {
-    
-  },[]);
-
   return (
     <>
     <PDFViewer  style={styles.viewer}>
@@ -173,12 +169,13 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>VEHICULO ASEGURADO</Text>
+                  {/* <Text style={styles.headers}>{informacionPlaca.placa}</Text> */}
                   <Text style={styles.datos}>{informacionPlaca.placa}</Text>
-                  {/* <Text style={styles.datos}>{placaMayusculas}</Text> */}
                   <Text style={styles.headers}>Categoria</Text>
-                  <Text style={styles.datos}>{informacionPlaca.uso}</Text>
+                  {/* <Text style={styles.datos}>{informacionPlaca.uso}</Text> */}
+                  <Text style={styles.datos}>AUTOMOVIL</Text>
                   <Text style={styles.headers}>Uso</Text>
-                  <Text style={styles.datos}>{strMayusculas}</Text>
+                  <Text style={styles.datos}>{informacionPlaca.uso.toUpperCase()}</Text>
                   <Text style={styles.headers}>Vln / N° de serie</Text>
                   <Text style={styles.datos}>G4HSJT576823</Text>
                 </View>    

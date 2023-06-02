@@ -34,7 +34,7 @@ function SoatPagina6() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"mostrar"}/>
       
       <PDFSoat informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} planSeleccionado = {planSeleccionado}/>
     </>

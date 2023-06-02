@@ -6,7 +6,7 @@ import Navbar from '../componentes/navbar/Navbar'
 function CrearCuenta() {
   return (
     <>
-      <Navbar/>
+      <Navbar comportamiento={"ocultar"}/>
       <RegistrarCliente/>
     </>
   );
