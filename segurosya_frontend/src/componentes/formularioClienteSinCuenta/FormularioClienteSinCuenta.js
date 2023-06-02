@@ -46,7 +46,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         const nuevoIdDepartamento = parseInt(idDepartamento);
         var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento);            
         setDepartamento(nuevoDepartamento);
-        buscarProvinciasDep(nuevoDepartamento.nombre)
+        buscarProvinciasDep(nuevoDepartamento.idDepartamento)
         .then(nuListaProv => {
             setListaProvincias(nuListaProv);
             setProvincia(nuListaProv[0]);
