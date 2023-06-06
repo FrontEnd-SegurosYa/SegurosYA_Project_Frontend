@@ -17,10 +17,10 @@ function CotizacionPagina2() {
   console.log(location.state);
 
   if(location.state !== null){
-    
-    informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
     informacionPlaca = location.state.informacionPlaca;
 
+    //Informacion que es devuelta
+    informacionClienteSinCuenta = location.state.informacionClienteSinCuenta;
   }
 
   //Redirigir a inicio si no se realizo el flujo anterior

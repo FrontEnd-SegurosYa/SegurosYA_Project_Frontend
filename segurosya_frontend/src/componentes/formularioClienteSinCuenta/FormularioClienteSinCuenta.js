@@ -328,7 +328,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
             <div className ="botones text-center">
                 <div className="btn-group" role="group" aria-label="Botones con separación">
                  
-                    <Link to={rumbo==="soat" ? "/soat1" : "/cotizacion2"} state={informacionPlaca}> 
+                    <Link to={rumbo==="soat" ? "/soat1" : "/cotizacion1"} state={informacionPlaca}> 
                         <button type="button" className="btnGeneral2 mx-3">Volver</button>
                     </Link>   
 

@@ -9,9 +9,10 @@ import { useLocation } from "react-router-dom";
 function CotizacionPagina1() {
   const location = useLocation();
   let informacionPlacaPasada = null;
+
   if(location.state !== null){
     informacionPlacaPasada = location.state;
-    console.log('Se recibio ');
+    console.log('Se recibio en cotizacion1');
     console.log(informacionPlacaPasada);
   }
   // console.log('Se recibio ');
