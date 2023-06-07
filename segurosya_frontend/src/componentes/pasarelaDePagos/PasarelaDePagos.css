@@ -119,3 +119,42 @@
     width: 600px;
     height: auto;
   }
+
+  .btnPasarela:disabled {
+    /* Estilos para el botón desactivado */
+    color: #666;
+    cursor: not-allowed;
+    border-color: var(--colorNegro);
+    pointer-events: none;
+    background-color: var(--colorGris1);
+    opacity: 0.5; 
+  }
+
+  .btnPasarela{
+    background: var(--colorBlanco2);
+    color: var(--colorNaranja1);
+    border: 2px solid var(--colorNaranja1);
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+    width: 220px;
+  }
+
+  
+.btnPasarela:enabled:hover {
+  background-color: var(--colorNaranja1);
+  color: var(--colorBlanco1);
+  border: none;
+}
+
+.btnPasarela:enabled{
+    background: var(--colorBlanco2);
+    color: var(--colorNaranja1);
+    border: 2px solid var(--colorNaranja1);
+    font-weight: 600;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    padding: 8px 25px;
+    width: 220px;
+}

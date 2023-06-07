@@ -1,7 +1,7 @@
 import './FormularioClienteSinCuenta.css';
 import { Link } from 'react-router-dom';
 import {BarraProgreso} from "../barraProgreso/BarraProgreso.js"
-import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos} from './solicitarInformacion';
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos} from './solicitarINformacion';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 

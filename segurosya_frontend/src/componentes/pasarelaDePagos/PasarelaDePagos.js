@@ -124,8 +124,10 @@ const PasarelaDePagos = ({informacionClienteSinCuenta,informacionPlaca,informaci
                         <br></br>
                         <br></br>
                     </label>
-                    
-                    <button type="submit" disabled={isButton2Disabled} className='btnGeneral  mx-3' data-bs-toggle="modal" data-bs-target="#envioSoat" >Continuar</button>   
+                    <br></br>
+                    <div className ="botonMedio"style={{ marginLeft: '175px' }}>
+                      <button type="submit" disabled={isButton2Disabled} className='btnPasarela  mx-3' data-bs-toggle="modal" data-bs-target="#envioSoat" >Continuar</button> 
+                    </div>
                     
                 </div>
 

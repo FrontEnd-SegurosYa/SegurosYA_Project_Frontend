@@ -213,7 +213,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
     </PDFViewer>
     <div className ="botones text-center">
       <Link to={"/"}>
-          <button type="button" className="btnGeneral2 mx-3">Volver</button>
+          <button type="button" className="btnGeneral2 mx-3">Volver al inicio</button>
       </Link>
     </div>
     </>

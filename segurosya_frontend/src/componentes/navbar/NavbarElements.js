@@ -2,10 +2,13 @@ import './Navbar.css'
 import logo from '../../img/logoNombre.png';
 import telefono from '../../img/telefonoGris.png';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 
 const NavbarElements = ({comportamiento}) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
   // console.log(comportamiento);
   return(
     <nav className="navbar navbar-expand-lg navbar-dark">
@@ -36,7 +39,7 @@ const NavbarElements = ({comportamiento}) => {
           {comportamiento === "mostrar" ? (
             <form className="d-flex mx-3 mostrar">
                 <Link to={"/iniciarSesion"}>
-                  <button type="button" className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
+                  <button className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
                 </Link>
             </form>
           ) : ( <></> )}
