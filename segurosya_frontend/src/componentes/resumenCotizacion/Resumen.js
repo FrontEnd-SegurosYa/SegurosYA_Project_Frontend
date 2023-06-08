@@ -65,7 +65,15 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
       <div className="containerR">
         <div className="cardResumen">
           <h2> <b> Resumen de la cotización </b></h2>
-          <h3>Monto Total: </h3>
+          <h3>Coberturas adicionales: </h3>
+          {
+            // Aca te deberia listar el array?? SI
+            listaDeIdCoberturas.map((name, idx) => (
+                <h5>{idx+1}. {name}<br/></h5>
+                
+            ))
+            
+          }
           <h5> <b>Esta cotización tiene vigencia hasta el día:  {fechaActualTexto}</b></h5>
         </div>
       </div>
