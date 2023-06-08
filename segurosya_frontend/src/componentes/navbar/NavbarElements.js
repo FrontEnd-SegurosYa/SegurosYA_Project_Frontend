@@ -5,8 +5,34 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 
-const NavbarElements = ({comportamiento}) => {
+const NavbarElements = ({comportamiento,cuentaCliente}) => {
   // console.log(comportamiento);
+  let componenteCuenta;
+
+  switch(comportamiento) {
+    case "mostrar":
+      componenteCuenta = 
+      <form className="d-flex mx-3 mostrar">
+        <Link to={"/iniciarSesion"} state={cuentaCliente}>
+          <button type="button" className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
+        </Link>
+      </form>;
+      break;
+    case "ocultar":
+      componenteCuenta = 
+        <></>;
+      break;
+    case "cuenta":
+      componenteCuenta = 
+      <div>
+        <p>{cuentaCliente.apellidoPaterno+", "+cuentaCliente.nombre}</p>
+        <Link to={"/"}>
+          <a>Cerrar Sesión</a>
+        </Link>
+      </div>;      
+      break;
+  }
+
   return(
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
@@ -33,13 +59,7 @@ const NavbarElements = ({comportamiento}) => {
             <img src={telefono} className="img-fluid" width="17" height="17"></img>
             <span className="navbar-brand mb-0 tituloNavbar mx-2"> (01) 654 3636</span>
           </div>
-          {comportamiento === "mostrar" ? (
-            <form className="d-flex mx-3 mostrar">
-                <Link to={"/iniciarSesion"}>
-                  <button type="button" className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
-                </Link>
-            </form>
-          ) : ( <></> )}
+          {componenteCuenta}
           
         </div>
       </div>
