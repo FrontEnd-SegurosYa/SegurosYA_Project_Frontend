@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import imagenCotizacion1 from '../../img/imagenAutoCotizacionInicio.png';
 import imagenLapicero1 from '../../img/imagenBoligrafo.png';
 //OTROS
-import { procesarPlaca,buscarPlaca } from './funcionesExtra';
+import { procesarPlaca,buscarPlaca, buscarPlaca2 } from './funcionesExtra';
 
 
 
@@ -57,7 +57,10 @@ function FormularioPlaca ({placaPasada}) {
         const placaProcesada = procesarPlaca(data.placa);
         buscarPlaca(placaProcesada)
         .then((success) => {
-            if (success) {
+            // console.log(success);
+            // console.log(success.length);
+
+            if (success.length !== 0) {
                 //Se encontro la placa
                 alert("La placa ingresada ya posee un seguro.");
                 return;
@@ -68,8 +71,8 @@ function FormularioPlaca ({placaPasada}) {
                 // Handle failed response or error
                 const informacionPlaca = {placa: procesarPlaca(data.placa), poseePlaca: !data.noPoseePlaca, poseeInspeccionVehicular: !data.noPoseeInspeccionVehicular}
                 const infoState = {informacionPlaca: informacionPlaca};
-                console.log("se envia ");
-                console.log(infoState);
+                // console.log("se envia ");
+                // console.log(infoState);
                 navigate("/cotizacion2", {state: infoState});
             }
           })
@@ -77,8 +80,15 @@ function FormularioPlaca ({placaPasada}) {
             console.error("Error occurred:", error);
             // Handle other errors
           });
-
-        
+        // buscarPlaca2(placaProcesada)
+        // .then((respuesta) => {
+        //     console.log(respuesta);
+        //     alert(respuesta);
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error occurred:", error);
+        //     // Handle other errors
+        //   });        
     }
     const sinPlaca = watch("noPoseePlaca");
     
