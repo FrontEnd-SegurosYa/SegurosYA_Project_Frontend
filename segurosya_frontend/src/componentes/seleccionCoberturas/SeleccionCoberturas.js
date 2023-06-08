@@ -77,8 +77,8 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                     <div className='infoPersonaCoche'>
                     <div>
                     <br/>
-                        <p><b>Sobre ti:</b></p>
-                        <ul>
+                        <p className='mx-3'><b>Sobre ti:</b></p>
+                        <ul className='mx-3'>
                             <li>{informacionClienteSinCuenta.nombre}</li>
                             <li>{informacionClienteSinCuenta.correoElectronico}</li>
                             <li>{informacionClienteSinCuenta.telefonoCelular}</li>
@@ -86,8 +86,8 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                     </div>
                     <div className="border-top my-3 borde"></div>
                     <div>
-                        <p><b>Sobre el vehiculo:</b></p>
-                        <ul>
+                        <p className='mx-3'><b>Sobre el vehiculo:</b></p>
+                        <ul className='mx-3'>
                             <li><b>Marca, modelo y año</b></li>
                                 {/* <p> - Fiat 500 2015</p> */}
                                 <p> - {informacionAuto.marca.nombre} {informacionAuto.modelo.nombre} {informacionAuto.anhoFabricacion}</p>
@@ -96,7 +96,7 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                             {/* <li><b>Uso</b></li>
                                 <p> - Particular</p> */}
                         </ul>
-                        <p><b>Seguro Base: S/. 40.00</b></p>
+                        <p className='mx-3'><b>Seguro Base: S/. 40.00</b></p>
                     </div>
                 </div>
                     
