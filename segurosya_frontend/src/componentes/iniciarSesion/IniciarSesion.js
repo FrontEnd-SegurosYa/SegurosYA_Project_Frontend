@@ -18,7 +18,7 @@ export const IniciarSesion = () => {
   const {register, handleSubmit,watch,formState: { errors }} = useForm();
   
   const onSubmit = (data) => {
-    iniciarSesion()
+    iniciarSesion(data.correo,data.constrasenha)
     .then(resultado => {
       if(resultado.response_msg === "Login Success"){
         alert("Inicio de sesion correcto.");
