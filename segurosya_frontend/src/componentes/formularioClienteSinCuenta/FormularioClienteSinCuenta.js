@@ -29,13 +29,11 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
 
     const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
     
-    // const [departamento,setDepartamento] = useState( informacionClienteSinCuenta !== undefined ? informacionClienteSinCuenta.ubicacion.departamento : null );
-    const [departamento,setDepartamento] = useState( null );
+    const [departamento,setDepartamento] = useState();
     const [listaDepartamentos,setListaDepartamentos] = useState([]);    
-    // const [provincia,setProvincia] = useState( informac  ionClienteSinCuenta !== undefined ? informacionClienteSinCuenta.ubicacion.provincia : null );
-    const [provincia,setProvincia] = useState( null );
+    const [provincia,setProvincia] = useState();
     const [listaProvincias, setListaProvincias] = useState([]);
-    const [distrito,setDistrito] = useState( null );
+    const [distrito,setDistrito] = useState();
     const [listaDistritos, setListaDistritos] = useState([]);
 
     const ubicacion = {
@@ -44,10 +42,11 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         distrito: distrito
     };
 
-    const cambioDepartamento = (idDepartamentoBuscado) => {
-        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === idDepartamentoBuscado);            
+    const cambioDepartamento = (idDepartamento) => {
+        const nuevoIdDepartamento = parseInt(idDepartamento);
+        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento);            
         setDepartamento(nuevoDepartamento);
-        buscarProvinciasDep(idDepartamentoBuscado)
+        buscarProvinciasDep(nuevoDepartamento.idDepartamento)
         .then(nuListaProv => {
             setListaProvincias(nuListaProv);
             setProvincia(nuListaProv[0]);
@@ -55,12 +54,12 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         .catch(error => {
             console.error('Error:', error);
         });
-        // console.log("id a cambiar: "+idDepartamento);
+        console.log("id a cambiar: "+idDepartamento);
     };
 
     const cambioProvincia = (idProvincia) => {
-        // const nuevoIdProvincia = parseInt(idProvincia);
-        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === idProvincia);
+        const nuevoIdProvincia = parseInt(idProvincia);
+        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === nuevoIdProvincia);
         setProvincia(provObtenida);
         // setListaDistritos( provObtenida.distritos );
         // setDistrito(provObtenida.distritos[0]);
@@ -71,53 +70,38 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
     };
 
     useEffect( () => {
+
         // fetch data
         obtenerDepartamentos()
         .then( listaDeps => {
+                var idDepAparicion = null;
                 setListaDepartamentos(listaDeps);
-                if(informacionClienteSinCuenta !== undefined){
-                    console.log("INICIO CON SELECCION");
-                    setDepartamento(informacionClienteSinCuenta.ubicacion.departamento);
-                    // cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
-                    buscarProvinciasDep(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento)
-                    .then( listaProvs => {
-                            setListaProvincias(listaProvs);
-                            setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
-
-                            //Temporal
-                            // obtenerDistritos()
-                            // .then( listaDists => {
-                            //         setListaDistritos(listaDists);
-                            //         setDistrito(listaDists[0]);
-                            //     }
-                            // ).catch();
-                    }).catch( error => {
-                        console.error('Error:', error);
-                    });
-                    // setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
-
+                if(informacionClienteSinCuenta){
+                    const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
+                    setDepartamento(listaDeps.find( (departamento)  => departamento.idDepartamento === idDepAnterior));
+                    idDepAparicion = idDepAnterior;
+                    cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
                 }else{
-                    console.log("INICIO LIMPIO");
                     setDepartamento(listaDeps[0]);
-                    buscarProvinciasDep(listaDeps[0].idDepartamento)
-                    .then( listaProvs => {
-                            console.log(listaProvs);
-                            setListaProvincias(listaProvs);
-                            setProvincia(listaProvs[0]);
-
-                            //Temporal
-                            // obtenerDistritos()
-                            // .then( listaDists => {
-                            //         setListaDistritos(listaDists);
-                            //         setDistrito(listaDists[0]);
-                            //     }
-                            // ).catch();
-                    }).catch( error => {
-                        console.error('Error:', error);
-                    });
+                    idDepAparicion = listaDeps[0].idDepartamento;
                 }          
 
-                  
+                buscarProvinciasDep(listaDeps[0].nombre)
+                .then( listaProvs => {
+                        console.log(listaProvs);
+                        setListaProvincias(listaProvs);
+                        setProvincia(listaProvs[0]);
+
+                        //Temporal
+                        // obtenerDistritos()
+                        // .then( listaDists => {
+                        //         setListaDistritos(listaDists);
+                        //         setDistrito(listaDists[0]);
+                        //     }
+                        // ).catch();
+                }).catch( error => {
+                    console.error('Error:', error);
+                });  
 
             }).catch( error => {
                 console.error('Error:', error);
@@ -254,7 +238,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 </select>
                                 
                             </div>                            
-                            {departamento && departamento.idDepartamento}
+                            {/* {departamento && departamento.idDepartamento} */}
                         </div>
 
                         <div className='ContenedorCampoUbicacion'>
@@ -269,11 +253,64 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 </select>
                                 
                             </div>                            
-                            {provincia && provincia.idProvincia}
+                            {/* {departamento && departamento.idDepartamento} */}
                         </div>
 
+                        
 
-            
+
+                        {/* <div className='ContenedorCampoUbicacion'>
+                            <div><p>Provincia:</p></div>
+                            <div>
+                                <Controller
+                                    name="provincia"
+                                    control={control}
+                                    render={({ field: { onChange } }) => (
+                                        <select onChange={(e) => {
+                                            onChange(e.target);
+                                            console.log(e.target);
+                                            // cambioProvincia(e.target.value);
+                                        }}
+                                        className='InputUbicacion'
+                                        >
+                                        {listaProvincias && listaProvincias.map((option) => (
+                                            <option key={option.idProvincia} value={option.nombre}>
+                                                {option.nombre}
+                                            </option>
+                                        ))}
+                                        </select>     
+                                    )}
+                                />
+                            </div>
+                            
+                        </div> */}
+
+
+                        {/* <div className='ContenedorCampoUbicacion'>
+                            <div><p>Distrito:</p></div>
+                            <div className='ContenedorSelectUbicacion'>
+                                <Controller
+                                name="distrito"
+                                control={control}
+                                render={({ field: { onChange } }) => (
+                                    <select 
+                                        onChange={(e) => { 
+                                            onChange(e.target); 
+                                            // cambioDistrito(e.target.value);
+                                        }}
+                                    className='InputUbicacion'
+                                    >
+                                    {listaDistritos && listaDistritos.map((distrito) => (
+                                        <option key={distrito.idDistrito} value={distrito.nombre}>
+                                            {distrito.nombre}
+                                        </option>
+                                    ))}
+                                    </select>
+                                )}  
+                                />
+                            </div>                            
+                        </div> */}
+                        
                         
                         
                     </div>

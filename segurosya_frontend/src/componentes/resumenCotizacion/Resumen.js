@@ -23,37 +23,27 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
   const fechaActualTexto= `${dia}/${mes}/${anio}`;
 
   const onSubmit = (data) => {      
-    const informacionCotizacion = {
-      newCliente: {
-        nombre: informacionClienteSinCuenta.nombre,
-        apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
-        apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
-        dni: informacionClienteSinCuenta.DNI
-      },
-      newAuto: {
-        placa: informacionPlaca.placa,
-        anhoFab: informacionAuto.anhoFabricacion,
-        valorComercial: 19000,
-        uso: "Particular",
-        idModelo: informacionAuto.modelo.idModelo,
-        idMarca: informacionAuto.marca.idMarca
-      },
-      newCotizacion: {
-        tieneInsveh: informacionPlaca.poseeInspeccionVehicular === true ? 1 : 0,
-        costoAdicional: 0,
-        montoPrima: 40
-      },
-      listaDeIdCoberturas: listaDeIdCoberturas
-    }
-    crearCotizacion(informacionCotizacion)
-    .then( respuesta => {
-      if(parseInt(respuesta) === -1){
-        alert("Error en la creacion de la cotizacion.");
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    // const informacionCotizacion = {
+    //   newCliente: {
+    //     nombre: informacionClienteSinCuenta.nombre,
+    //     apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
+    //     apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
+    //     dni: informacionClienteSinCuenta.DNI
+    //   },
+    //   newAuto: {
+    //     placa: informacionPlaca.placa,
+    //     anhoFab: informacionAuto.anhoFabricacion,
+    //     valorComercial: 19000,
+    //     uso: "Particular",
+    //   },
+    // }
+    // crearCotizacion(informacionCotizacion)
+    // .then( respuesta => {
+    //   alert(respuesta);
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
 }
 
   return (
@@ -111,7 +101,7 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
               </div>
               <div className="modal-footer">
                 <Link to={"/"} >
-                  <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Volver a la página principal</button>
+                  <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Volver</button>
                   </Link>
               </div>
             </div>

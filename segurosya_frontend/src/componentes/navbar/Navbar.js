@@ -2,10 +2,10 @@ import NavbarElements from './NavbarElements';
 import React from 'react';
 
 
-function Navbar({comportamiento,cuentaCliente}) {
+function Navbar({comportamiento}) {
 	return (
 		<React.Fragment>
-			<NavbarElements comportamiento={comportamiento} cuentaCliente={cuentaCliente}/>
+			<NavbarElements comportamiento={comportamiento}/>
 		</React.Fragment>
 	);
 }

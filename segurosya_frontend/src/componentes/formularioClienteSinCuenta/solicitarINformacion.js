@@ -32,13 +32,13 @@ export function obtenerDistritos() {
         );
 }
 
-export function buscarProvinciasDep(idDepartamento) {
+export function buscarProvinciasDep(nombreDepartamneto) {
     return fetch(LINKSERVER+"/api/provincia/buscar", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
         },
-        body: JSON.stringify({idDepartamento: idDepartamento})
+        body: JSON.stringify({nombre: nombreDepartamneto})
     })
     .then(response => {
         if (!response.ok) {
