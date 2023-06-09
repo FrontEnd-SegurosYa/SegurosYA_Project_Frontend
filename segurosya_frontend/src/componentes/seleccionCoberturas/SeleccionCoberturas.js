@@ -47,13 +47,13 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
 
 
         if (checked) {
-            setCheckbox([...checkbox, value]);
+            setCheckbox([...checkbox, {idCobertura: id, nombre: value }]);
             // setCheckbox(checkbox.filter((val) => val !== value));
-            console.log('checkbox if -->', checkbox)
+            console.log('checkbox if -->', checkbox);
         } else {
-            setCheckbox(checkbox.filter((val) => val !== value));
+            setCheckbox(checkbox.filter((val) => val !== id));
             // setCheckbox([ ...checkbox, value ]);
-            console.log('checkbox else -->', checkbox)
+            console.log('checkbox else -->', checkbox);
         }
     }
 
@@ -110,7 +110,7 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                                     {listaCoberturas && listaCoberturas.map((option) => (
                                         <>
                                         <ul className='listaCob'>
-                                            <li><div className='cobertura'><div className='nombreCobertura'>{option.nombre}</div><div>14.00</div><div><input checked={checkbox.includes(option.nombre)} onChange={_handleCheckbox(option.idCobertura)} type="checkbox" id={option.idCobertura} value={option.nombre}/></div></div></li>
+                                            <li><div className='cobertura'><div className='nombreCobertura'>{option.nombre}</div><div>14.00</div><div><input  onChange={_handleCheckbox(option.idCobertura)} type="checkbox" id={option.idCobertura} value={option.nombre}/></div></div></li>
                                         </ul>
                                         <div className="border-top my-3 borde"></div>
                                         </>
