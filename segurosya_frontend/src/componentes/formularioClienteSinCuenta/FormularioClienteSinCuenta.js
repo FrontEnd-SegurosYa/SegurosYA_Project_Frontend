@@ -253,7 +253,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 </select>
                                 
                             </div>                            
-                            {/* {departamento && departamento.idDepartamento} */}
+                            {/* {provincia && provincia.idProvincia} */}
                         </div>
 
                         

@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 
 import { crearCotizacion } from "./funcionesExtras";
 
-function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas}) {
+function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas,nombresCoberturas,monto}) {
   
   const { control, handleSubmit,setValue } = useForm();
   const fechaActual = new Date();
@@ -23,27 +23,40 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
   const fechaActualTexto= `${dia}/${mes}/${anio}`;
 
   const onSubmit = (data) => {      
-    // const informacionCotizacion = {
-    //   newCliente: {
-    //     nombre: informacionClienteSinCuenta.nombre,
-    //     apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
-    //     apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
-    //     dni: informacionClienteSinCuenta.DNI
-    //   },
-    //   newAuto: {
-    //     placa: informacionPlaca.placa,
-    //     anhoFab: informacionAuto.anhoFabricacion,
-    //     valorComercial: 19000,
-    //     uso: "Particular",
-    //   },
-    // }
-    // crearCotizacion(informacionCotizacion)
-    // .then( respuesta => {
-    //   alert(respuesta);
-    // })
-    // .catch(error => {
-    //   console.error('Error:', error);
-    // });
+    const informacionCotizacion = {
+      newCliente: {
+        nombre: informacionClienteSinCuenta.nombre,
+        apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
+        apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
+        dni: informacionClienteSinCuenta.DNI
+      },
+      newAuto: {
+        placa: informacionPlaca.placa,
+        anhoFab: informacionAuto.anhoFabricacion,
+        valorComercial: 19000,
+        uso: "Particular",
+        idModelo: informacionAuto.modelo.idModelo,
+        idMarca: informacionAuto.marca.idMarca
+      },
+      newCotizacion: {
+        tieneInsveh: informacionPlaca.poseeInspeccionVehicular === true ? 1 : 0,
+        costoAdicional: monto,
+        montoPrima: 40
+      },
+      listaDeIdCoberturas: listaDeIdCoberturas
+    }
+    crearCotizacion(informacionCotizacion)
+    .then( respuesta => {
+      if(parseInt(respuesta) === -1){
+        alert("Error en la creacion de la cotizacion.");
+      }else{
+        console.log("Se creo la cotizacion:"+respuesta);
+      }
+
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
   return (
@@ -68,12 +81,13 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
           <h3>Coberturas adicionales: </h3>
           {
             // Aca te deberia listar el array?? SI
-            listaDeIdCoberturas.map((name, idx) => (
-                <h5>{idx+1}. {name}<br/></h5>
+            nombresCoberturas.map((nombresCoberturas, idx) => (
+                <h5>{idx+1}. {nombresCoberturas} 14.00<br/></h5>
                 
             ))
             
           }
+          <h3>Total: {monto.toFixed(2)}</h3>
           <h5> <b>Esta cotización tiene vigencia hasta el día:  {fechaActualTexto}</b></h5>
         </div>
       </div>
