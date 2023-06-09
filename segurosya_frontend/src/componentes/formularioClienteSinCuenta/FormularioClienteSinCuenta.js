@@ -43,8 +43,8 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
     };
 
     const cambioDepartamento = (idDepartamento) => {
-        const nuevoIdDepartamento = parseInt(idDepartamento);
-        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento);            
+        // const nuevoIdDepartamento = parseInt(idDepartamento);
+        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === idDepartamento);            
         setDepartamento(nuevoDepartamento);
         buscarProvinciasDep(nuevoDepartamento.idDepartamento)
         .then(nuListaProv => {
@@ -58,15 +58,16 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
     };
 
     const cambioProvincia = (idProvincia) => {
-        const nuevoIdProvincia = parseInt(idProvincia);
-        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === nuevoIdProvincia);
+        // const nuevoIdProvincia = parseInt(idProvincia);
+        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === idProvincia);
         setProvincia(provObtenida);
         // setListaDistritos( provObtenida.distritos );
         // setDistrito(provObtenida.distritos[0]);
     };
 
-    const cambioDistrito = (distSelec) => {
-        setDistrito(distSelec);
+    const cambioDistrito = (idDistrito) => {
+        const distObtenido = listaDistritos.find( (distrito)  => distrito.idDistrito === idDistrito);
+        setDistrito(distObtenido);
     };
 
     useEffect( () => {
@@ -74,34 +75,63 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         // fetch data
         obtenerDepartamentos()
         .then( listaDeps => {
-                var idDepAparicion = null;
+                
                 setListaDepartamentos(listaDeps);
-                if(informacionClienteSinCuenta){
-                    const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
-                    setDepartamento(listaDeps.find( (departamento)  => departamento.idDepartamento === idDepAnterior));
-                    idDepAparicion = idDepAnterior;
-                    cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
+                if(informacionClienteSinCuenta !== undefined){
+                    // const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
+                    setDepartamento(informacionClienteSinCuenta.ubicacion.departamento);
+
+                    // cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
+                    // setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
+
+
+                    buscarProvinciasDep(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento)
+                    .then(listaProvs => {
+                        setListaProvincias(listaProvs);
+                        setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
+
+                        obtenerDistritos()
+                        .then(listaDists => {
+                            setDistrito(informacionClienteSinCuenta.ubicacion.distrito);
+                            setListaDistritos(listaDists);
+                        })
+                        .catch();
+                    })
+                    .catch();
+
+
+                    // setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
+                    // buscarProvinciasDep(informacionClienteSinCuenta.ubicacion.de)
                 }else{
                     setDepartamento(listaDeps[0]);
-                    idDepAparicion = listaDeps[0].idDepartamento;
+                    // idDepAparicion = listaDeps[0].idDepartamento;
+
+                    buscarProvinciasDep(listaDeps[0].idDepartamento)
+                    .then( listaProvs => {
+                            console.log(listaProvs);
+                            setListaProvincias(listaProvs);
+                            setProvincia(listaProvs[0]);
+
+                            obtenerDistritos()
+                            .then(listaDists => {
+                                setDistrito(listaDists[0]);
+                                setListaDistritos(listaDists);
+                            })
+                            .catch();
+                            
+                            //Temporal
+                            // obtenerDistritos()
+                            // .then( listaDists => {
+                            //         setListaDistritos(listaDists);
+                            //         setDistrito(listaDists[0]);
+                            //     }
+                            // ).catch();
+                    }).catch( error => {
+                        console.error('Error:', error);
+                    });  
                 }          
 
-                buscarProvinciasDep(listaDeps[0].nombre)
-                .then( listaProvs => {
-                        console.log(listaProvs);
-                        setListaProvincias(listaProvs);
-                        setProvincia(listaProvs[0]);
-
-                        //Temporal
-                        // obtenerDistritos()
-                        // .then( listaDists => {
-                        //         setListaDistritos(listaDists);
-                        //         setDistrito(listaDists[0]);
-                        //     }
-                        // ).catch();
-                }).catch( error => {
-                    console.error('Error:', error);
-                });  
+                
 
             }).catch( error => {
                 console.error('Error:', error);
@@ -254,6 +284,21 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 
                             </div>                            
                             {/* {provincia && provincia.idProvincia} */}
+                        </div>
+
+                        <div className='ContenedorCampoUbicacion'>
+                            <div><p>Provincia:</p></div>
+                            <div>
+                                <select onChange={(e) => cambioDistrito(parseInt(e.target.value))} className='Resultado' value={distrito && distrito.idDistrito}>
+                                        {listaDistritos && listaDistritos.map((option) => (
+                                        <option key={option.idDistrito} value={option.idDistrito}>
+                                            {option.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                                
+                            </div>                            
+                            {/* {distrito && distrito.idDistrito} */}
                         </div>
 
                         

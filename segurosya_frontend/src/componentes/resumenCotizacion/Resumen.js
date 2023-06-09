@@ -93,7 +93,7 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
       </div>
       <br/>
       <div className="text-center">
-            <Link to={"/cotizacion3"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca, informacionAuto: informacionAuto}}>
+            <Link to={"/cotizacionTemp"} state={{informacionClienteSinCuenta: informacionClienteSinCuenta,informacionPlaca: informacionPlaca, informacionAuto: informacionAuto}}>
               <button className="btnGeneral2" >Volver</button>
             </Link>
 
