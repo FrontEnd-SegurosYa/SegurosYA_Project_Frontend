@@ -254,7 +254,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 </select>
                                 
                             </div>                            
-                            {departamento && departamento.idDepartamento}
+                            {/* {departamento && departamento.idDepartamento} */}
                         </div>
 
                         <div className='ContenedorCampoUbicacion'>
@@ -269,7 +269,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                                 </select>
                                 
                             </div>                            
-                            {provincia && provincia.idProvincia}
+                            {/* {provincia && provincia.idProvincia} */}
                         </div>
 
 

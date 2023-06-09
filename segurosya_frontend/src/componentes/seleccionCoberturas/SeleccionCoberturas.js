@@ -16,6 +16,8 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
 
     const [listaCoberturas,setListaCoberturas] = useState([]);
     const [coberturasSeleccionadas, setCoberturasSeleccionadas] = useState([]);
+    const [nombresCoberturas,setNombresCoberturas] = useState([]);
+    const [costoAdicional,setCostoAdicional] = useState(0.0);
     //const [checkbox, setCheckbox] = useState(true);
     // const [checkbox, setCheckbox] = useState(new Array(listaCoberturas.length).fill(false))
     const [checkbox, setCheckbox] = React.useState([]);
@@ -41,19 +43,23 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
     //     console.log("Este es el index", index);
     // }
 
-    const _handleCheckbox = (id) => (event) => {
+    const _handleCheckbox = (id,nombre,monto) => (event) => {
         // console.log('event --> ', event)
         const { value, checked } = event.target
 
 
         if (checked) {
-            setCheckbox([...checkbox, {idCobertura: id, nombre: value }]);
+            setCheckbox([...checkbox, id]);
             // setCheckbox(checkbox.filter((val) => val !== value));
-            console.log('checkbox if -->', checkbox);
+            setNombresCoberturas([...nombresCoberturas, nombre]);
+            setCostoAdicional(costoAdicional+monto)
+            // console.log('checkbox if -->', checkbox);
         } else {
             setCheckbox(checkbox.filter((val) => val !== id));
+            setNombresCoberturas(nombresCoberturas.filter((val) => val !== nombre));
+            setCostoAdicional(costoAdicional-monto)
             // setCheckbox([ ...checkbox, value ]);
-            console.log('checkbox else -->', checkbox);
+            // console.log('checkbox else -->', checkbox);
         }
     }
 
@@ -61,7 +67,9 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
         const informacionCliente = {informacionClienteSinCuenta: informacionClienteSinCuenta, 
                                     informacionPlaca: informacionPlaca,
                                     informacionAuto: informacionAuto,
-                                    listaDeIdCoberturas: checkbox
+                                    listaDeIdCoberturas: checkbox,
+                                    nombresCoberturas: nombresCoberturas,
+                                    monto: costoAdicional
                                     };
         // console.log("Esta es la informacion", informacionCliente);
 
@@ -110,12 +118,13 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                                     {listaCoberturas && listaCoberturas.map((option) => (
                                         <>
                                         <ul className='listaCob'>
-                                            <li><div className='cobertura'><div className='nombreCobertura'>{option.nombre}</div><div>14.00</div><div><input  onChange={_handleCheckbox(option.idCobertura)} type="checkbox" id={option.idCobertura} value={option.nombre}/></div></div></li>
+                                            <li><div className='cobertura'><div className='nombreCobertura'>{option.nombre}</div><div>14.00</div><div><input  onChange={_handleCheckbox(option.idCobertura,option.nombre,14.0)} type="checkbox" id={option.idCobertura} value={option.nombre}/></div></div></li>
                                         </ul>
                                         <div className="border-top my-3 borde"></div>
                                         </>
                                     ))}
                             </div>
+                            <p>Total: {costoAdicional.toFixed(2)}</p>
                         </div>
                     </div>
                     
