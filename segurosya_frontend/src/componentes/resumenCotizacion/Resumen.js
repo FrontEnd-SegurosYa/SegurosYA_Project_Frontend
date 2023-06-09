@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 
 import { crearCotizacion } from "./funcionesExtras";
 
-function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas}) {
+function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas,nombresCoberturas,monto}) {
   
   const { control, handleSubmit,setValue } = useForm();
   const fechaActual = new Date();
@@ -40,7 +40,7 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
       },
       newCotizacion: {
         tieneInsveh: informacionPlaca.poseeInspeccionVehicular === true ? 1 : 0,
-        costoAdicional: 0,
+        costoAdicional: monto,
         montoPrima: 40
       },
       listaDeIdCoberturas: listaDeIdCoberturas
@@ -49,7 +49,10 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
     .then( respuesta => {
       if(parseInt(respuesta) === -1){
         alert("Error en la creacion de la cotizacion.");
+      }else{
+        console.log("Se creo la cotizacion:"+respuesta);
       }
+
     })
     .catch(error => {
       console.error('Error:', error);
@@ -78,12 +81,13 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
           <h3>Coberturas adicionales: </h3>
           {
             // Aca te deberia listar el array?? SI
-            listaDeIdCoberturas.map((name, idx) => (
-                <h5>{idx+1}. {name}<br/></h5>
+            nombresCoberturas.map((nombresCoberturas, idx) => (
+                <h5>{idx+1}. {nombresCoberturas} 14.00<br/></h5>
                 
             ))
             
           }
+          <h3>Total: {monto.toFixed(2)}</h3>
           <h5> <b>Esta cotización tiene vigencia hasta el día:  {fechaActualTexto}</b></h5>
         </div>
       </div>
