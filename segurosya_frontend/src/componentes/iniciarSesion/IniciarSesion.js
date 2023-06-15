@@ -18,11 +18,18 @@ export const IniciarSesion = () => {
   const {register, handleSubmit,watch,formState: { errors }} = useForm();
   
   const onSubmit = (data) => {
-    iniciarSesion()
+    console.log(data.correo);
+    console.log(data.contrasenha);
+    iniciarSesion(data.correo,data.contrasenha)
     .then(resultado => {
+      // alert(resultado.response_msg);
       if(resultado.response_msg === "Login Success"){
         alert("Inicio de sesion correcto.");
+        navigate("/",{state: resultado});  
       }else{
+        if(resultado.response_msg === "Account does not exist"){
+          alert("La cuenta ingresada no existe.");
+        }
         alert("Inicio de sesion fallido.");
       }
     })
@@ -53,7 +60,7 @@ export const IniciarSesion = () => {
         </p>
 
         <p><input type='password' className= "Ingresa" placeholder="Contraseña"
-        {...register("constrasenha",{
+        {...register("contrasenha",{
               required: true,
             }
           )
