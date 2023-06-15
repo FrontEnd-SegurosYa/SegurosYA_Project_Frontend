@@ -100,6 +100,7 @@ const PasarelaDePagos = ({informacionClienteSinCuenta,informacionPlaca,informaci
     <form onSubmit={handleSubmit(onSubmit)}>
         <div className='ContenedorPasarela'>
             <div className='CuadroResumen'>
+                <h3 className='TextoResumen'>PLAN: {planSeleccionado.nombrePlan}</h3>
                 <h3 className='TextoResumen'>TOTAL A PAGAR:  S/ {planSeleccionado.monto}</h3>
             </div>
             <br></br>

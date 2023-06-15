@@ -76,27 +76,26 @@
     margin-right: 20px;
 }
   
-  .CuadroResumen{
-    justify-content: center;
-    align-items: flex-start;
-    height: 80px;
-    border: 1px solid  var(--colorAzul1);
-    border-radius: 10px;
-  }
+.CuadroResumen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  border: 1px solid var(--colorAzul1);
+  border-radius: 10px;
+  padding: 10px; 
+}
 
-  .TextoResumen{
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 37px;
-    text-align: center;
-
-    color: var(--colorAzul1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%; 
-  }
+.TextoResumen {
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  color: var(--colorAzul1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
   .Columna1{
     flex: 1;

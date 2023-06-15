@@ -27,13 +27,15 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
   const [listaPlanes,setListaPlanes] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [montoSeleccionado, setMontoSeleccionado] = useState(0.0);
+  const [nombreSeleccionado, setNombreSeleccionado] = useState("hola");
   const navigate = useNavigate();
   
   const {handleSubmit,formState: { errors } ,setValue} = useForm();
 
-  const handleClick = (cardId,precioPlan) => {
+  const handleClick = (cardId,precioPlan,nombre) => {
     setSelectedCard(cardId);
     setMontoSeleccionado(precioPlan);
+    setNombreSeleccionado(nombre);
     console.log("se seteo: "+cardId+" "+precioPlan);
   };
 
@@ -43,7 +45,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
         setListaPlanes(listPlanes);
         if(planSeleccionado){
           console.log("volvio "+planSeleccionado.idPlan+" "+planSeleccionado.monto);
-          handleClick(planSeleccionado.idPlan,planSeleccionado.monto);
+          handleClick(planSeleccionado.idPlan,planSeleccionado.monto,planSeleccionado.nombre);
         }
       }
     ).catch( error => {
@@ -68,7 +70,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
       return;
     }
 
-    const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, planSeleccionado: {idPlan: selectedCard, monto: montoSeleccionado}};
+    const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca,informacionAuto : informacionAuto, planSeleccionado: {idPlan: selectedCard, monto: montoSeleccionado, nombrePlan: nombreSeleccionado}};
     navigate("/soat5", {state: infoState});
     
     
@@ -94,7 +96,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
                 key={plan.idPlan}
                 id={plan.idPlan}
                 selected={selectedCard === plan.idPlan}
-                onClick={() => handleClick(plan.idPlan,plan.precio)}
+                onClick={() => handleClick(plan.idPlan,plan.precio,plan.nombre)}
                 title={plan.nombre}
                 pago="Pago anual"
                 costo={plan.precio.toString()}

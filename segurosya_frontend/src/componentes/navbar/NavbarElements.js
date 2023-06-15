@@ -1,13 +1,45 @@
 import './Navbar.css'
 import logo from '../../img/logoNombre.png';
 import telefono from '../../img/telefonoGris.png';
+import usuario from '../../img/usuario.png';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
 
-const NavbarElements = ({comportamiento}) => {
+const NavbarElements = ({comportamiento,cuentaCliente}) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  let componenteCuenta;
+
+  switch(comportamiento) {
+    case "mostrar":
+      componenteCuenta = 
+      <form className="d-flex mx-3 mostrar">
+        <Link to={"/iniciarSesion"} state={cuentaCliente}>
+          <button type="button" className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
+        </Link>
+      </form>;
+      break;
+    case "ocultar":
+      componenteCuenta = 
+        <></>;
+      break;
+    case "cuenta":
+      componenteCuenta = 
+      <div className='containerNavBar'>
+        <div className="columna">
+          <div className='textoNav'>William Levi </div>
+          {/* {cuentaCliente.apellidoPaterno+", "+cuentaCliente.nombre} */}
+          <Link to={"/"}>
+            <a className='textoNav'>Cerrar Sesión</a>
+          </Link>
+        </div>
+        <div className="columna imagenUsuario">
+          <img src = {usuario} alt="" width="33" height="30" className="mx-3"/>
+          </div>
+      </div>;      
+      break;
+  }
 
   // console.log(comportamiento);
   return(
@@ -36,13 +68,7 @@ const NavbarElements = ({comportamiento}) => {
             <img src={telefono} className="img-fluid" width="17" height="17"></img>
             <span className="navbar-brand mb-0 tituloNavbar mx-2"> (01) 654 3636</span>
           </div>
-          {comportamiento === "mostrar" ? (
-            <form className="d-flex mx-3 mostrar">
-                <Link to={"/iniciarSesion"}>
-                  <button className="btnGeneral btnInicioSesion">Ingresa a tu Cuenta</button>
-                </Link>
-            </form>
-          ) : ( <></> )}
+            {componenteCuenta}
           
         </div>
       </div>

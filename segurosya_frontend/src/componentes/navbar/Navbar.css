@@ -11,3 +11,18 @@
 .navbar-nav .nav-link:hover {
 	color: var(--colorCeleste2);
 }
+
+.textoNav{
+	color: var(--colorBlanco2);
+}
+
+.imagenUsuario{
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.containerNavBar{
+	display: flex;
+}
+
