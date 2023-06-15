@@ -1,7 +1,7 @@
 import './FormularioClienteSinCuenta.css';
 import { Link } from 'react-router-dom';
 import {BarraProgreso} from "../barraProgreso/BarraProgreso.js"
-import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos} from './solicitarINformacion';
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv} from './solicitarINformacion';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
@@ -50,6 +50,16 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
         .then(nuListaProv => {
             setListaProvincias(nuListaProv);
             setProvincia(nuListaProv[0]);
+
+            buscarDistritosProv(nuListaProv[0].idProvincia)
+            .then(nuListDists => {
+                setListaDistritos(nuListDists);
+                setDistrito(nuListDists[0]);
+            })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+            
         })
         .catch(error => {
             console.error('Error:', error);
@@ -59,14 +69,23 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
 
     const cambioProvincia = (idProvincia) => {
         // const nuevoIdProvincia = parseInt(idProvincia);
-        const provObtenida = listaProvincias.find( (provincia)  => provincia.idProvincia === idProvincia);
-        setProvincia(provObtenida);
-        // setListaDistritos( provObtenida.distritos );
-        // setDistrito(provObtenida.distritos[0]);
+        var nuevaProvincia = listaProvincias.find( (provincia)  => provincia.idProvincia === idProvincia);
+        setProvincia(nuevaProvincia);
+
+        buscarDistritosProv(nuevaProvincia.idProvincia)
+        .then(nuListDists => {
+            console.log(nuListDists);
+            setListaDistritos(nuListDists);
+            setDistrito(nuListDists[0]);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        // console.log("id a cambiar: "+idDepartamento);
     };
 
     const cambioDistrito = (idDistrito) => {
-        const distObtenido = listaDistritos.find( (distrito)  => distrito.idDistrito === idDistrito);
+        var distObtenido = listaDistritos.find( (distrito)  => distrito.idDistrito === idDistrito);
         setDistrito(distObtenido);
     };
 
@@ -78,54 +97,48 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                 
                 setListaDepartamentos(listaDeps);
                 if(informacionClienteSinCuenta !== undefined){
-                    // const idDepAnterior = informacionClienteSinCuenta.ubicacion.departamento.idDepartamento;
+                    
                     setDepartamento(informacionClienteSinCuenta.ubicacion.departamento);
-
-                    // cambioDepartamento(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento);
-                    // setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
-
 
                     buscarProvinciasDep(informacionClienteSinCuenta.ubicacion.departamento.idDepartamento)
                     .then(listaProvs => {
                         setListaProvincias(listaProvs);
                         setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
 
-                        obtenerDistritos()
+                        buscarDistritosProv(informacionClienteSinCuenta.ubicacion.provincia.idProvincia)
                         .then(listaDists => {
                             setDistrito(informacionClienteSinCuenta.ubicacion.distrito);
                             setListaDistritos(listaDists);
                         })
-                        .catch();
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
                     })
-                    .catch();
+                    .catch( error => {
+                        console.error('Error:', error);
+                    });
 
-
-                    // setProvincia(informacionClienteSinCuenta.ubicacion.provincia);
-                    // buscarProvinciasDep(informacionClienteSinCuenta.ubicacion.de)
                 }else{
                     setDepartamento(listaDeps[0]);
-                    // idDepAparicion = listaDeps[0].idDepartamento;
-
+                   
                     buscarProvinciasDep(listaDeps[0].idDepartamento)
                     .then( listaProvs => {
-                            console.log(listaProvs);
+                            // console.log(listaProvs);
                             setListaProvincias(listaProvs);
                             setProvincia(listaProvs[0]);
 
-                            obtenerDistritos()
+                            buscarDistritosProv(listaProvs[0].idProvincia)
                             .then(listaDists => {
                                 setDistrito(listaDists[0]);
                                 setListaDistritos(listaDists);
+                                
                             })
-                            .catch();
+                            .catch( error => {
+                                console.error('Error:', error);
+                            });
                             
                             //Temporal
-                            // obtenerDistritos()
-                            // .then( listaDists => {
-                            //         setListaDistritos(listaDists);
-                            //         setDistrito(listaDists[0]);
-                            //     }
-                            // ).catch();
+                            
                     }).catch( error => {
                         console.error('Error:', error);
                     });  
@@ -150,25 +163,39 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
     }, [] );
 
     const onSubmit = (data) => {
-        const informacionClienteSinCuenta = {
-            nombre: data.nombre,
-            apellidoPaterno: data.apellidoPaterno,
-            apellidoMaterno: data.apellidoMaterno,
-            DNI: data.DNI,
-            correoElectronico: data.email,
-            telefonoCelular: data.telefonoCelular,
-            ubicacion: ubicacion
-        };
-        // const informacionPlaca = informacionPlaca;
-        const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
-        // console.log(informacionClienteSinCuenta);
-        // console.log(rumbo);
-        if(rumbo === "soat"){
-            navigate("/soat3", {state: infoState});
-        }
-        else {
-            navigate("/cotizacion3", {state: infoState});
-        }
+
+        consultarDNI(data.DNI)
+        .then(resultado => {
+            if(resultado.idCliente == 0){
+                const informacionClienteSinCuenta = {
+                    nombre: data.nombre,
+                    apellidoPaterno: data.apellidoPaterno,
+                    apellidoMaterno: data.apellidoMaterno,
+                    DNI: data.DNI,
+                    correoElectronico: data.email,
+                    telefonoCelular: data.telefonoCelular,
+                    ubicacion: ubicacion
+                };
+                // const informacionPlaca = informacionPlaca;
+                const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
+                // console.log(informacionClienteSinCuenta);
+                // console.log(rumbo);
+                if(rumbo === "soat"){
+                    navigate("/soat3", {state: infoState});
+                }
+                else {
+                    navigate("/cotizacion3", {state: infoState});
+                }
+            }else{
+                alert("El DNI ingresado ya pertenece a un cliente.");
+            }
+            
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        
     }
    
     return (
@@ -301,62 +328,6 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                             {/* {distrito && distrito.idDistrito} */}
                         </div>
 
-                        
-
-
-                        {/* <div className='ContenedorCampoUbicacion'>
-                            <div><p>Provincia:</p></div>
-                            <div>
-                                <Controller
-                                    name="provincia"
-                                    control={control}
-                                    render={({ field: { onChange } }) => (
-                                        <select onChange={(e) => {
-                                            onChange(e.target);
-                                            console.log(e.target);
-                                            // cambioProvincia(e.target.value);
-                                        }}
-                                        className='InputUbicacion'
-                                        >
-                                        {listaProvincias && listaProvincias.map((option) => (
-                                            <option key={option.idProvincia} value={option.nombre}>
-                                                {option.nombre}
-                                            </option>
-                                        ))}
-                                        </select>     
-                                    )}
-                                />
-                            </div>
-                            
-                        </div> */}
-
-
-                        {/* <div className='ContenedorCampoUbicacion'>
-                            <div><p>Distrito:</p></div>
-                            <div className='ContenedorSelectUbicacion'>
-                                <Controller
-                                name="distrito"
-                                control={control}
-                                render={({ field: { onChange } }) => (
-                                    <select 
-                                        onChange={(e) => { 
-                                            onChange(e.target); 
-                                            // cambioDistrito(e.target.value);
-                                        }}
-                                    className='InputUbicacion'
-                                    >
-                                    {listaDistritos && listaDistritos.map((distrito) => (
-                                        <option key={distrito.idDistrito} value={distrito.nombre}>
-                                            {distrito.nombre}
-                                        </option>
-                                    ))}
-                                    </select>
-                                )}  
-                                />
-                            </div>                            
-                        </div> */}
-                        
-                        
                         
                     </div>
                 </div>

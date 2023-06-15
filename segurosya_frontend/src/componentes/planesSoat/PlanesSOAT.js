@@ -13,7 +13,7 @@ import imagenTrabajando from '../../img/hombresTrabajando.png'
 import { useState, useEffect } from "react";
 
 //Utiles
-import { obtenerPlanes } from './funcionesExtras'; 
+import { obtenerPlanes, obtenerBeneficioXPlan, obtenerServicioXPlan } from './funcionesExtras'; 
 
 import planesSoatJSON from './planesSOAT.json';
 
@@ -42,7 +42,8 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
   useEffect(() => {
     obtenerPlanes()
     .then(listPlanes => {
-        setListaPlanes(listPlanes);
+        setListaPlanes(listPlanes);        
+        
         if(planSeleccionado){
           console.log("volvio "+planSeleccionado.idPlan+" "+planSeleccionado.monto);
           handleClick(planSeleccionado.idPlan,planSeleccionado.monto,planSeleccionado.nombre);
@@ -55,16 +56,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
   }, []);
 
   const onSubmit = (data) => {
-    // let monto;
-    // if (selectedCard === 1){
-    //   monto = 50;
-    // }
-    // else if (selectedCard === 2){
-    //   monto = 100;
-    // }
-    // else if (selectedCard === 3){
-    //   monto = 180;
-    // }
+
     if(selectedCard === null){
       alert("Seleccione un plan.");
       return;
@@ -78,6 +70,10 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
 }
 
   return (
+    <>
+    <div id='tituloCajas'>
+      ¡Tenemos estos planes para ti!
+    </div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="contenedor-plan">
           {/* <ul>
@@ -92,20 +88,38 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
           </ul> */}
           
           {listaPlanes && listaPlanes.map((plan,index) => (
-                <Plan
-                key={plan.idPlan}
-                id={plan.idPlan}
-                selected={selectedCard === plan.idPlan}
-                onClick={() => handleClick(plan.idPlan,plan.precio,plan.nombre)}
-                title={plan.nombre}
-                pago="Pago anual"
-                costo={plan.precio.toString()}
-                coberturas={['Default']}
-                asistencias={['Default']}
-                beneficios={['Default']}
-                image={fotosPlanes[index]}
-                />
+                <>
+                  <Plan
+                  key={plan.idPlan}
+                  id={plan.idPlan}
+                  selected={selectedCard === plan.idPlan}
+                  onClick={() => handleClick(plan.idPlan,plan.precio,plan.nombre)}
+                  title={plan.nombre}
+                  pago="Pago anual"
+                  costo={"S/. "+plan.precio.toFixed(2).toString()}
+                  // asistencias={['Default']}
+                  // beneficios={['Default']}
+                  // servicios={plan.servicios}
+                  // beneficios={plan.beneficios}
+                  image={fotosPlanes[index]}
+                  />
+
+                  <ul>
+                    {plan.beneficios && plan.beneficios.map(beneficio => (
+                      <>
+                        <li>
+                          beneficio.idBeneficio
+                        </li>
+                      </>
+                    ))}
+
+                  </ul>
+                </>
+                
+                
             ))}
+
+            
 
           {/* <Plan
           id={1}
@@ -170,7 +184,7 @@ const PlanesSOAT = ({informacionClienteSinCuenta,informacionPlaca,informacionAut
         </div>
       </div> */}
     </form>
-     
+    </> 
   );
 };
 

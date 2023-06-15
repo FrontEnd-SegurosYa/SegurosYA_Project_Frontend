@@ -5,4 +5,10 @@
     /*justify-content: center;*/
     margin-left: 2%;
   }
-  
+
+#tituloCajas {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 15px;
+}  

@@ -25,7 +25,7 @@ function SoatPagina2() {
   //Redirigir a inicio si no se realizo el flujo anterior
   useEffect(() => {
     if(location.state === null){
-      navigate("/");
+      navigate("/inicio");
     }
   },[]);
     

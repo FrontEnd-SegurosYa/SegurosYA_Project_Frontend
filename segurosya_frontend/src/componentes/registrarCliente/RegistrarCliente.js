@@ -11,19 +11,13 @@ import { useState, useEffect } from 'react';
 
 import ubicacionesJSON from "./ubicaciones.json";
 
-import { obtenerDepartamentos } from './funcionesExtras';
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv } from './funcionesExtras';
 
 export const RegistrarCliente = () => {
     const navigate = useNavigate();
 
-    const { control, register,handleSubmit,formState: { errors } } = useForm();
+    const { control, register,handleSubmit,formState: { errors },setValue } = useForm();
     
-    // const [departamento,setDepartamento] = useState(ubicacionesJSON[0].nombre);
-    // const [listaDepartamentos,setListaDepartamentos] = useState(ubicacionesJSON);
-    // const [provincia,setProvincia] = useState(ubicacionesJSON[0].provincias[0].nombre);
-    // const [listaProvincias, setListaProvincias] = useState(ubicacionesJSON[0].provincias);
-    // const [distrito,setDistrito] = useState(ubicacionesJSON[0].provincias[0].distritos[0]);
-    // const [listaDistritos, setListaDistritos] = useState(ubicacionesJSON[0].provincias[0].distritos);
     const [departamento,setDepartamento] = useState();
     const [listaDepartamentos,setListaDepartamentos] = useState([]);
     const [provincia,setProvincia] = useState();
@@ -38,73 +32,106 @@ export const RegistrarCliente = () => {
     };
 
     const cambioDepartamento = (idDepartamento) => {
-        // const depObtenido = ubicacionesJSON.find( (departamento)  => departamento.nombre === depSelec);
-        const nuevoIdDepartamento = parseInt(idDepartamento);            
-        setDepartamento(listaDepartamentos.find( (departamento)  => departamento.idDepartamento === nuevoIdDepartamento));
+        // const nuevoIdDepartamento = parseInt(idDepartamento);
+        var nuevoDepartamento = listaDepartamentos.find( (departamento)  => departamento.idDepartamento === idDepartamento);            
+        setDepartamento(nuevoDepartamento);
+        buscarProvinciasDep(nuevoDepartamento.idDepartamento)
+        .then(nuListaProv => {
+            setListaProvincias(nuListaProv);
+            setProvincia(nuListaProv[0]);
+
+            buscarDistritosProv(nuListaProv[0].idProvincia)
+            .then(nuListDists => {
+                setListaDistritos(nuListDists);
+                setDistrito(nuListDists[0]);
+            })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
         console.log("id a cambiar: "+idDepartamento);
-        // setProvincia(depObtenido.provincias[0].nombre);
-        // setListaProvincias( depObtenido.provincias );
-        // setDistrito(depObtenido.provincias[0].distritos[0]);
-        // setListaDistritos( depObtenido.provincias[0].distritos);
     };
 
-    const cambioProvincia = (provSelec) => {
-        // const provObtenida = listaProvincias.find( (provincia)  => provincia.nombre === provSelec);
-        // setProvincia(provObtenida.nombre);
-        // setListaDistritos( provObtenida.distritos );
-        // setDistrito(provObtenida.distritos[0]);
+    const cambioProvincia = (idProvincia) => {
+        // const nuevoIdProvincia = parseInt(idProvincia);
+        var nuevaProvincia = listaProvincias.find( (provincia)  => provincia.idProvincia === idProvincia);
+        setProvincia(nuevaProvincia);
+
+        buscarDistritosProv(nuevaProvincia.idProvincia)
+        .then(nuListDists => {
+            console.log(nuListDists);
+            setListaDistritos(nuListDists);
+            setDistrito(nuListDists[0]);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        // console.log("id a cambiar: "+idDepartamento);
     };
 
-    const cambioDistrito = (distSelec) => {
-        // setDistrito(distSelec);
+    const cambioDistrito = (idDistrito) => {
+        var distObtenido = listaDistritos.find( (distrito)  => distrito.idDistrito === idDistrito);
+        setDistrito(distObtenido);
     };
 
-    useEffect(() => {
-        // setListaDepartamentos( ubicacionesJSON );
+    useEffect( () => {
+
+        // fetch data
         obtenerDepartamentos()
-        .then( listaDeps => {
-                setListaDepartamentos(listaDeps);
-                setDepartamento(listaDeps[0]);                
-                         
-                // buscarProvinciasDep(listaDeps[0].nombre)
-                // .then( listaProvs => {
-                //         // console.log(listaProvs);
-                //         setListaProvincias(listaProvs);
-                //         setProvincia(listaProvs[0]);
+        .then( listaDeps => {                
+            setListaDepartamentos(listaDeps);            
+            setDepartamento(listaDeps[0]);            
+            buscarProvinciasDep(listaDeps[0].idDepartamento)
+            .then( listaProvs => {
+                // console.log(listaProvs);
+                setListaProvincias(listaProvs);
+                setProvincia(listaProvs[0]);
 
-                        //Temporal
-                        // obtenerDistritos()
-                        // .then( listaDists => {
-                        //         setListaDistritos(listaDists);
-                        //         setDistrito(listaDists[0]);
-                        //     }
-                        // ).catch();
-                }).catch( error => {
+                buscarDistritosProv(listaProvs[0].idProvincia)
+                .then(listaDists => {
+                    setDistrito(listaDists[0]);
+                    setListaDistritos(listaDists);
+                    
+                })
+                .catch( error => {
                     console.error('Error:', error);
-                })            
-        .catch( error => {
+                });                    
+            }).catch( error => {
                 console.error('Error:', error);
-            }
-        ); 
-    }, []);
+            });                   
+        }).catch( error => {
+            console.error('Error:', error);
+        }); 
+    }, [] );
 
     const onSubmit = (data) => {
-        // console.log(data);
-        const informacionNuevaCuenta = {
-            nombre: data.nombre,
-            apellidoPaterno: data.apellidoPaterno,
-            apellidoMaterno: data.apellidoMaterno,
-            DNI: data.DNI,
-            correoElectronico: data.email,
-            telefonoCelular: data.telefonoCelular,
-            ubicacion: ubicacion
-            // ubicacion: ubicacion
-        };
-        console.log(informacionNuevaCuenta);
-        // alert(`departamento: ${ubicacion.departamento}, provincia: ${ubicacion.provincia}, distrito: ${ubicacion.distrito}`);
-        // navigate("/cotizacion1", {state: informacionClienteSinCuenta});
+        consultarDNI(data.DNI)
+        .then(resultado => {
+            if(resultado.idCliente == 0){
+                const informacionClienteSinCuenta = {
+                    nombre: data.nombre,
+                    apellidoPaterno: data.apellidoPaterno,
+                    apellidoMaterno: data.apellidoMaterno,
+                    DNI: data.DNI,
+                    correoElectronico: data.email,
+                    telefonoCelular: data.telefonoCelular,
+                    ubicacion: ubicacion
+                };
+                
+                const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta};
+                
+                
+            }else{
+                alert("El DNI ingresado ya pertenece a un cliente.");
+            }
         
-    }
+        });
+    };
+    
     return (
     <>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -184,14 +211,11 @@ export const RegistrarCliente = () => {
                 {errors.password && (<p className="error-message">Ingrese una contraseña de maximo 15 caracteres y solo numeros y letras (sin ñ).</p>)}
             </div>
 
-            <p>Al continuar acepto la 
-                <a  className="Celeste"
+            <p>Al continuar acepto la <a  className="Celeste"
                     href="https://drive.google.com/file/d/11ufJI949A8UPw0QWubV3aH3wCxfjjpb_/view?usp=sharing"
                     target="_blank"
                     rel="noreferrer"
-                >
-
-                    Política de privacidad</a>
+                > Política de privacidad</a>
             </p>
 
             <div className='Trio'>
@@ -200,6 +224,28 @@ export const RegistrarCliente = () => {
                     <select onChange={(e) => cambioDepartamento(parseInt(e.target.value))} className='Resultado' value={departamento && departamento.idDepartamento}>
                             {listaDepartamentos && listaDepartamentos.map((option) => (
                             <option key={option.idDepartamento} value={option.idDepartamento}>
+                                {option.nombre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className='IngresaDatoTrio'>
+                    <p className='Negrita'>Provincia</p>
+                    <select onChange={(e) => cambioProvincia(parseInt(e.target.value))} className='Resultado' value={provincia && provincia.idProvincia}>
+                            {listaProvincias && listaProvincias.map((option) => (
+                            <option key={option.idProvincia} value={option.idProvincia}>
+                                {option.nombre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className='IngresaDatoTrio'>
+                    <p className='Negrita'>Distrito</p>
+                    <select onChange={(e) => cambioDistrito(parseInt(e.target.value))} className='Resultado' value={distrito && distrito.idDistrito}>
+                            {listaDistritos && listaDistritos.map((option) => (
+                            <option key={option.idDistrito} value={option.idDistrito}>
                                 {option.nombre}
                             </option>
                         ))}

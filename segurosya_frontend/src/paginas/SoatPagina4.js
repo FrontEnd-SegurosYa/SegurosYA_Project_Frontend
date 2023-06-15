@@ -37,6 +37,7 @@ function SoatPagina4() {
     <>
       <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {4}/>
+      
       <PlanesSOAT informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} planSeleccionado={planSeleccionado} />
     </>   
   );

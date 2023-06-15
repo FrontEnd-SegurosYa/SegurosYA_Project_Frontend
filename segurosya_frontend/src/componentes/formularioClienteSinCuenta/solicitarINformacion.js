@@ -33,7 +33,7 @@ export function obtenerDistritos() {
 }
 
 export function buscarProvinciasDep(idDepartamento) {
-    return fetch(LINKSERVER+"/api/provincia/buscar", {
+    return fetch(LINKSERVER+"/api/provincia/buscarXDepartamento", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
@@ -53,13 +53,34 @@ export function buscarProvinciasDep(idDepartamento) {
         );
 }
 
-export function buscarDistritosProv(nombreProvincia) {
-    return fetch(LINKSERVER+"/api/distrito/buscar", {
+export function buscarDistritosProv(idProvincia) {
+    return fetch(LINKSERVER+"/api/distrito/buscarXProvincia", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
         },
-        body: JSON.stringify({nombre: nombreProvincia})
+        body: JSON.stringify({idProvincia: idProvincia})
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+            }
+        );
+}
+
+export function consultarDNI(dniBuscado) {
+    return fetch(LINKSERVER+"/api/cliente/buscar", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({dni: dniBuscado})
     })
     .then(response => {
         if (!response.ok) {
