@@ -28,7 +28,8 @@ const NavbarElements = ({comportamiento,cuentaCliente}) => {
       componenteCuenta = 
       <div className='containerNavBar'>
         <div className="columna">
-          <div className='textoNav'>William Levi </div>
+          {/* <div className='textoNav'>William Levi </div> */}
+          <div className='textoNav'>{cuentaCliente.apellidoPaterno+", "+cuentaCliente.nombre} </div>
           {/* {cuentaCliente.apellidoPaterno+", "+cuentaCliente.nombre} */}
           <Link to={"/"}>
             <a className='textoNav'>Cerrar Sesión</a>

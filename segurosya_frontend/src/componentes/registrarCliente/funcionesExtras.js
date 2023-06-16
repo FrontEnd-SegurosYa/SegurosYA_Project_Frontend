@@ -93,3 +93,87 @@ export function consultarDNI(dniBuscado) {
             }
         );
 }
+
+export function crearCliente(nombre,apellidoPaterno,apellidoMaterno,dni) {
+    return fetch(LINKSERVER+"/api/cliente/crear", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({nombre: nombre, apellidoPaterno: apellidoPaterno, apellidoMaterno: apellidoMaterno, dni: dni})
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+            return response.text();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+            }
+        );
+}
+
+export function crearContacto(idCliente,telefono,direccion) {
+    return fetch(LINKSERVER+"/api/contacto/insertar", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({idCliente: idCliente, telefono: telefono, direccion: direccion})
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+            return response.text();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+            }
+        );
+}
+
+export function crearCuenta(idCliente,correo,contrasenha) {
+    return fetch(LINKSERVER+"/api/cuenta/insertar", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({idCliente: idCliente, correo: correo, contrasenha: contrasenha})
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+            return response.text();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+            }
+        );
+}
+
+export function iniciarSesion(correo,contrasenha) {
+    return fetch(LINKSERVER+"/api/cuenta/login", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({correo: correo, contrasenha: contrasenha})
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+            }
+        );
+}

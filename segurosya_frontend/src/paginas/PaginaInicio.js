@@ -21,7 +21,7 @@ function PaginaInicio() {
 
     if(location.state !== null){
       // cuenta si inicio de sesion
-      clienteCuenta = location.state.resultado;
+      clienteCuenta = location.state;
     }
     
     return (

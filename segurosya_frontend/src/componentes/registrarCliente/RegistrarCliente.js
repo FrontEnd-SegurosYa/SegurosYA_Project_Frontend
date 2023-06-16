@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 
 import ubicacionesJSON from "./ubicaciones.json";
 
-import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv } from './funcionesExtras';
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv, crearCliente, crearContacto, crearCuenta, iniciarSesion } from './funcionesExtras';
 
 export const RegistrarCliente = () => {
     const navigate = useNavigate();
@@ -111,22 +111,87 @@ export const RegistrarCliente = () => {
     const onSubmit = (data) => {
         consultarDNI(data.DNI)
         .then(resultado => {
-            if(resultado.idCliente == 0){
-                const informacionClienteSinCuenta = {
+            if(resultado.idCliente === 0){
+                const infoNuevoCliente = {
                     nombre: data.nombre,
                     apellidoPaterno: data.apellidoPaterno,
                     apellidoMaterno: data.apellidoMaterno,
                     DNI: data.DNI,
                     correoElectronico: data.email,
-                    telefonoCelular: data.telefonoCelular,
-                    ubicacion: ubicacion
+                    contrasenha: data.contrasenha,
+                    telefono: data.telefonoCelular,
+                    ubicacion: ubicacion.departamento.nombre+", "+ubicacion.provincia.nombre+", "+ubicacion.distrito.nombre
                 };
                 
-                const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta};
+                const infoState = {infoNuevoCliente: infoNuevoCliente};
                 
+                crearCliente(infoNuevoCliente.nombre,infoNuevoCliente.apellidoPaterno,infoNuevoCliente.apellidoMaterno,infoNuevoCliente.DNI)
+                .then( nuIdCliente => {
+                    console.log(nuIdCliente);
+                    // return;
+                    if(nuIdCliente !== 0){
+                        console.log("nuevo cliente: "+nuIdCliente);
+                        //Exito
+                        crearContacto(parseInt(nuIdCliente,10),infoNuevoCliente.telefono,infoNuevoCliente.ubicacion)
+                        .then(nuevoIdContacto => {
+                            console.log("nuevo contacto: "+nuevoIdContacto);
+                            if(nuevoIdContacto !== 0){
+                                //Exito
+                                crearCuenta(parseInt(nuIdCliente,10),infoNuevoCliente.correoElectronico,infoNuevoCliente.contrasenha)
+                                .then(nuIdCuenta => {
+                                    console.log("nueva cuenta: "+nuIdCuenta);
+                                    if(nuIdCuenta !== 0){
+                                        //Redireccion a pagina de inicio con cuenta
+
+                                        //Verificacion Final
+                                        iniciarSesion(infoNuevoCliente.correoElectronico,infoNuevoCliente.contrasenha)
+                                        .then( resultado => {
+                                            if(resultado.response_msg === "Login Success"){
+                                                alert("Inicio de sesion correcto.");
+                                                navigate("/",{state: resultado});  
+                                            }else{
+                                                alert("Error de inicio de sesion.");
+                                                return;
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error(error);
+                                            return;
+                                        });
+
+                                    }else{
+                                        alert("Error en creacion de cuenta.");
+                                        return;
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                    return;
+                                });
+
+                            }else{
+                                alert("Error en creacion de contacto.");
+                                return;
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            return;
+                        });
+
+                    }else{
+                        alert("Error en creacion de cliente.");
+                        return;
+                    }
+                } )
+                .catch(error => {
+                    console.error(error);
+                    return;
+                });
                 
             }else{
                 alert("El DNI ingresado ya pertenece a un cliente.");
+                return;
             }
         
         });
@@ -203,8 +268,7 @@ export const RegistrarCliente = () => {
                 <p className='Negrita'>Contraseña:</p>
                 <input type='password' 
                     {...register('contrasenha',{
-                        required: true,
-                        pattern: /^(?:[A-Za-z0-9]{1,20}\n){15}$/
+                        required: true
                         })
                     }
                     className='InputTexto'/>
@@ -251,21 +315,7 @@ export const RegistrarCliente = () => {
                         ))}
                     </select>
                 </div>
-                {/* <div className='IngresaDatoTrio Medio'>
-                    <p className='Negrita'>Provincia</p>
-                    <select className='Opciones'>
-                        <option>Barranca</option>
-                        <option>Cajatambo</option>
-                        <option>Canta</option>
-                    </select>
-                </div>
-                <div className='IngresaDatoTrio'>
-                    <p className='Negrita'>Distrito</p>
-                    <select className='Opciones'>
-                        <option>Ancón</option>
-                        <option>Ate Vitarte</option>
-                        <option>Barranco</option>
-                    </select> */}
+                
                 </div>
             </div>
         </div>
