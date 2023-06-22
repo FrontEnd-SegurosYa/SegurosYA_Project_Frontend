@@ -109,7 +109,7 @@ export function SeleccionCoberturas({informacionClienteSinCuenta,informacionPlac
                 </div>
                     
                     <div className="containerFormularioCarroSeguro">
-                        <h4 className = "TituloSeguro2"><b>Ingresa los datos de tu auto para cotizar</b></h4>
+                        <h4 className = "TituloSeguro2"><b>Selecciona tus coberturas:</b></h4>
                                         
                         <div className='Form'>
                             <div className='Opciones'>

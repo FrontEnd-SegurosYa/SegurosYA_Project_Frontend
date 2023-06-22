@@ -127,8 +127,7 @@ const styles = StyleSheet.create({
 
 function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,planSeleccionado})  {
   const fechaActual = new Date();
-  const fechaDiaDespues = addDays(fechaActual, 1); // Sumar un día
-  const fechaFutura = addYears(fechaDiaDespues, 1); // Sumar un año
+  const fechaFutura = addYears(fechaActual, 1); // Sumar un año
   const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
   const str = informacionPlaca.uso;
   const strMayusculas = str.toUpperCase();
@@ -165,7 +164,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.headers}>N° Poliza - Certificado</Text>
                   <Text style={styles.datos}>8022-700000001231</Text>
                   <Text style={styles.headers}>Desde</Text>
-                  <Text style={styles.datos}>{format(fechaDiaDespues, 'dd/MM/yyyy')}</Text>
+                  <Text style={styles.datos}>{format(fechaActual, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>VEHICULO ASEGURADO</Text>
@@ -176,14 +175,12 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.datos}>AUTOMOVIL</Text>
                   <Text style={styles.headers}>Uso</Text>
                   <Text style={styles.datos}>{informacionPlaca.uso.toUpperCase()}</Text>
-                  <Text style={styles.headers}>Vln / N° de serie</Text>
-                  <Text style={styles.datos}>G4HSJT576823</Text>
                 </View>    
                 <View style={styles.columna}>
                   <Text style={{marginBottom: 1,color: "#7C7D81",fontFamily: 'Roboto', fontWeight: 'bold',fontSize: '12pt',}}>CERTIFICADO SOAT</Text>
                   <Text style={{marginBottom: 15,color: "#7C7D81",fontFamily: 'Roboto', fontWeight: 'bold',fontSize: '12pt',}}>CONTROL POLICIAL</Text>
                   <Text style={styles.headers}>Desde</Text>
-                  <Text style={styles.datos}>{format(fechaDiaDespues, 'dd/MM/yyyy')}</Text>
+                  <Text style={styles.datos}>{format(fechaActual, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>CONTRATANTE / ASEGURADO</Text>

@@ -170,7 +170,8 @@ export const DatosCarro = ({informacionClienteSinCuenta,informacionPlaca,rumbo,i
                         value={anhoFabricacion}
                         onChange={(e) => {
                           const inputValue = parseInt(e.target.value);
-                          if (inputValue > 0) {
+                          const anioActual = new Date().getFullYear();;
+                          if (inputValue > 0 && inputValue <= anioActual) {
                             onChange(inputValue);
                             cambioAnhoFabricacion(e.target.value);
                           }

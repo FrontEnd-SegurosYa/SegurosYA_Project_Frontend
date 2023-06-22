@@ -51,9 +51,9 @@ function ContenedorBarraProgresoSeguro ({paso}) {
                     <tbody >
                         <tr>
                             <td><ContenedorParteBarraProgresoSeguro valor = {1} etiqueta = "Ingresa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgresoSeguro valor = {2} etiqueta = "Completa" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgresoSeguro valor = {3} etiqueta = "Escoge" paso={paso}/></td>
-                            <td><ContenedorParteBarraProgresoSeguro valor = {4} etiqueta = "Valida" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {2} etiqueta = "Registra" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {3} etiqueta = "Completa" paso={paso}/></td>
+                            <td><ContenedorParteBarraProgresoSeguro valor = {4} etiqueta = "Escoge" paso={paso}/></td>
                             <td><ContenedorParteBarraProgresoSeguro valor = {5} etiqueta = "Valida" paso={paso}/></td>
                         </tr>
                     </tbody>
