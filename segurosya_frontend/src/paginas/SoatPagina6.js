@@ -30,6 +30,7 @@ function SoatPagina6() {
     if(location.state === null){
       navigate("/");
     }
+
   },[]);
 
   return (

@@ -132,7 +132,7 @@ export const RegistrarCliente = () => {
                     if(nuIdCliente !== 0){
                         console.log("nuevo cliente: "+nuIdCliente);
                         //Exito
-                        crearContacto(parseInt(nuIdCliente,10),infoNuevoCliente.telefono,infoNuevoCliente.ubicacion)
+                        crearContacto(parseInt(nuIdCliente,10),infoNuevoCliente.telefono,infoNuevoCliente.ubicacion,infoNuevoCliente.correoElectronico)
                         .then(nuevoIdContacto => {
                             console.log("nuevo contacto: "+nuevoIdContacto);
                             if(nuevoIdContacto !== 0){

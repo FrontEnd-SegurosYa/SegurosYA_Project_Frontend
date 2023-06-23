@@ -47,7 +47,7 @@ const Plan = ({ id, selected, onClick, title, pago, costo, servicios, beneficios
             <p className="azulos"><b>Servicios</b></p>
             <ul>
                 {listaServicios.map((item, index) => (
-                    <li key={index}>{item.nombre}: {item.descripcion}</li>
+                    <li key={index}>{item.nombre}: {item.detalle}</li>
                 ))}
             </ul>
             <p className="azulos"><b>Beneficios</b></p>

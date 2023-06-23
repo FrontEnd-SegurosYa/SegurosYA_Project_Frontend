@@ -314,7 +314,7 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                         </div>
 
                         <div className='ContenedorCampoUbicacion'>
-                            <div><p>Provincia:</p></div>
+                            <div><p>Distrito:</p></div>
                             <div>
                                 <select onChange={(e) => cambioDistrito(parseInt(e.target.value))} className='Resultado' value={distrito && distrito.idDistrito}>
                                         {listaDistritos && listaDistritos.map((option) => (

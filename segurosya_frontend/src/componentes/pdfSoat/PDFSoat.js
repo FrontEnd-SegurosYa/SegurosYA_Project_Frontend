@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Page, Text, View, Document, StyleSheet,Image,Font } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import logoImage from '../../img/logoMinisterio.png';
@@ -9,6 +9,9 @@ import RobotoBold from '../../fonts/Roboto-Bold.ttf';
 import { addDays, addMonths, addYears, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useForm, Controller} from 'react-hook-form';
+
+import { crearAuto, crearCliente,crearContacto, crearPoliza } from './funcionesExtras';
+
 
 
 Font.register({
@@ -134,6 +137,64 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
 
   const placaMini = informacionPlaca.placa;
   const placaMayusculas = placaMini.toUpperCase();
+
+  useEffect(() => {
+    const infoNuevoCliente = {
+      nombre: informacionClienteSinCuenta.nombre,
+      apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
+      apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
+      DNI: informacionClienteSinCuenta.DNI,
+      correoElectronico: informacionClienteSinCuenta.email,
+      telefono: informacionClienteSinCuenta.telefono,
+      ubicacion: informacionClienteSinCuenta.departamento.nombre+", "+informacionClienteSinCuenta.provincia.nombre+", "+informacionClienteSinCuenta.distrito.nombre
+  };
+
+    //crear Cliente
+    // crearCliente(informacionClienteSinCuenta.nombre,informacionClienteSinCuenta.apellidoPaterno,informacionClienteSinCuenta.apellidoMaterno,informacionClienteSinCuenta.DNI)
+    // .then(nuIdCliente => {
+    //   if(nuIdCliente !== 0){
+    //     //crear Contacto
+    //     crearContacto(parseInt(nuIdCliente,10),infoNuevoCliente.telefono,infoNuevoCliente.ubicacion,infoNuevoCliente.correoElectronico)
+    //     .then(nuIdContacto => {
+    //       if(parseInt(nuIdContacto,10) !== 0){
+    //         crearAuto(informacionPlaca.placa,informacionAuto.anhoFabricacion,27000.0,informacionPlaca.uso,parseInt(nuIdCliente,10),informacionAuto.idModelo,informacionAuto.idMarca)
+    //         .then(nuIdAuto => {
+    //           if(parseInt(nuIdAuto,10) !== 0){
+    //             crearPoliza()
+    //             .then()
+    //             .catch(error => {
+    //               alert("Error en creacion de poliza RED.");
+    //               return;
+    //             });
+    //           }else{
+    //             alert("Error en creacion de auto.");
+    //             return;
+    //           }
+    //         })
+    //         .catch(error => {
+    //           alert("Error en creacion de auto RED.");
+    //           return;
+    //         });
+    //       }else{
+    //         alert("Error en creacion de contacto.");
+    //         return;
+    //       }
+    //     })
+    //     .catch(error => {
+    //       alert("Error en creacion de contacto RED.");
+    //       return;
+    //     });
+    //   }else{
+    //     alert("Error en creacion de cliente.");
+    //     return;
+    //   }
+    // })
+    // .catch(error => {
+    //   alert("Error en creacion de cliente RED.");
+    //   return;
+    // });
+    
+  },[]);
 
   return (
     <>
