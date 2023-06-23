@@ -1,15 +1,6 @@
 # Archivos generados por el entorno de desarrollo
 
-#Linux
+node_modules/
 segurosya_frontend/node_modules/
-segurosya_frontend/node_modules/*
-segurosya_frontend/build/
-segurosya_frontend/dist/*
-segurosya_frontend/.cache/*
-node_modules/*
-
-#Windows
-segurosya_frontend\node_modules\*
-segurosya_frontend\node_modules\
 
 
