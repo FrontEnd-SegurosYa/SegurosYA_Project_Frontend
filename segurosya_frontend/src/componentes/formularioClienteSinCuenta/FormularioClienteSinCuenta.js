@@ -1,7 +1,7 @@
 import './FormularioClienteSinCuenta.css';
 import { Link } from 'react-router-dom';
 import {BarraProgreso} from "../barraProgreso/BarraProgreso.js"
-import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv} from './solicitarINformacion';
+import { obtenerDepartamentos, buscarProvinciasDep ,obtenerDistritos, consultarDNI, buscarDistritosProv,consultarClienteEspecial} from './solicitarINformacion';
 
 // import imagenConductor from '../img/imagenFormularioSinCuenta.png';
 
@@ -164,36 +164,52 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
 
     const onSubmit = (data) => {
 
-        consultarDNI(data.DNI)
+        consultarClienteEspecial(data.DNI)
         .then(resultado => {
-            if(resultado.idCliente == 0){
-                const informacionClienteSinCuenta = {
-                    nombre: data.nombre,
-                    apellidoPaterno: data.apellidoPaterno,
-                    apellidoMaterno: data.apellidoMaterno,
-                    DNI: data.DNI,
-                    correoElectronico: data.email,
-                    telefonoCelular: data.telefonoCelular,
-                    ubicacion: ubicacion
-                };
-                // const informacionPlaca = informacionPlaca;
-                const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
-                // console.log(informacionClienteSinCuenta);
-                // console.log(rumbo);
-                if(rumbo === "soat"){
-                    navigate("/soat3", {state: infoState});
-                }
-                else {
-                    navigate("/cotizacion3", {state: infoState});
-                }
+            console.log(resultado);
+            if(resultado.numDoc === "-1"){
+                consultarDNI(data.DNI)
+                .then(resultado => {
+                    if(resultado.idCliente == 0){
+                        const informacionClienteSinCuenta = {
+                            nombre: data.nombre,
+                            apellidoPaterno: data.apellidoPaterno,
+                            apellidoMaterno: data.apellidoMaterno,
+                            DNI: data.DNI,
+                            correoElectronico: data.email,
+                            telefonoCelular: data.telefonoCelular,
+                            ubicacion: ubicacion
+                        };
+                        // const informacionPlaca = informacionPlaca;
+                        const infoState = {informacionClienteSinCuenta: informacionClienteSinCuenta, informacionPlaca: informacionPlaca};
+                        // console.log(informacionClienteSinCuenta);
+                        // console.log(rumbo);
+                        if(rumbo === "soat"){
+                            navigate("/soat3", {state: infoState});
+                        }
+                        else {
+                            navigate("/cotizacion3", {state: infoState});
+                        }
+                    }else{
+                        alert("El DNI ingresado ya pertenece a un cliente.");
+                    }
+                    
+                })
+                .catch(error => {
+                    console.error(error);
+                    return;
+                });
             }else{
-                alert("El DNI ingresado ya pertenece a un cliente.");
+                alert("Usted pertenece a nuestra lista de clientes especiales. Comuniquese con nosotros.")
+                return;
             }
-            
         })
         .catch(error => {
             console.error(error);
+            return;
         });
+
+        
 
         
     }
