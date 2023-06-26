@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useState} from 'react';
 import { Page, Text, View, Document, StyleSheet,Image,Font } from '@react-pdf/renderer';
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFViewer, PDFJSStatic } from '@react-pdf/renderer';
 import logoImage from '../../img/logoMinisterio.png';
 import logoNombreAzul from '../../img/logoNombreAzul.png';
 import '../../index.css'
@@ -10,7 +10,8 @@ import { addDays, addMonths, addYears, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useForm, Controller} from 'react-hook-form';
 
-import { crearAuto, crearCliente,crearContacto, crearPoliza } from './funcionesExtras';
+import { pruebaEnvioCorreoArchivoAdjunto} from './funcionesExtras';
+import pdfjs from 'pdfjs-dist';
 
 Font.register({
   family: 'Roboto',
@@ -139,6 +140,17 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
   const nombreFormato = informacionClienteSinCuenta.nombre.charAt(0).toUpperCase() + informacionClienteSinCuenta.nombre.slice(1);
   const apellidoPaternoFormato = informacionClienteSinCuenta.apellidoPaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoPaterno.slice(1);
   const apellidoMaternoFormato = informacionClienteSinCuenta.apellidoMaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoMaterno.slice(1);
+  
+  //pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+  const handleDocumentLoadSuccess = async (pdf) => {
+    console.log("entra")
+    const pdfData = await pdf.toBlob();
+    const pdfObject = new Blob([pdfData], { type: 'application/pdf' });
+
+    pruebaEnvioCorreoArchivoAdjunto(pdfData,"valerie.munayco0607@gmail.com","Prueba pdf","Holi");
+    console.log('Objeto PDF:', pdfObject);
+  };
 
   useEffect(() => {
     const infoNuevoCliente = {
@@ -202,7 +214,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
   return (
     <>
     <PDFViewer  style={styles.viewer}>
-      <Document>
+      <Document onLoadSuccess={handleDocumentLoadSuccess} options={{ docBaseUrl: window.location.origin }}>
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
             <Image src={logoImage} />
