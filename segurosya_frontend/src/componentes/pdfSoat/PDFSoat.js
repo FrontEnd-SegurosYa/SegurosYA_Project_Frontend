@@ -12,8 +12,6 @@ import { useForm, Controller} from 'react-hook-form';
 
 import { crearAuto, crearCliente,crearContacto, crearPoliza } from './funcionesExtras';
 
-
-
 Font.register({
   family: 'Roboto',
   fonts: [
@@ -126,7 +124,8 @@ const styles = StyleSheet.create({
     paddingLeft: "50",
     borderRadius: "6"
   },
-});
+})
+
 
 function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,planSeleccionado})  {
   const fechaActual = new Date();
@@ -137,6 +136,9 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
 
   const placaMini = informacionPlaca.placa;
   const placaMayusculas = placaMini.toUpperCase();
+  const nombreFormato = informacionClienteSinCuenta.nombre.charAt(0).toUpperCase() + informacionClienteSinCuenta.nombre.slice(1);
+  const apellidoPaternoFormato = informacionClienteSinCuenta.apellidoPaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoPaterno.slice(1);
+  const apellidoMaternoFormato = informacionClienteSinCuenta.apellidoMaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoMaterno.slice(1);
 
   useEffect(() => {
     const infoNuevoCliente = {
@@ -146,7 +148,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
       DNI: informacionClienteSinCuenta.DNI,
       correoElectronico: informacionClienteSinCuenta.email,
       telefono: informacionClienteSinCuenta.telefono,
-      ubicacion: informacionClienteSinCuenta.departamento.nombre+", "+informacionClienteSinCuenta.provincia.nombre+", "+informacionClienteSinCuenta.distrito.nombre
+      //ubicacion: informacionClienteSinCuenta.departamento.nombre+", "+informacionClienteSinCuenta.provincia.nombre+", "+informacionClienteSinCuenta.distrito.nombre
   };
 
     //crear Cliente
@@ -196,6 +198,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
     
   },[]);
 
+  
   return (
     <>
     <PDFViewer  style={styles.viewer}>
@@ -245,7 +248,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.headers}>Hasta</Text>
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>CONTRATANTE / ASEGURADO</Text>
-                  <Text style={styles.datos}>{informacionClienteSinCuenta.nombre+" "+informacionClienteSinCuenta.apellidoPaterno+" "+informacionClienteSinCuenta.apellidoMaterno}</Text>
+                  <Text style={styles.datos}>{nombreFormato+" "+apellidoPaternoFormato+" "+apellidoMaternoFormato}</Text>
                   <Text style={styles.headers}>Importe de la prima</Text>
                   <Text style={styles.datos}>{planSeleccionado.monto}</Text>
                   <Text style={styles.headers}>Fecha</Text>

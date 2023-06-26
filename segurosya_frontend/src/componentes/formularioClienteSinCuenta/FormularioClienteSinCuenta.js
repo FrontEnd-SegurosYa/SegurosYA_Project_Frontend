@@ -255,7 +255,8 @@ function ContenedorPrincipal ( {informacionPlaca,rumbo,informacionClienteSinCuen
                             pattern: /^(?!.*(ll|ch))[A-Za-z][A-Za-z]+(?: [A-Za-z][A-Za-z]+)?$/,
                         })}/>
                         {errors.apellidoMaterno && <p className="error-message">Debe ingresar un nombre y un apellido</p>}
-                    </div>                   
+                    </div>    
+                                   
                 </div>
 
                 <div>
