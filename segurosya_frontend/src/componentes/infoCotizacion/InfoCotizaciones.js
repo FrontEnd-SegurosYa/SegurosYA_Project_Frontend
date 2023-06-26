@@ -11,7 +11,6 @@ const InfoCotizaciones = () => {
         <div className='bloque-datos'>
             <br></br>
             <TituloBloques titulo='¿Qué te ofrecemos?'/>
-            <br/>
             <div className='lista-horizontal'>
                 <div className = "contenedorCotizacion1">
                     <InfoBloque titulo='Protegemos tu vehiculo' 

@@ -18,13 +18,13 @@ function CotizacionPagina1() {
   // console.log('Se recibio ');
   // console.log(informacionPlacaPasada);
   return (
-    <>
+    <div className="no-scroll">
       <Navbar comportamiento={"mostrar"}/>
       <BarraProgresoSeguro paso = {1}/>
       {/* <FormularioPlacaCotizacion datosCliente = {informacionClienteSinCuenta} /> */}
       <FormularioPlacaCotizacion placaPasada={informacionPlacaPasada}/>
       <InfoCotizaciones/>
-    </>   
+    </div>   
   );
 }
 export default CotizacionPagina1;
