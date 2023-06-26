@@ -136,3 +136,28 @@ export function crearPoliza(
             }
         );
 }
+
+export function pruebaEnvioCorreoArchivoAdjunto (archivo,destino,asunto,contenido) {
+    //Utiles
+    const formData = new FormData();
+    formData.append('file',archivo);
+    formData.append('to',destino);
+    formData.append('subject',asunto);
+    formData.append('content',contenido);
+
+    return fetch(LINKSERVER+"/api/cotizacion/envioCorreo", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('File upload failed');
+        }else{
+            return response.text();
+        }            
+    })
+    .catch(error => {
+        console.error('Error Uploading File:', error);
+        throw error;
+    });
+}
