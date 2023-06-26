@@ -5,6 +5,7 @@ import Navbar from '../componentes/navbar/Navbar'
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
 function SoatPagina4() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,12 +35,12 @@ function SoatPagina4() {
   },[]);
 
   return (
-    <>
+    <div className="no-scroll">
       <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {4}/>
       
       <PlanesSOAT informacionClienteSinCuenta={informacionClienteSinCuenta} informacionPlaca={informacionPlaca} informacionAuto={informacionAuto} planSeleccionado={planSeleccionado} />
-    </>   
+    </div>   
   );
 }
 export default SoatPagina4;

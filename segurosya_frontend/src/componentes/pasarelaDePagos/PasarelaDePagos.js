@@ -127,7 +127,6 @@ const PasarelaDePagos = ({informacionClienteSinCuenta,informacionPlaca,informaci
                 <div className='Columna1'>
                     <div >
                         <br></br>
-                        <br></br>
                         <h5><b>Seleccione su método de pago:</b></h5>
                     </div>
                     <br></br>
@@ -141,7 +140,6 @@ const PasarelaDePagos = ({informacionClienteSinCuenta,informacionPlaca,informaci
                             style={{ transform: 'scale(1.5)' }}
                         />
                         <img src={imagenVISA} alt="Imagen" className="ImagenRadio" /> 
-                        <br></br>
                         <br></br>
                     </label>
                     <br></br>

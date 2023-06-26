@@ -5,12 +5,13 @@
     border: 1px solid #ccc;
     background-color: var(--colorBlanco1);
     border-radius: 4px;
-    margin-right: 60px;
+    margin-right: 55px;
     display: inline-block;
     position: relative; /* Agrega esta propiedad para establecer el contexto de posicionamiento */
     border-radius: 38px;
     box-sizing: border-box;
-    height:1000px;
+    height:550px;
+    margin-bottom: 0;
   }
 
   .plan.clicked{
@@ -38,6 +39,7 @@
     margin-bottom: 10px;
     text-align: center;
     color: var(--colorAzul3);
+    font-size: 25px;
   }
 
   .azulos{
@@ -58,6 +60,8 @@
   
   .plan p {
     font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
     color: #888;
     padding: 10px;
     color: var(--colorAzul1);
@@ -68,6 +72,7 @@
     padding-left: 20px; /* Elimina el padding izquierdo predeterminado de la lista */
     list-style: none; /* Elimina los estilos de viñetas de la lista */
     color: var(--colorAzul1);
+    margin-bottom: 0;
   }
 
 

@@ -137,3 +137,8 @@
     padding: 8px 25px;
     width: 220px;
 }
+
+.no-scroll {
+  overflow: hidden;
+  overflow-x: hidden;
+}

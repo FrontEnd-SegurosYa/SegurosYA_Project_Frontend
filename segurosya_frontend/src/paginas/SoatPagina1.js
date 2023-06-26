@@ -20,13 +20,13 @@ function SoatPagina1() {
 
   
   return (
-    <>
+    <div className="no-scroll">
       <Navbar comportamiento={"mostrar"}/>
       <BarraProgreso paso = {1}/>
       {/* <FormularioPlacaSoat datosCliente = {informacionClienteSinCuenta} /> */}
       <FormularioPlacaSoat placaPasada={placaPasada}/>
       <InfoCotizaciones/>
-    </>   
+    </div>   
   );
 }
 export default SoatPagina1;
