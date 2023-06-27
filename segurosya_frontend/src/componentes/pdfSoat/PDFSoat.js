@@ -1,5 +1,5 @@
 import React, { useEffect ,useState} from 'react';
-import { Page, Text, View, Document, StyleSheet,Image,Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet,Image,Font, pdf } from '@react-pdf/renderer';
 import { PDFViewer, PDFJSStatic } from '@react-pdf/renderer';
 import logoImage from '../../img/logoMinisterio.png';
 import logoNombreAzul from '../../img/logoNombreAzul.png';
@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 import { useForm, Controller} from 'react-hook-form';
 
 import { pruebaEnvioCorreoArchivoAdjunto} from './funcionesExtras';
-import pdfjs from 'pdfjs-dist';
+
+import { LINKSERVER } from '../../utiles/constantes.js';
 
 Font.register({
   family: 'Roboto',
@@ -127,94 +128,113 @@ const styles = StyleSheet.create({
   },
 })
 
+const generatePDF = async (fechaActual,fechaFutura,monto,nombreFormato,apellidoMaternoFormato,apellidoPaternoFormato,usoMayuscula,placa,hora) => {
+  const doc = (
+    <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+            <Image src={logoImage} />
+            <Text style={styles.texto}> Certificado Electrónico</Text>
+            <Text style={styles.texto}> Decreto Supremo 015-2016  MTC</Text>
 
-function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,planSeleccionado})  {
+            <View style={styles.section}>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={styles.columna}>
+                  <Text style={styles.texto }>COMPAÑIA DE SEGUROS</Text>
+                  <Image src={logoNombreAzul} style = {styles.imagenLogo}/>
+                </View>
+                <View style={styles.columna}>
+                  <Text style={styles.texto }>EN CASO DE EMERGENCIAS</Text>
+                  <Text style={styles.numEmergencia}>500 000</Text>
+                </View>
+              </View>
+              <Text style={styles.texto}>Dirección: Av. República de Panamá  4056, San Isidro</Text>
+              <Text style={styles.lineas}>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</Text>
+              <Text style={styles.poliza}>VIGENCIA DE LA POLIZA</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={styles.columna}>
+                  <Text style={styles.headers}>N° Poliza - Certificado</Text>
+                  <Text style={styles.datos}>8022-700000001231</Text>
+                  <Text style={styles.headers}>Desde</Text>
+                  <Text style={styles.datos}>{fechaActual}</Text>
+                  <Text style={styles.headers}>Hasta</Text>
+                  <Text style={styles.datos}>{fechaFutura}</Text>
+                  <Text style={styles.headers2}>VEHICULO ASEGURADO</Text>
+                  {/* <Text style={styles.headers}>{informacionPlaca.placa}</Text> */}
+                  <Text style={styles.datos}>{placa}</Text>
+                  <Text style={styles.headers}>Categoria</Text>
+                  {/* <Text style={styles.datos}>{informacionPlaca.uso}</Text> */}
+                  <Text style={styles.datos}>AUTOMOVIL</Text>
+                  <Text style={styles.headers}>Uso</Text>
+                  <Text style={styles.datos}>{usoMayuscula}</Text>
+                </View>    
+                <View style={styles.columna}>
+                  <Text style={{marginBottom: 1,color: "#7C7D81",fontFamily: 'Roboto', fontWeight: 'bold',fontSize: '12pt',}}>CERTIFICADO SOAT</Text>
+                  <Text style={{marginBottom: 15,color: "#7C7D81",fontFamily: 'Roboto', fontWeight: 'bold',fontSize: '12pt',}}>CONTROL POLICIAL</Text>
+                  <Text style={styles.headers}>Desde</Text>
+                  <Text style={styles.datos}>{fechaActual}</Text>
+                  <Text style={styles.headers}>Hasta</Text>
+                  <Text style={styles.datos}>{fechaFutura}</Text>
+                  <Text style={styles.headers2}>CONTRATANTE / ASEGURADO</Text>
+                  <Text style={styles.datos}>{nombreFormato+" "+apellidoPaternoFormato+" "+apellidoMaternoFormato}</Text>
+                  <Text style={styles.headers}>Importe de la prima</Text>
+                  <Text style={styles.datos}>{monto}</Text>
+                  <Text style={styles.headers}>Fecha</Text>
+                  <Text style={styles.datos}>{fechaActual}</Text>
+                  <Text style={styles.headers}>Hora de emisión</Text>
+                  <Text style={styles.datos}>{hora}</Text>
+                </View>  
+              </View>        
+            </View>
+            <Text style={styles.footer1}>Los establecimientos de salud públicos y privados están obligados a
+                  prestar atención médica quirúrgica de emergencia en caso de la
+                  ocurrencia de un accidente de tránsito conforme en la Ley  N° 26842,
+                  Ley General de Salud y su Reglamento.
+            </Text>
+            <Text style={styles.footer2}>La información sobre las obligaciones y derechos del 
+                  contratante/asegurado, coberturas y exclusiones, 
+                  las podría encontrar ingresando a www.apeseg.org.pe/soat o solicitando tu cartilla 
+                  informativa en las oficinas de la compañia de seguros.
+            </Text>
+          </View>
+    </Page>
+  </Document>
+  );
+
+  const pdfBlob = await pdf(doc).toBlob(); // Convert the PDF into a Blob object
+  return pdfBlob;
+};
+
+const sendPDF = async (fechaActual,fechaFutura,monto,nombreFormato,apellidoMaternoFormato,apellidoPaternoFormato,usoMayuscula,placa,hora,correo) => {
+  const pdfBlob = await generatePDF(fechaActual,fechaFutura,monto,nombreFormato,apellidoMaternoFormato,apellidoPaternoFormato,usoMayuscula,placa,hora);
+  pruebaEnvioCorreoArchivoAdjunto(pdfBlob,correo,"SOAT","Estimado cliente, se le hace envío de su SOAT.")
+
+};
+
+const PDFSoat = ({ informacionClienteSinCuenta, informacionPlaca, informacionAuto, planSeleccionado }) => {
+
   const fechaActual = new Date();
+  const fechaActualFormato = format(fechaActual, 'dd/MM/yyyy');
   const fechaFutura = addYears(fechaActual, 1); // Sumar un año
+  const fechaFuturaFormato = format(fechaFutura, 'dd/MM/yyyy'); // Sumar un año
   const { control, register,handleSubmit,formState: { errors } ,setValue} = useForm();
-  const str = informacionPlaca.uso;
-  const strMayusculas = str.toUpperCase();
+  const uso = informacionPlaca.uso;
+  const usoMayuscula = uso.toUpperCase();
 
-  const placaMini = informacionPlaca.placa;
-  const placaMayusculas = placaMini.toUpperCase();
   const nombreFormato = informacionClienteSinCuenta.nombre.charAt(0).toUpperCase() + informacionClienteSinCuenta.nombre.slice(1);
   const apellidoPaternoFormato = informacionClienteSinCuenta.apellidoPaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoPaterno.slice(1);
   const apellidoMaternoFormato = informacionClienteSinCuenta.apellidoMaterno.charAt(0).toUpperCase() + informacionClienteSinCuenta.apellidoMaterno.slice(1);
-  
-  //pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-  const handleDocumentLoadSuccess = async (pdf) => {
-    console.log("entra")
-    const pdfData = await pdf.toBlob();
-    const pdfObject = new Blob([pdfData], { type: 'application/pdf' });
-
-    pruebaEnvioCorreoArchivoAdjunto(pdfData,"valerie.munayco0607@gmail.com","Prueba pdf","Holi");
-    console.log('Objeto PDF:', pdfObject);
-  };
-
-  useEffect(() => {
-    const infoNuevoCliente = {
-      nombre: informacionClienteSinCuenta.nombre,
-      apellidoPaterno: informacionClienteSinCuenta.apellidoPaterno,
-      apellidoMaterno: informacionClienteSinCuenta.apellidoMaterno,
-      DNI: informacionClienteSinCuenta.DNI,
-      correoElectronico: informacionClienteSinCuenta.email,
-      telefono: informacionClienteSinCuenta.telefono,
-      //ubicacion: informacionClienteSinCuenta.departamento.nombre+", "+informacionClienteSinCuenta.provincia.nombre+", "+informacionClienteSinCuenta.distrito.nombre
-  };
-
-    //crear Cliente
-    // crearCliente(informacionClienteSinCuenta.nombre,informacionClienteSinCuenta.apellidoPaterno,informacionClienteSinCuenta.apellidoMaterno,informacionClienteSinCuenta.DNI)
-    // .then(nuIdCliente => {
-    //   if(nuIdCliente !== 0){
-    //     //crear Contacto
-    //     crearContacto(parseInt(nuIdCliente,10),infoNuevoCliente.telefono,infoNuevoCliente.ubicacion,infoNuevoCliente.correoElectronico)
-    //     .then(nuIdContacto => {
-    //       if(parseInt(nuIdContacto,10) !== 0){
-    //         crearAuto(informacionPlaca.placa,informacionAuto.anhoFabricacion,27000.0,informacionPlaca.uso,parseInt(nuIdCliente,10),informacionAuto.idModelo,informacionAuto.idMarca)
-    //         .then(nuIdAuto => {
-    //           if(parseInt(nuIdAuto,10) !== 0){
-    //             crearPoliza()
-    //             .then()
-    //             .catch(error => {
-    //               alert("Error en creacion de poliza RED.");
-    //               return;
-    //             });
-    //           }else{
-    //             alert("Error en creacion de auto.");
-    //             return;
-    //           }
-    //         })
-    //         .catch(error => {
-    //           alert("Error en creacion de auto RED.");
-    //           return;
-    //         });
-    //       }else{
-    //         alert("Error en creacion de contacto.");
-    //         return;
-    //       }
-    //     })
-    //     .catch(error => {
-    //       alert("Error en creacion de contacto RED.");
-    //       return;
-    //     });
-    //   }else{
-    //     alert("Error en creacion de cliente.");
-    //     return;
-    //   }
-    // })
-    // .catch(error => {
-    //   alert("Error en creacion de cliente RED.");
-    //   return;
-    // });
-    
-  },[]);
+  const monto = planSeleccionado.monto;
+  const placa = informacionPlaca.placa;
+  const hora = format(fechaFutura, 'HH:mm:ss');
+  const correo = informacionClienteSinCuenta.correoElectronico
 
   
+
   return (
     <>
     <PDFViewer  style={styles.viewer}>
-      <Document onLoadSuccess={handleDocumentLoadSuccess} options={{ docBaseUrl: window.location.origin }}>
+      <Document onLoadSuccess = {sendPDF(fechaActualFormato,fechaFuturaFormato,monto,nombreFormato,apellidoMaternoFormato,apellidoPaternoFormato,usoMayuscula,placa,hora,correo)}>
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
             <Image src={logoImage} />
@@ -245,12 +265,12 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.datos}>{format(fechaFutura, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers2}>VEHICULO ASEGURADO</Text>
                   {/* <Text style={styles.headers}>{informacionPlaca.placa}</Text> */}
-                  <Text style={styles.datos}>{informacionPlaca.placa}</Text>
+                  <Text style={styles.datos}>{placa}</Text>
                   <Text style={styles.headers}>Categoria</Text>
                   {/* <Text style={styles.datos}>{informacionPlaca.uso}</Text> */}
                   <Text style={styles.datos}>AUTOMOVIL</Text>
                   <Text style={styles.headers}>Uso</Text>
-                  <Text style={styles.datos}>{informacionPlaca.uso.toUpperCase()}</Text>
+                  <Text style={styles.datos}>{usoMayuscula}</Text>
                 </View>    
                 <View style={styles.columna}>
                   <Text style={{marginBottom: 1,color: "#7C7D81",fontFamily: 'Roboto', fontWeight: 'bold',fontSize: '12pt',}}>CERTIFICADO SOAT</Text>
@@ -262,7 +282,7 @@ function PDFSoat ({informacionClienteSinCuenta,informacionPlaca,informacionAuto,
                   <Text style={styles.headers2}>CONTRATANTE / ASEGURADO</Text>
                   <Text style={styles.datos}>{nombreFormato+" "+apellidoPaternoFormato+" "+apellidoMaternoFormato}</Text>
                   <Text style={styles.headers}>Importe de la prima</Text>
-                  <Text style={styles.datos}>{planSeleccionado.monto}</Text>
+                  <Text style={styles.datos}>{monto}</Text>
                   <Text style={styles.headers}>Fecha</Text>
                   <Text style={styles.datos}>{format(fechaActual, 'dd/MM/yyyy')}</Text>
                   <Text style={styles.headers}>Hora de emisión</Text>

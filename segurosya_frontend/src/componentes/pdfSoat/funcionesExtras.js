@@ -140,7 +140,7 @@ export function crearPoliza(
 export function pruebaEnvioCorreoArchivoAdjunto (archivo,destino,asunto,contenido) {
     //Utiles
     const formData = new FormData();
-    formData.append('file', archivo, 'document.pdf');
+    formData.append('file', archivo, 'SOAT.pdf');
     formData.append('to',destino);
     formData.append('subject',asunto);
     formData.append('content',contenido);
