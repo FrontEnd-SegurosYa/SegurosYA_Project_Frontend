@@ -227,7 +227,7 @@ const PDFSoat = ({ informacionClienteSinCuenta, informacionPlaca, informacionAut
   const monto = planSeleccionado.monto;
   const placa = informacionPlaca.placa;
   const hora = format(fechaFutura, 'HH:mm:ss');
-  const correo = informacionClienteSinCuenta.correoElectronico
+  const correo = informacionClienteSinCuenta.correoElectronico;
 
   
 

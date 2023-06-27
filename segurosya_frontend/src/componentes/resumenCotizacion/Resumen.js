@@ -2,17 +2,132 @@ import React from "react";
 import "./Resumen.css"; // archivo CSS donde escribiremos nuestros estilos
 import '../../index.css'
 import imagenCheck from '../../img/check.png'
+import imagenSeguro from '../../img/seguro.png'
+import { Page, Text, View, Document, StyleSheet,Image,Font, pdf } from '@react-pdf/renderer';
+import { PDFViewer, PDFJSStatic } from '@react-pdf/renderer';
 import './fecha'
 import { Link } from "react-router-dom";
-import DatosCarroSoat from "../datosCarroSoat/datosCarroSoat";
-
+import { format } from 'date-fns';
+import RobotoRegular from '../../fonts/Roboto-Regular.ttf';
+import RobotoBold from '../../fonts/Roboto-Bold.ttf'
+import logoNombreAzul from '../../img/logoNombreAzul.png';
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from "react";
 
-import { crearCotizacion } from "./funcionesExtras";
+import { crearCotizacion,pruebaEnvioCorreoArchivoAdjunto } from "./funcionesExtras";
+Font.register({
+  family: 'Roboto',
+  fonts: [
+    { src: RobotoRegular, fontWeight: 'normal' },
+    { src: RobotoBold, fontWeight: 'bold' },
+  ],
+});
 
-function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas,nombresCoberturas,monto}) {
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1
+  },
+  columna: {
+    width: '50%', // Ajusta el ancho de cada columna (en este caso, 50%)
+    padding: 6, // Agrega un espacio de relleno entre las columnas
+  },
+  texto: {
+    marginBottom: 5,
+    color: "#7C7D81",
+    fontFamily: 'Roboto', 
+    fontWeight: 'bold',
+    fontSize: '15pt',
+  },
+  viewer: {
+    width: window.innerWidth, //the pdf viewer will take up all of the width and height
+    height: window.innerHeight,
+  },
+  imagenLogo:{
+    width: 100, 
+    height: 55,
+    marginLeft: '35', 
+    marginRight: 'auto',
+  },
+  lineas:{
+    marginBottom: 4,
+    color: "#7C7D81",
+    fontFamily: 'Roboto', 
+    fontWeight: 'bold',
+    fontSize: '10pt',
+  },
+  datosSeguro:{
+    color: '#3E54AC',  
+    fontWeight: 'bold',
+    fontFamily: 'Roboto', 
+    fontSize: '15pt',
+    marginBottom: 10
+  },
+  datosSeguro2:{
+    color: '#3E54AC',  
+    fontWeight: 'normal',
+    fontFamily: 'Roboto', 
+    fontSize: '13pt',
+    marginBottom: 10
+  },
+  cobertura:{
+    color: '#7C7D81',  
+    fontWeight: 'normal',
+    fontFamily: 'Roboto', 
+    fontSize: '10pt',
+    marginBottom: 10
+  },
+})
+
+const generatePDF = async (marca,modelo,anhoFabricacion,numAsientos,nombresCoberturas,fecha,monto) => {
+  const doc = (
+    <Document>
+      <Page size="A5" style={styles.page}>
+        <View style={styles.section}>
+        <Image src={logoNombreAzul} style = {styles.imagenLogo}/>
+          <View style={styles.section}>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.columna}>
+                <Text style={styles.datosSeguro }>Información del auto</Text>
+                <Text style={styles.lineas }>{"1. Marca:" + marca}</Text>
+                <Text style={styles.lineas }>{"2. Modelo: " + modelo}</Text>
+                <Text style={styles.lineas }>{"3. Año de fabricación: "+ anhoFabricacion}</Text>
+                <Text style={styles.lineas }>{"4. Número de asientos: "+ numAsientos}</Text>
+              </View>
+              <View style={styles.columna}>
+                <Image src={imagenSeguro} />
+              </View>
+            </View>
+            <Text style={styles.datosSeguro}> Resumen de la cotización </Text>
+            <Text style={styles.datosSeguro2}> Coberturas adicionales: </Text>
+            {nombresCoberturas.map((nombresCoberturas, index) => (
+              <Text key={index} style={styles.cobertura}>{index+1 + ". "+ nombresCoberturas + " :  14.00"}</Text>
+            ))}
+            <Text style={styles.lineas}> {"Total: " + monto.toFixed(2)}</Text>
+            <Text style={styles.lineas}> {"Esta cotización tiene vigencia hasta el día: " + fecha} </Text>
+          </View>
+        </View>
+      </Page>
+    </Document>
+  );
+
+  const pdfBlob = await pdf(doc).toBlob(); // Convert the PDF into a Blob object
+  return pdfBlob;
+};
+
+const sendPDF = async (marca,modelo,anhoFabricacion,numAsientos,nombresCoberturas,fecha,monto,correo) => {
+  const pdfBlob = await generatePDF(marca,modelo,anhoFabricacion,numAsientos,nombresCoberturas,fecha,monto);
+  pruebaEnvioCorreoArchivoAdjunto(pdfBlob,correo,"Cotización","Estimado cliente, se le hace envío de su cotización.")
+};
+
+function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,listaDeIdCoberturas,nombresCoberturas,monto})  {
   
   const { control, handleSubmit,setValue } = useForm();
   const fechaActual = new Date();
@@ -21,6 +136,11 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
   const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
   const anio = fechaActual.getFullYear();
   const fechaActualTexto= `${dia}/${mes}/${anio}`;
+  const marca = informacionAuto.marca.nombre;
+  const modelo = informacionAuto.modelo.nombre;
+  const anhoFabricacion = informacionAuto.anhoFabricacion;
+  const numAsientos = informacionAuto.numeroAsientos;
+  const correo = informacionClienteSinCuenta.correoElectronico;
 
   const onSubmit = (data) => {      
     const informacionCotizacion = {
@@ -58,7 +178,7 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
       console.error('Error:', error);
     });
 }
-
+  
   return (
     <>
       <div className="containerR">
@@ -115,8 +235,8 @@ function Resumen({informacionClienteSinCuenta,informacionPlaca,informacionAuto,l
               </div>
               <div className="modal-footer">
                 <Link to={"/"} >
-                  <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal">Volver</button>
-                  </Link>
+                  <button className="btnGeneral btnVolverCentrado" data-bs-dismiss="modal" onClick={sendPDF(marca,modelo,anhoFabricacion,numAsientos,nombresCoberturas,fechaActualTexto,monto,correo)}>Volver</button>
+                </Link>
               </div>
             </div>
         </div>
