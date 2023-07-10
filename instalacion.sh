@@ -105,4 +105,4 @@ sudo service apache2 restart
 # Mensaje de exito
 echo "Gracias por instalar el servidor Front-End de cliente de Seguros Ya."
 echo "El siguiente link le servira para acceder a la pagina web:"
-echo "https://$linkFrontEnd"
+echo "$linkFrontEnd"
